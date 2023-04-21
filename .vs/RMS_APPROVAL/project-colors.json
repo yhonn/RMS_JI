@@ -1,0 +1,36 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "6797a492-8f75-48b8-9e87-e7438980cae4": {
+      "ProjectGuid": "6797a492-8f75-48b8-9e87-e7438980cae4",
+      "DisplayName": "ly_APPROVAL",
+      "ColorIndex": 0
+    },
+    "2abfce4c-ce30-4937-880a-5496d437e63b": {
+      "ProjectGuid": "2abfce4c-ce30-4937-880a-5496d437e63b",
+      "DisplayName": "ly_SIME",
+      "ColorIndex": 1
+    },
+    "e4709c34-7e70-4c24-a4eb-b8145e1f08b4": {
+      "ProjectGuid": "e4709c34-7e70-4c24-a4eb-b8145e1f08b4",
+      "DisplayName": "RMS_APPROVAL",
+      "ColorIndex": 2
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    },
+    "9354fdb6-c29d-4950-bc22-61aeee0b27e8": {
+      "ProjectGuid": "9354fdb6-c29d-4950-bc22-61aeee0b27e8",
+      "DisplayName": "JI_SIME",
+      "ColorIndex": 3
+    },
+    "6954dc92-01a6-4485-8c97-95149266618c": {
+      "ProjectGuid": "6954dc92-01a6-4485-8c97-95149266618c",
+      "DisplayName": "JI_SIME",
+      "ColorIndex": 4
+    }
+  },
+  "NextColorIndex": 5
+}

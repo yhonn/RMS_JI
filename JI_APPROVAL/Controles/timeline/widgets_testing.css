@@ -1,0 +1,122 @@
+﻿/*
+ * Component: Social Widgets
+ * -------------------------
+ */
+
+
+.box-widget_t {
+    border: none;
+    position: relative;
+}
+
+.widget-user_t  .widget-user-header {
+    padding:5px;
+    height: 70px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.widget-user_t  .widget-user-username {
+    margin-top: 0px;
+    margin-bottom: 0px;       
+    font-size: 15px;
+    font-weight: 300;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.widget-user_t  .widget-user-desc {
+    margin-top: 0px;
+    font-weight: 600;
+}
+
+.widget-user_t  .widget-user-image {
+    position: relative;
+    top: -40%;
+    left: 0%;
+    /*margin-left: -5%;*/
+}
+
+ .widget-user_t .widget-user-image  > img {
+  width: 80px;
+  height: auto;  
+  float:left; 
+  }
+
+  .widget-user_t .widget-user-image .img-border-aqua-active {    
+   border:3px solid #00a7d0 !important;    
+  } 
+
+  .widget-user_t .widget-user-image .img-border-green-active {    
+   border:3px solid #008d4c !important;    
+  }
+
+  .widget-user_t .widget-user-image .img-border-orange-active {    
+   border:3px solid #ff7701 !important;    
+  }
+
+  .widget-user_t .widget-user-image .img-border-blue-active {    
+   border:3px solid #005384 !important;    
+  }
+
+ .widget-user_t .widget-user-image .img-border-yellow-active {    
+   border:3px solid #db8b0b !important;    
+  }
+
+ .widget-user_t .widget-user-image .img-border-red-active {    
+   border:3px solid #d33724 !important;    
+  }
+
+  .widget-user_t .widget-user-image .img-border-gray-active {    
+   border:3px solid #b5bbc8 !important;    
+  }
+
+.widget-user_t  .box-footer{
+    padding-top: 0px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 2px solid #f4f4f4;
+    padding: 1px;
+    margin-left:15px;
+    background-color: #ffffff;
+}
+
+
+ .widget-user_t .time {
+    color: #999;
+    /*float: right;*/
+    padding: 0px;
+    margin-right:1px;
+    font-size: 12px;
+  }
+
+
+
+/*.widget-user-2 .widget-user-header {
+    padding: 20px;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.widget-user-2 .widget-user-username {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.widget-user-2 .widget-user-desc {
+    margin-top: 0;
+}
+
+.widget-user-2 .widget-user-username,
+.widget-user-2 .widget-user-desc {
+    margin-left: 75px;
+}
+
+.widget-user-2 .widget-user-image > img {
+    width: 65px;
+    height: auto;
+    float: left;
+}*/

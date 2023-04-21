@@ -1,0 +1,367 @@
+﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="RMS_APPROVAL.SiteMaster" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title><%: Page.Title %></title>
+    <%--<link href="~/Content/Site.css" rel="stylesheet" />--%>
+    <asp:PlaceHolder runat="server">
+        <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <%--<script src="<%: ResolveUrl("~/Scripts/modernizr-2.6.2.js") %>"></script>--%>
+    </asp:PlaceHolder>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+    <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/fonts/css/font-awesome.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/Content/ionicons.css">
+    <link rel="stylesheet" href="~/Content/dist/css/AdminLTE.css?tm=0001.001" />
+    <link rel="stylesheet" href="~/Content/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="~/Content/SitioExtension.css" />
+    <link rel="stylesheet" href="~/Content/custom_.css">
+    <link rel="stylesheet" href="~/Content/Jquery/jquery.datetimepicker.css">
+    
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+    
+      <style type="text/css">
+        .auto-style1 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 6px;
+            top: 16px;
+        }
+    </style>
+
+</head>
+<body class="hold-transition skin-black-light sidebar-mini">
+<%--<body class="hold-transition sidebar-mini skin-dark-light skin-black">--%>
+    <form runat="server">
+        <asp:ScriptManager runat="server" EnablePartialRendering="true">
+        </asp:ScriptManager>
+        <script src="<%=ResolveUrl("~/Content/Jquery/jQuery-2.1.4.min.js")%>"></script>
+        <script src="<%=ResolveUrl("~/Content/Jquery/jquery.datetimepicker.full.js")%>"></script>
+        <script>
+
+            if ($(window).width() < 1090) {
+                $('body').addClass("sidebar-collapse");
+            }
+
+            $(window).resize(function () {
+                if ($(window).width() < 1090) {
+                    $('body').addClass("sidebar-collapse");
+                        if (typeof (url) !== 'undefined') {
+                            $('#sidebar-menu a').filter(function () {
+                                return this.href == url;
+                            }).parent('li').addClass('current-page').parent('ul').slideUp().parent().addClass('active');
+                        }
+                    }
+                else {
+                    $('body').removeClass("sidebar-collapse");
+                    if (typeof (url) !== 'undefined') {
+                        $('#sidebar-menu a').filter(function () {
+                            return this.href == url;
+                        }).parent('li').addClass('current-page').parent('ul').slideDown().parent().addClass('active');
+                    }
+                }
+            });
+        </script>
+        <!-- Bootstrap 3.3.5 -->
+        <script src="<%=ResolveUrl("~/Content/bootstrap/js/bootstrap.min.js")%>"></script>
+        <div class="wrapper">
+
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="<%= ResolveUrl("~/Default")%>" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini">
+                        <img src="<%= ResolveUrl("~/Imagenes/logos/Chemonics-log150_nw.png")%>" style="max-width: 50px" alt="Chemonics International">
+                       <%--  <img src="<%= ResolveUrl("~/Imagenes/logos/LIF_Logo_small.png")%>" style="max-width: 50px" alt="LAND INNOVATION FUND">--%>
+                    </span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg "><asp:image runat="server" ID="imgProgram" style="max-height: 80px; max-width:210px;" class="img-rounded" /></span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                 <nav class="navbar" role="navigation">               
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle menu_toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="divTitulo-md divTitulo-lg divTitulo-sm">
+                        <asp:Label runat="server" ID="lbl_programa" CssClass="tituloPrograma"></asp:Label>
+                        <asp:Label ID="lbl_subregion" runat="server" CssClass="subTituloPrograma"></asp:Label>
+                    </div>
+                    <%--<div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li>test</li>
+                            </ul>
+                        </div>--%>
+                    <%--ACS-Chemonics--%>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="<%= ResolveUrl(Session("E_Imagen")) %>" class="user-image" alt="User Image">
+                                    <span class="hidden-xs"><%= If(Session("E_Nombre").ToString.Length > 20, Session("E_Nombre").ToString.Substring(0, 20) & "...", Session("E_Nombre"))  %></span>
+                                    <div runat="server" id="div_bandera" class="text-center"></div>
+                                </a>
+                                <ul class="dropdown-menu" style="width:350px;">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="<%= ResolveUrl(Session("E_Imagen")) %>" class="img-circle" alt="User Image">
+                                        <p>
+                                            <%= Session("E_Nombre") %> &nbsp; <asp:Label ID="lbl_rol_id" runat="server" Text=""></asp:Label>
+
+                                            <small></small>
+                                        </p>
+                                        <div runat="server" id="divIdiomas"></div>
+                                    </li>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <ul class="nav-justified">
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/Administracion/FrmChangePwd") %>" class="btn btn-default btn-flat"><asp:label runat="server" ID="lblm_editar">Edit</asp:label></a>
+                                            </li>
+                                            <li>
+                                                <%--<a href="<%# Eval("sys_url") & Eval("sys_page_aux") & "?TkUsrVal=" & Me.Session("idGuiToken") & "&IdP=" & Me.Session("E_IDPrograma")  %>" class="btn btn-success btn-md btn-block" style="font-weight:600" role="button"  ><%# Eval("prefix_n") %>&nbsp;&nbsp;<span class="glyphicon glyphicon-log-in"></span></a>--%>
+                                                <%--  <a href="<%= UrlSys %>/RMS/frm_activitySelect.aspx" & "?TkUsrVal=" & Me.Session("idGuiToken") & "&IdP=" & Me.Session("E_IDPrograma")%>" class="btn btn-default btn-flat"><asp:label runat="server" ID="lblm_actividades">Switch Project</asp:label></a>--%>                                                                                                  
+                                                <a href="<%=  UrlSys & "/RMS/frm_activitySelect.aspx" & "?TkUsrVal=" & Me.Session("idGuiToken") & "&IdP=" & Me.Session("E_IDPrograma")%>" class="btn btn-default btn-flat"><asp:label runat="server" ID="Label1">Switch Project</asp:label></a>
+                                            </li>
+                                            <li>
+                                                <a href="<%= ResolveUrl("~/frm_Login.aspx?Idout=1") %>" class="btn btn-default btn-flat"><asp:label runat="server" ID="lblm_logout">Log Out</asp:label></a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- =============================================== -->
+            <!-- Left side column. contains the sidebar -->
+            <aside class="main-sidebar sidebar">
+
+
+                <div class="left_col scroll-view">
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu prile quick info -->
+                    <div class="profile">
+                        <div class="profile_pic">
+                            <img src="<%= ResolveUrl(Session("E_Imagen")) %>" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <asp:label runat="server" ID="lblm_welcome">Bienvenido,</asp:label>
+                            <h2><%= If(Session("E_Nombre").ToString.Length > 40, Session("E_Nombre").ToString.Substring(0, 40) & "...", Session("E_Nombre"))  %></h2>
+                        </div>
+                    </div>
+                    <!-- /menu prile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3><%--Administrador--%></h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="<%= ResolveUrl("~/Default")%>"><i class="fa fa-home"></i> <asp:label runat="server" ID="lblm_home">Home</asp:label></a>
+                                </li>
+
+                                <asp:Repeater ID="rptFirstLevel" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a><i class="fa <%# Eval("icono_clase")%>"></i> <%# Eval("valor")%><span class="fa fa-chevron-down"></span>
+                                            <%--<i class="fa fa-angle-left pull-right"></i>--%>
+                                            <asp:Label runat="server" Visible="false"><%# DataBinder.Eval(Container.DataItem, "id_menu") %></asp:Label>
+                                        </a>
+                                            <!-- first level html -->
+                                            <ul class="nav child_menu" style="display: none">
+                                                <asp:Repeater ID="rptSecondLevel" runat="server">
+                                                    <ItemTemplate>
+                                                        <li><a href='<%# ResolveUrl(Eval("URL_item_menu")) %>' runat="server"><span><%# Eval("valor")%></span></a></li>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </ul>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <!-- /menu footer buttons -->
+                </div>
+
+
+                
+                <!-- /.sidebar -->
+            </aside>
+            <div id="body">
+                <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+                <section class="content-wrapper main-content clear-fix">
+                    <asp:ContentPlaceHolder runat="server" ID="MainContent2" />
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                                <telerik:RadAjaxLoadingPanel ID="RadAjaxLoadingPanel1" runat="server">
+                                </telerik:RadAjaxLoadingPanel>
+                            </asp:ContentPlaceHolder>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                     <telerik:RadWindow InitialBehaviors="Maximize" 
+                                        RenderMode="Lightweight" 
+                                        runat="server" 
+                                        Width="800" 
+                                        Height="300" 
+                                        id="RadWindowHelp" 
+                                        VisibleOnPageLoad="false"  >                        
+                    </telerik:RadWindow>                    
+
+                </section>
+            </div>
+
+            <%--<asp:UpdateProgress ID="UpdateProgress1" runat="server">
+
+                <ProgressTemplate>
+                    <cc1:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" runat="server" 
+                        TargetControlID="UpPanel"
+                        VerticalSide="Middle"
+                        VerticalOffset="0"
+                        HorizontalSide="Left"
+                        HorizontalOffset="450" />
+                    &nbsp;
+          <br />
+                    <asp:Panel ID="UpPanel" runat="server"
+                        Width="350px" BackColor="White" ForeColor="Black"
+                        BorderWidth="1px" BorderStyle="Dotted" BorderColor="Gray" Style="z-index: 1;"
+                        Height="48px">
+                        <table border="0" style="width: 350px; height: 40px">
+                            <tr>
+                                <td style="text-align: center;" class="style1">
+                                    <asp:Image ID="Image1" runat="server"
+                                        ImageUrl="~/Imagenes/iconos/Loading.gif" /></td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                </ProgressTemplate>
+            </asp:UpdateProgress>--%>
+            <asp:UpdateProgress ID="UpdateProgress1" runat="server">
+                <ProgressTemplate>
+                        <cc1:AlwaysVisibleControlExtender ID="AlwaysVisibleControl" runat="server"
+                            TargetControlID="UpPanel"
+                            VerticalSide="Top"
+                            HorizontalSide="Left"
+                            />
+                            <asp:Panel ID="UpPanel" runat="server" CssClass="divLoading">
+                                <div class="auto-style1">
+                                    <asp:Image ID="Image1" runat="server" CssClass="loadingGif"
+                                        ImageUrl="~/Imagenes/iconos/Loading.gif" />
+                                </div>                            
+
+                            </asp:Panel>
+                </ProgressTemplate>                
+            </asp:UpdateProgress>
+
+        </div>
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 0.1.5       
+            </div>
+            <strong>Copyright &copy; 2015-2020 <a href="">Chemonics International</a>.</strong> All rights reserved.
+        </footer>
+        <!-- jQuery 2.1.4 -->
+
+
+        <script src="<%=ResolveUrl("~/Content/slimScroll/jquery.slimscroll.min.js")%>"></script>
+        <script src="<%=ResolveUrl("~/Content/fastclick/fastclick.min.js")%>"></script>
+        <script src="<%=ResolveUrl("~/Content/dist/js/app.min.js")%>"></script>
+        <script src="<%=ResolveUrl("~/Scripts/ExtensionTemplate.js")%>"></script>
+
+        <script type="text/javascript">
+            function loadDeleteModal() {
+                $('#modalConfirm').modal('show');
+            }
+            function hideDeleteModal() {
+                $('#modalConfirm').modal('hide');
+            }
+
+            
+            <%--$(function () {
+                setInterval(KeepSessionAlive, 10000);
+            });
+
+            function KeepSessionAlive() {
+                var keepSessionAliveUrl = '<% ResolveUrl("~/KeepSessionAlive.ashx")%>'
+                //$.post(a, null, function () {
+                //    console.log("Session still working SIME");
+                //});
+                $.ajax({
+                    type: "POST",
+                    url: keepSessionAliveUrl,
+                    success: function () { console.log("Session still working"); }
+                });
+            }--%>
+
+
+                      function ShowWindowHelp(oWnd) {  
+                           oWnd.add_close(OnClientClose); //set a function to be called when RadWindow is closed   
+                    }  
+
+                     function showhelp(video_help_name) {
+
+                         var oWnd = $find("<%= RadWindowHelp.ClientID %>");
+                          oWnd.add_close(OnClientCloseHelp); //set a function to be called when
+                          oWnd.moveTo(100, 100);                  
+                          oWnd.show();                  
+                          oWnd.setSize(1000, 800);
+                          oWnd.setUrl('<%=ResolveUrl("~/help/help_play.aspx")%>?video_help=' + video_help_name);                 
+                          oWnd.minimize();
+                          oWnd.maximize();
+                          oWnd.restore();
+
+                         setTimeout(function ()
+                            {
+                                oWnd.set_status("Playing video tutorial: " + video_help_name)
+                            }, 1000);                                                                
+                    } 
+
+                    function OnClientPageLoad(sender, args)
+                     {
+                         setTimeout(function(){
+                            sender.set_status("");},1);
+                     }
+
+                    function OnClientCloseHelp(oWnd) {  
+                        oWnd.setUrl("about:blank"); // Sets url to blank  
+                        oWnd.remove_close(OnClientCloseHelp);                
+                    }       
+
+
+        </script>
+    </form>
+</body>
+</html>

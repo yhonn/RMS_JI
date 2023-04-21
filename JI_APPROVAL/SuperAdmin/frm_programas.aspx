@@ -1,0 +1,128 @@
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="frm_programas.aspx.vb" Inherits="RMS_APPROVAL.frm_programas" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register TagPrefix="uc" TagName="Confirm" Src="~/Controles/ModalConfirm.ascx" %>
+
+<asp:Content runat="server" ID="MainContent" ContentPlaceHolderID="MainContent">
+    <uc:Confirm runat="server" ID="MsgGuardar" />
+    <asp:Label ID="identity" runat="server" Text="" CssClass="deleteIdentity" data-id="" Visible="false" />
+    <section class="content-header">
+        <h1>
+            <asp:Label runat="server" ID="lblt_titulo_pantalla">Administración</asp:Label></h1>
+    </section>
+    <section class="content">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">
+                    <asp:Label runat="server" ID="lblt_subtitulo_pantalla">Programas</asp:Label></h3>
+            </div>
+            <div class="box-body">
+                <telerik:RadTextBox ID="txt_doc" runat="server"
+                    EmptyMessage="Ingrese nombre aquí..." LabelWidth="" Width="395px"
+                    ValidationGroup="1">
+                    <PasswordStrengthSettings IndicatorWidth="100px"></PasswordStrengthSettings>
+                </telerik:RadTextBox>
+                <telerik:RadButton ID="btn_buscar" runat="server"  AutoPostBack="true" Text="Buscar" Width="100px">
+                </telerik:RadButton>
+                <telerik:RadButton ID="btn_nuevo" runat="server"  AutoPostBack="true" Enabled="false" Text="Nuevo Programa">
+                </telerik:RadButton>
+                <hr />
+                <asp:Label runat="server" ID="lbltotal" CssClass="info"></asp:Label>
+                <telerik:RadGrid ID="grd_cate" runat="server" AllowAutomaticDeletes="True" CellSpacing="0" 
+                    GridLines="None" AllowPaging="True" AllowSorting="True" PageSize="15" AutoGenerateColumns="False">
+                    <ClientSettings EnableRowHoverStyle="true">
+                        <Selecting AllowRowSelect="True"></Selecting>
+                    </ClientSettings>
+                    <MasterTableView AutoGenerateColumns="False" DataKeyNames="id_programa" AllowAutomaticUpdates="True">
+                        <Columns>
+
+                            <telerik:GridBoundColumn DataField="id_programa"
+                                FilterControlAltText="Filter id_programa column"
+                                SortExpression="id_programa" UniqueName="id_programa"
+                                Visible="False" DataType="System.Int32" HeaderText="id_programa"
+                                ReadOnly="True">
+                            </telerik:GridBoundColumn>
+
+                            <telerik:GridTemplateColumn UniqueName="Eliminar" Visible="false">
+                                <HeaderStyle Width="10" />
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="col_hlk_eliminar" runat="server" Width="10"
+                                        ImageUrl="../Imagenes/iconos/b_drop.png" ToolTip="Eliminar"
+                                        OnClick="Eliminar_Click">
+                                        <asp:Image ID="Image1" runat="server" ImageUrl="../Imagenes/iconos/b_drop.png" Style="border-width: 0px;" />
+                                    </asp:LinkButton>
+                                </ItemTemplate>
+                            </telerik:GridTemplateColumn>
+
+                            <telerik:GridTemplateColumn FilterControlAltText="filtro comments column" UniqueName="Edit" Visible="false">
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="col_hlk_edit" runat="server" ImageUrl="../Imagenes/iconos/b_edit.png" ToolTip="Editar programa" Target="_self" />
+                                </ItemTemplate>
+                                <ItemStyle Width="5px" />
+                            </telerik:GridTemplateColumn>
+
+                            <%--<telerik:GridTemplateColumn FilterControlAltText="filtro comments column" UniqueName="print">
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="Print" runat="server" ImageUrl="~/Imagenes/iconos/printer_off.png" ToolTip="Imprimir detalles" Target="_blank" />
+                                </ItemTemplate>
+                                <ItemStyle Width="5px" />
+                            </telerik:GridTemplateColumn>--%>
+
+                            <telerik:GridBoundColumn DataField="codigo_programa"
+                                FilterControlAltText="Filter codigo_programa column" HeaderText="Código" UniqueName="colm_codigo_programa">
+                                <HeaderStyle Width="150px" />
+                            </telerik:GridBoundColumn>
+
+                            <telerik:GridBoundColumn DataField="nombre_programa"
+                                FilterControlAltText="Filter nombre_programa column"
+                                HeaderText="Programa" SortExpression="nombre_programa"
+                                UniqueName="colm_nombre_programa">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="monto_programa"
+                                FilterControlAltText="Filter monto_programa column" HeaderText="Monto Programa"
+                                SortExpression="monto_programa"
+                                UniqueName="colm_monto_programa">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridBoundColumn DataField="fecha_inicio" DataType="System.DateTime" DataFormatString="{0:dd-MM-yyyy}"
+                                FilterControlAltText="Filter fecha_inicio column"
+                                HeaderText="Fecha Inicio" SortExpression="fecha_inicio"
+                                UniqueName="colm_fecha_inicio">
+                            </telerik:GridBoundColumn>
+                            <telerik:GridDateTimeColumn DataField="fecha_fin" DataType="System.DateTime" DataFormatString="{0:dd-MM-yyyy}"
+                                FilterControlAltText="Filter fecha_fin column"
+                                HeaderText="Fecha Fin" SortExpression="fecha_fin"
+                                UniqueName="colm_fecha_fin">
+                            </telerik:GridDateTimeColumn>
+                            <telerik:GridTemplateColumn FilterControlAltText="filtro comments column" UniqueName="colm_idioma" HeaderText="Idiomas">
+                                <ItemTemplate>
+                                    <asp:HyperLink ID="col_hlk_idioma" runat="server" ImageUrl="~/Imagenes/iconos/translate-icon.png" ToolTip="Idiomas" />
+                                </ItemTemplate>
+                                <ItemStyle Width="5px" />
+                            </telerik:GridTemplateColumn>
+                        </Columns>
+                    </MasterTableView>
+                </telerik:RadGrid>
+            </div>
+            <div class="modal fade bs-example-modal-sm" id="modalConfirm" data-backdrop="static" data-keyboard="false">
+                <div class="vertical-alignment-helper">
+                    <div class="modal-dialog modal-sm vertical-align-center">
+                        <div class="modal-content">
+                            <div class="modal-header modal-danger">
+                                <h4 class="modal-title" runat="server" id="esp_ctrl_h4_eliminar_titulo">Eliminar Registro</h4>
+                            </div>
+                            <div class="modal-body">
+                                <asp:Label ID="esp_ctrl_lbl_eliminar" runat="server" Text="Desea eliminar el registro?" />
+                            </div>
+                            <div class="modal-footer">
+                                <asp:Button runat="server" ID="esp_ctrl_btn_eliminar" CssClass="btn btn-sm btn-danger btn-ok" Text="Eliminar" />
+                                <button class="btn btn-sm" data-dismiss="modal" aria-hidden="true" causesvalidation="false" runat="server" id="esp_ctrl_btnh_CANCELAR">Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</asp:Content>

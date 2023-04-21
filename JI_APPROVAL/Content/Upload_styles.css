@@ -1,0 +1,147 @@
+﻿
+ .RadUpload .ruUploadProgress {
+    display: inline-block;
+    width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+}
+ 
+.demo-container .ruFakeInput {
+    width: 200px;
+    height: 18px;
+}
+ 
+/** Customize demo canvas */
+.qsf-demo-canvas {
+    width: 600px;
+    color: #555555;
+    background: #f6f6f6;
+    font-size: 13px;
+    position: relative;
+}
+ 
+    .qsf-demo-canvas .qsf-decoration {
+        width: 130px;
+        height: 205px;
+        background: url("images/qsf-demo-bg.png") 0 0 no-repeat;
+        position: absolute;
+        top: -20px;
+        left: 15px;
+    }
+ 
+    .qsf-demo-canvas h2 {
+        margin: 0;
+        padding: .25em 40px .25em 150px;
+        color: #ffffff;
+        background: #317f99;
+        text-transform: uppercase;
+    }
+ 
+    .qsf-demo-canvas .qsf-list {
+        margin: 0;
+        padding: 1em 0 1em 150px;
+        list-style: none;
+        background: #ced1d3;
+    }
+ 
+ 
+    /** Customize the RadUpload */
+    .qsf-demo-canvas .RadUpload {
+        width: auto;
+        padding: 1px 150px;
+        background: #e8e8e8;
+    }
+ 
+    .qsf-demo-canvas .ruInputs li {
+        position: relative;
+        /*line-height: 1.1;*/
+    }
+ 
+    /** Upload mini-control */
+    .qsf-demo-canvas .ruInputs li:first-child {
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+ 
+    /** Validation error */
+    .qsf-demo-canvas .ruInputs .ruError {
+        padding: 5px 0px;
+        margin: 10px 0px;
+        border: 1px solid #ef0000;
+        background: #f9e8e8;
+    }
+ 
+        .qsf-demo-canvas .ruError .ruFileWrap {
+            height: auto;
+            overflow: visible !important;
+            display: block;
+        }
+ 
+        .qsf-demo-canvas .ruError .ruUploadProgress {
+            display: block;
+        }
+ 
+        .qsf-demo-canvas .ruError .ruUploadFailure {
+            background-position: 2px 80%;
+        }
+ 
+        .qsf-demo-canvas .ruError .ruErrorMessage {
+            display: block;
+            font-variant: small-caps;
+            text-transform: lowercase;
+            margin-left: 5px;
+        }
+ 
+ 
+ 
+    /** Validation list */
+    .qsf-demo-canvas .qsf-results {
+        padding: 1em 0 1em 150px;
+    }
+ 
+        /** Headings */
+        .qsf-demo-canvas .qsf-results h3 {
+            margin: 0;
+            padding: 1em 0 1em 40px;
+            font-size: 10px;
+            font-weight: normal;
+            text-transform: uppercase;
+            background-position: left center;
+            background-repeat: no-repeat;
+        }
+ 
+    .qsf-demo-canvas .qsf-success h3 {
+        color: #328d0a;
+        background-image: url("images/qsf-demo-success-bg.png");
+    }
+ 
+    .qsf-demo-canvas .qsf-error h3 {
+        color: #ef0000;
+        background-image: url("images/qsf-demo-error-bg.png");
+    }
+ 
+    /** list */
+    .qsf-demo-canvas .qsf-results .qsf-list {
+        padding: 10px;
+        background: none;
+    }
+ 
+    .qsf-demo-canvas .qsf-success .qsf-list {
+        padding-left: 0px;
+    }
+ 
+    .qsf-demo-canvas .qsf-error .qsf-list {
+        background-color: #f9e8e8;
+        margin-bottom: 1em;
+    }
+ 
+ 
+    /* Error */
+    .qsf-demo-canvas .ruError .ruErrorMessage {
+        color: #ef0000;
+        font-variant: small-caps;
+        text-transform: lowercase;
+        padding-bottom: 0;
+    }

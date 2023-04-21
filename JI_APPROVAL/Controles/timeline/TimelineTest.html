@@ -1,0 +1,70 @@
+﻿<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200,300,600,700' rel='stylesheet' type='text/css'>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<link rel="stylesheet" href="../../Content/bootstrap/css/bootstrap.min.css" />
+
+   <!-- Bootstrap 3.3.5 -->
+<script src="../../Content/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Theme style -->
+<link rel="stylesheet" href="../../Content/dist/css/AdminLTE.css" />
+
+<link href="timelineApproval.css" rel="stylesheet">
+
+<!--<button id="toggleButton">Toggle</button>-->
+
+<ul class="timeline_2" id="timeline">
+    <li class="li complete">
+        <div class="box_line">
+            <span class="bg-red">
+                10 Feb. 2014
+            </span>
+        </div>
+        <div class="status">
+            <h4> Shift Created </h4>
+        </div>
+    </li>
+    <li class="li complete">
+        <div class="timestamp">
+            <span class="author">PAM Admin</span>
+            <span class="date">11/15/2014</span>
+        </div>
+        <div class="status">
+            <h4> Email Sent </h4>
+        </div>
+    </li>
+    <li class="li complete">
+        <div class="timestamp">
+            <span class="author">Aaron Rodgers</span>
+            <span class="date">11/15/2014</span>
+        </div>
+        <div class="status">
+            <h4> SIC Approval </h4>
+        </div>
+    </li>
+    <li class="li">
+        <div class="timestamp">
+            <span class="author">PAM Admin</span>
+            <span class="date">TBD</span>
+        </div>
+        <div class="status">
+            <h4> Shift Completed </h4>
+        </div>
+    </li>
+</ul>      
+
+<script>
+
+    var completes = document.querySelectorAll(".complete");
+    var toggleButton = document.getElementById("toggleButton");
+
+
+    function toggleComplete() {
+        var lastComplete = completes[completes.length - 1];
+        lastComplete.classList.toggle('complete');
+    }
+
+    toggleButton.onclick = toggleComplete;
+
+</script>

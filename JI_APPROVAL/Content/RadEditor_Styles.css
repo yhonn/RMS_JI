@@ -1,0 +1,7 @@
+﻿.RadFileExplorer input.rfeAddressBox {
+    display: none;
+}
+
+.icnNewFolder {
+    display: none !important;
+}

@@ -1,0 +1,7 @@
+﻿#dwndWrapper {
+    height: 85px;
+    background-image: url("../../images/upload_100.png");
+    background-position: left;
+    background-repeat: no-repeat;
+    padding: 15px 0 0 100px;
+}

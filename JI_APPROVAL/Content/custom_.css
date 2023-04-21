@@ -1,0 +1,45 @@
+﻿/*
+ * Component: Custom styles
+ * -------------------------
+ */
+
+
+
+ .img-border-aqua-active {    
+   border:3px solid #00a7d0 !important;    
+  } 
+
+.img-border-green-active {    
+   border:3px solid #008d4c !important;    
+  }
+
+.img-border-orange-active {    
+   border:3px solid #ff7701 !important;    
+  }
+
+  .img-border-blue-active {    
+   border:3px solid #005384 !important;    
+  }
+
+ .img-border-yellow-active {    
+   border:3px solid #db8b0b !important;    
+  }
+
+ .img-border-red-active {    
+   border:3px solid #d33724 !important;    
+  }
+
+ .img-border-gray-active {    
+   border:3px solid #b5bbc8 !important;    
+  }
+
+ /*.direct-chat-text_v1_02 {
+    border-radius: 5px;
+    position: relative;
+    padding: 5px 10px;
+    background: #ffffff;
+    border: 2px solid #d2d6de;
+    margin: 5px 0 0 50px;
+    color: #444444;
+    text-align: justify;
+}*/

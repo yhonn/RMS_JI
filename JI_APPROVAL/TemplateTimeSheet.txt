@@ -1,0 +1,136 @@
+   <table class="table table-responsive table-hover table-sm table-bordered table-bordered-ts " >
+                                              <thead >
+                                                <tr class="bg-primary">                                                  
+                                                  <th colspan="2">DATE</th>
+                                                  <th class="text-center">1</th>
+                                                  <th class="text-center">2</th>
+                                                  <th class="text-center">3</th>
+                                                  <th class="text-center">4</th>
+                                                  <th class="text-center">5</th>
+                                                  <th class="text-center">6</th>
+                                                  <th class="text-center">7</th>
+                                                  <th class="text-center">8</th>
+                                                  <th class="text-center">9</th>
+                                                  <th class="text-center">10</th>
+                                                  <th class="text-center"></th>
+                                                </tr>
+                                              </thead>
+                                                 <tbody>
+                                                    <tr>
+                                                      <td colspan="2" class="bg-info">Billable Time</td>                                                                                                      
+                                                      <td class="bg-primary text-center">dom</td>
+                                                      <td class="bg-primary text-center">lun</td>
+                                                      <td class="bg-primary text-center">mar</td>
+                                                      <td class="bg-primary text-center">mier</td>
+                                                      <td class="bg-primary text-center">jue</td>
+                                                      <td class="bg-primary text-center">vie</td>
+                                                      <td class="bg-primary text-center">sáb</td>
+                                                      <td class="bg-primary text-center">dom</td>
+                                                      <td class="bg-primary text-center">lun</td>
+                                                      <td class="bg-primary text-center">mar</td>
+                                                      <td class="bg-primary text-center">TOTAL</td>
+                                                    </tr>
+                                                    <tr >
+                                                      <th scope="row">1</th>
+                                                      <td>Regular Work Hours (US/Non-Field)</td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td class="text-center bg-primary"></td> 
+                                                    </tr>
+                                                    <tr>
+                                                      <td colspan="12" class="bg-info">Regular Work Hours (Field)</td>                                                  
+                                                      <td class="text-center bg-primary"></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <th scope="row">2</th>
+                                                      <td>México JPV</td>
+                                                      <td class="text-center">1</td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td class="bg-primary text-center">1</td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td colspan="12" class="bg-info">Other (Specify Below)</td>                                                  
+                                                      <td class="text-center bg-primary "></td>
+                                                    </tr>
+                                                    <tr>
+                                                      <th scope="row">3</th>
+                                                      <td>Uganda YLA</td>
+                                                      <td></td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="text-center">8</td>
+                                                      <td class="bg-primary text-center">72 </td>
+                                                    </tr>
+                                                    <tr>
+                                                      <td colspan="12" class="bg-info">Travel Work Hours</td>  
+                                                      <td class="text-center bg-primary "></td>                                                
+                                                    </tr>
+                                                    <tr>
+                                                      <th scope="row">4</th>
+                                                      <td>Mexico YLA</td>
+                                                      <td class="text-center">5</td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td class="bg-primary text-center">5</td> 
+                                                    </tr>
+                                                     <tr>
+                                                      <th scope="row">5</th>
+                                                      <td>Uganda YLA</td>
+                                                      <td class="text-center">2</td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                      <td></td>
+                                                       <td class="bg-primary text-center">2</td>
+                                                    </tr>
+                                                </tbody> 
+                                                <tfoot>
+                                                    <tr >                                                     
+                                                      <th colspan="2"></th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <th class="bg-primary text-center">8</th>
+                                                      <td class="bg-primary text-center">80</td>
+                                                </tfoot>
+                                            </table>

@@ -1,0 +1,160 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterPar.master.vb" Inherits="RMS_APPROVAL.MasterPar" %>
+
+<%@ Register Assembly="Telerik.Web.UI" Namespace="Telerik.Web.UI" TagPrefix="telerik" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="tme_Planedh" xml:lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>[::. CHEMONICS .::] </title>
+
+    <script type="text/javascript">        //window.print();</script>
+    <style type="text/css">
+        #form1
+        {
+            width: 745px;
+        }
+
+        .style1
+        {
+            font-family: "Trebuchet MS";
+        }
+
+        .cleared
+        {
+            width: 744px;
+        }
+
+        body, p
+        {
+            margin: 0.5em 0;
+            font-family: Trebuchet MS, "Times New Roman", Times, Serif;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+        }
+
+        body
+        {
+            margin: 0 auto;
+            padding: 0;
+            color: #4E5242;
+        }
+
+        td
+        {
+            font-family: Trebuchet MS, "Times New Roman", Times, Serif;
+            font-style: normal;
+            font-weight: normal;
+            text-align: left;
+        }
+
+        .style2
+        {
+            border-collapse: collapse;
+            width: 782px;
+            border-color: #9a7328;
+            border-width: 0;
+        }
+
+        .style3
+        {
+            width: 10px;
+        }
+
+        .style4
+        {
+            width: 10px;
+            height: 10px;
+        }
+
+        .style5
+        {
+            height: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="art-page-background-simple-gradient" style="width: 748px">
+            <div id="art-page-background-gradient" style="width: 750px">
+            </div>
+        </div>
+    
+    <table cellpadding="0" class="style2">
+        <tr>
+            <td class="style4"></td>
+            <td class="style5"></td>
+        </tr>
+        <tr>
+            <td class="style3">&nbsp;</td>
+            <td>
+                <div class="art-sheet-body" style="width: 759px">
+                    <div class="art-nav">
+                        <telerik:RadScriptManager ID="RadScriptManager1" runat="server">
+                        </telerik:RadScriptManager>
+                    </div>
+                    <div class="art-content-layout" style="width: 745px">
+                        <div class="art-content-layout-row" style="width: 650px">
+                            <div class="art-layout-cell art-content" style="width: 742px">
+                                <div class="art-post" style="width: 747px">
+                                    <div class="art-post-tl">
+                                    </div>
+                                    <div class="art-post-tr">
+                                    </div>
+                                    <div class="art-post-bl">
+                                    </div>
+                                    <div class="art-post-br">
+                                    </div>
+                                    <div class="art-post-tc">
+                                    </div>
+                                    <div class="art-post-bc">
+                                    </div>
+                                    <div class="art-post-cl">
+                                    </div>
+                                    <div class="art-post-cr">
+                                    </div>
+                                    <div class="art-post-cc">
+                                    </div>
+                                    <div class="art-post-body" style="width: 650px">
+                                        <div style="width: 650px">
+
+                                            <div id="ZonaID1" class="art-postcontent" style="width: 712px">
+
+                                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                                        </asp:ContentPlaceHolder>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                            <div class="cleared">
+                                            </div>
+                                        </div>
+                                        <div class="cleared">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleared">
+                    </div>
+                    <div class="art-footer">
+                        <div class="art-footer-text">
+                            <p style="font-size: x-small; text-align: center; margin:0 auto; width:850px;" class="style1">
+                                Copyright Chemonics International Inc. <%= Date.Now.Year.ToString %>---. All Rights Reserved.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    </form>
+
+</body>
+</html>
+
