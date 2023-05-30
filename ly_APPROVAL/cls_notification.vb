@@ -2357,6 +2357,9 @@ Namespace APPROVAL
                         Add_Emails_List("TO", set_ta_roles_emails(vOrden)) 'Actual, Originator 0
                         Add_Emails_List("TO", set_ta_roles_emails(vOrden + 1)) 'Next Step
 
+                        If tipo = 1 Or tipo = 2 Then
+                            Add_Emails_List("CC", get_t_notification_emails_end_app(id_documento)) 'Infom to the Manager
+                        End If
 
                         'Add_Emails_List("TO", set_ta_roles_emails(vOrden)) 'Actual, Originator 0
                         'Add_Emails_List("TO", set_ta_roles_emails(vOrden + 1)) 'Next Step
@@ -2383,7 +2386,9 @@ Namespace APPROVAL
 
                     Case cAPPROVED
 
-
+                        'If tipo = 1 Or tipo = 2 Then
+                        '    Add_Emails_List("CC", get_t_notification_emails_end_app(id_documento)) 'Infom to the Manager
+                        'End If
                         'Add a for loop to send email to all participated before!
                         Dim maxOrder As Integer = 0
                         Add_Emails_List("TO", set_ta_roles_emails(0)) 'Originator
@@ -2399,7 +2404,12 @@ Namespace APPROVAL
                             Dim clss_approval As APPROVAL.clss_approval
                             clss_approval = New APPROVAL.clss_approval(id_programa)
                             maxOrder = clss_approval.get_ta_AppDocumentoOrden_MAX(id_documento).Rows().Item(0).Item("orden") ' To get the Max ORder values to make the same step again
-                            Add_Emails_List("TO", set_ta_roles_emails(maxOrder)) 'The last step who did the standby
+                            If vOrden = 0 Then
+                                Add_Emails_List("TO", set_ta_roles_emails(vOrden + 1)) 'The last step who did the standby
+                            Else
+
+                                Add_Emails_List("TO", set_ta_roles_emails(maxOrder)) 'The last step who did the standby
+                            End If
                             Add_Emails_List("TO", set_ta_travel_roles_emails(maxOrder, id_viaje, campo))
                         End If
 
@@ -2415,7 +2425,7 @@ Namespace APPROVAL
                         Else 'StandBy Step
 
                             'strSubject = strSubject.Replace("<!--##STATE_STEP##-->", " Document approval for next phase. Observations completed ")
-                            Add_Emails_List("TO", set_ta_travel_roles_emails(maxOrder, id_viaje, campo))
+                            Add_Emails_List("TO", set_ta_travel_roles_emails(vOrden + 1, id_viaje, campo))
                             'Add_Emails_List("CC", set_ta_GrupoRoles_emails(maxOrder)) 'The last step group of whom did the standby
                             'Add_Emails_List("CC", set_ta_GrupoRoles_emails(maxOrder + 1)) 'Next Step Group of last step group of whom did the standby
                             Add_Emails_List("TO", set_ta_travel_roles_emails((maxOrder + 1), id_viaje, campo))
@@ -2426,7 +2436,9 @@ Namespace APPROVAL
 
 
                     Case cnotAPPROVED
-
+                        If tipo = 2 Then
+                            Add_Emails_List("CC", get_t_notification_emails_end_app(id_documento)) 'Infom to the Manager
+                        End If
                         Add_Emails_List("TO", set_ta_travel_roles_emails(vOrden, id_viaje, campo))
                         Add_Emails_List("TO", set_ta_travel_roles_emails(vOrden, id_viaje, campo2))
                         'Add_Emails_List("TO", set_ta_roles_emails(-1)) 'included all
@@ -2437,7 +2449,9 @@ Namespace APPROVAL
                         strSubject = String.Format("Approvals System: {0} {1} no aprobado.", tipoApp, get_Apps_DocumentField("numero_instrumento", "id_documento", id_documento, "id_App_documento", id_AppDocumento))
 
                     Case cCANCELLED
-
+                        If tipo = 2 Then
+                            Add_Emails_List("CC", get_t_notification_emails_end_app(id_documento)) 'Infom to the Manager
+                        End If
                         Add_Emails_List("TO", set_ta_travel_roles_emails(vOrden, id_viaje, campo))
                         Add_Emails_List("TO", set_ta_travel_roles_emails(vOrden, id_viaje, campo2))
                         'Add_Emails_List("TO", set_ta_roles_emails(-1)) 'included all
@@ -2448,7 +2462,9 @@ Namespace APPROVAL
 
                     Case cSTANDby
 
-
+                        If tipo = 2 Then
+                            Add_Emails_List("CC", get_t_notification_emails_end_app(id_documento)) 'Infom to the Manager
+                        End If
                         'Add a for loop to send email to all participated before!
 
                         Add_Emails_List("TO", set_ta_roles_emails(0)) 'Originator
@@ -2479,7 +2495,9 @@ Namespace APPROVAL
                         Add_Emails_List("TO", set_ta_travel_roles_emails(vOrden, id_viaje, "0", campo2, campo3))
                         strSubject = String.Format("Approvals System: {0} {1} aprobado.", tipoApp, get_Apps_DocumentField("numero_instrumento", "id_documento", id_documento, "id_App_documento", id_AppDocumento))
 
-
+                        If tipo = 2 Then
+                            Add_Emails_List("CC", get_t_notification_emails_end_app(id_documento)) 'Infom to the Manager
+                        End If
 
                         'Add_Emails_List("TO", set_ta_roles_emails(-1)) 'included all
                         'Add_Emails_List("CC", set_ta_GrupoRoles_emails(-1)) 'included all groups
@@ -2610,7 +2628,7 @@ Namespace APPROVAL
             Dim campo = ""
             Dim campo2 = ""
             Dim campo3 = ""
-            If tipo = 1 Then
+            If tipo = 1 Or tipo = 2 Then
                 tipoApp = "Solicitud de anticipo"
                 campo = "id_usuario_app"
                 campo2 = "id_usuario_radica"
@@ -2822,7 +2840,7 @@ Namespace APPROVAL
             Dim campo = ""
             Dim campo2 = ""
             Dim campo3 = ""
-            If tipo = 1 Then
+            If tipo = 1 Or tipo = 2 Then
                 tipoApp = "Solicitud de par"
                 campo = "id_usuario_app"
                 campo2 = "id_usuario_radica"
@@ -4606,7 +4624,7 @@ Namespace APPROVAL
 
                 For Each dtRow As DataRow In tbl_emails.Rows
 
-                    If dtEmail("email").ToString.Trim = dtRow("email").ToString.Trim Then
+                    If dtEmail("email").ToString.Trim.Replace(";", "") = dtRow("email").ToString.Trim.Replace(";", "") Then
                         boolExist = True
                         Exit For
                     End If
@@ -4614,10 +4632,12 @@ Namespace APPROVAL
                 Next
 
                 If boolExist = False Then 'Add The Email
-                    Dim NewRow As DataRow = tbl_emails.NewRow()
-                    NewRow("Tipo") = strType
-                    NewRow("email") = dtEmail("email").ToString.Trim
-                    tbl_emails.Rows.Add(NewRow)
+                    If dtEmail("email").ToString.Trim.Replace(";", "").Length > 0 Then
+                        Dim NewRow As DataRow = tbl_emails.NewRow()
+                        NewRow("Tipo") = strType
+                        NewRow("email") = dtEmail("email").ToString.Trim.Replace(";", "")
+                        tbl_emails.Rows.Add(NewRow)
+                    End If
                 Else
                     boolExist = False
                 End If

@@ -6072,7 +6072,6 @@ Public Class frm_ActivityEvaluation
 
 
         Using dbEntities As New dbRMS_JIEntities
-
             Dim oRound = dbEntities.VW_TA_EVALUATION_ROUNDS.Where(Function(p) p.ID_APPLY_EVALUATION = id_APP_evaluation And p.ID_ROUND = id_ROUND).FirstOrDefault()
             Dim idEVALround = Convert.ToInt32(oRound.ID_EVALUATION_ROUND)
 
@@ -6083,7 +6082,6 @@ Public Class frm_ActivityEvaluation
             Dim oTA_EVALUATION_APP = dbEntities.TA_EVALUATION_APP.Where(Function(p) p.ID_EVALUATION_ROUND = idEVALround And p.ID_APPLY_APP = ID_APPLYapp)
 
             ' Dim oTA_ACTIVITY = dbEntities.TA_ACTIVITY.Find(oTA_ACTIVITY_SOLICITATION.ID_ACTIVITY)
-
             Dim oTA_AWARDED_APP = New TA_AWARDED_APP
 
             oTA_AWARDED_APP.ID_APPLY_APP = ID_APPLYapp
@@ -6103,8 +6101,9 @@ Public Class frm_ActivityEvaluation
             oTA_AWARDED_APP.EXCHANGE_RATE = oTA_ACTIVITY_SOLICITATION.TA_ACTIVITY.tasa_cambio
             oTA_AWARDED_APP.ID_BUDGET = 4 'Default Budget
 
-
-            Dim idPrograma = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
+            Dim idPrograma = Convert.ToInt32(Me.Session("E_IDPrograma"))
+            Dim currency = dbEntities.t_programa_currency.FirstOrDefault(Function(p) p.id_programa = idPrograma And p.set_default = True)
+            oTA_AWARDED_APP.id_programa_currency = currency.id_programa_currency
             Dim cls_Solicitation As ly_APPROVAL.APPROVAL.cls_solicitations = New ly_APPROVAL.APPROVAL.cls_solicitations(idPrograma, cl_user)
 
             Dim idAWARDED As Integer
@@ -6200,7 +6199,7 @@ Public Class frm_ActivityEvaluation
     End Sub
 
 
-
+    ' Dim oTA_ACTIVITY = dbEntities.TA_ACTIVITY.Find(oTA_ACTIVITY_SOLICITATION.ID_ACTIVITY)
 
     Sub Generate_AWARD_APP_IS(ByVal id_APP_evaluation As Integer, ByVal id_ROUND As Integer, ByVal ID_APPLYapp As Integer)
 
@@ -6219,7 +6218,6 @@ Public Class frm_ActivityEvaluation
             ' Dim oTA_ACTIVITY = dbEntities.TA_ACTIVITY.Find(oTA_ACTIVITY_SOLICITATION.ID_ACTIVITY)
 
             Dim oTA_AWARDED_APP = New TA_AWARDED_APP
-
             oTA_AWARDED_APP.ID_APPLY_APP = ID_APPLYapp
             oTA_AWARDED_APP.ID_ACTIVITY = oTA_ACTIVITY_SOLICITATION.ID_ACTIVITY
             oTA_AWARDED_APP.ID_ORGANIZATION_APP = oSol.ID_ORGANIZATION_APP
@@ -6241,6 +6239,8 @@ Public Class frm_ActivityEvaluation
 
 
             Dim idPrograma = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
+            Dim currency = dbEntities.t_programa_currency.FirstOrDefault(Function(p) p.id_programa = idPrograma And p.set_default = True)
+            oTA_AWARDED_APP.id_programa_currency = currency.id_programa_currency
             Dim cls_Solicitation As ly_APPROVAL.APPROVAL.cls_solicitations = New ly_APPROVAL.APPROVAL.cls_solicitations(idPrograma, cl_user)
 
             Dim idAWARDED As Integer

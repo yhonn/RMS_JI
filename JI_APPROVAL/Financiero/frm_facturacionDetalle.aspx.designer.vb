@@ -23,6 +23,15 @@ Partial Public Class frm_facturacionDetalle
     Protected WithEvents imgChemo As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
+    '''resolucion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents resolucion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''lbl_numero_factura control.
     '''</summary>
     '''<remarks>

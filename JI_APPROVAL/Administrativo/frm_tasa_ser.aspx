@@ -92,7 +92,7 @@
                                         </telerik:GridDateTimeColumn>
                                         <telerik:GridNumericColumn DataField="tasa_ser"
                                              ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                            DataType="System.Decimal" HeaderText="Tasa SER" DataFormatString="{0:n}">
+                                            DataType="System.Decimal" HeaderText="Tasa SER" DataFormatString="{0:n0}">
                                         </telerik:GridNumericColumn>
                                     </Columns>
                                 </MasterTableView>

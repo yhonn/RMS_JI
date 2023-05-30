@@ -54,8 +54,28 @@ Public Class frm_anticiposVerificacion
     End Sub
     Sub loadRutas(idAnticipo As Integer)
         Using dbEntities As New dbRMS_JIEntities
-            Dim rutas = dbEntities.tme_anticipos.Find(idAnticipo)
+            Dim rutas = dbEntities.vw_anticipo_detalle_ruta.Where(Function(p) p.id_anticipo = idAnticipo).ToList()
+            Me.grd_rutas.DataSource = rutas
+            Me.grd_rutas.DataBind()
         End Using
+    End Sub
+    Protected Sub grd_rutas_ItemDataBound(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridItemEventArgs) Handles grd_rutas.ItemDataBound
+
+        If e.Item.ItemType = GridItemType.AlternatingItem Or e.Item.ItemType = GridItemType.Item Then
+            Dim id_facturacion_producto = DataBinder.Eval(e.Item.DataItem, "id_anticipo_ruta").ToString()
+            Dim lbl_tiempo_estimado As Label = CType(e.Item.Cells(0).FindControl("lbl_tiempo_estimado"), Label)
+            lbl_tiempo_estimado.Text = DataBinder.Eval(e.Item.DataItem, "tiempo_estimado")
+            Dim lbl_observaciones_trayecto As Label = CType(e.Item.Cells(0).FindControl("lbl_observaciones_trayecto"), Label)
+            lbl_observaciones_trayecto.Text = DataBinder.Eval(e.Item.DataItem, "observaciones_trayecto")
+            Dim lbl_observaciones_ruta As Label = CType(e.Item.Cells(0).FindControl("lbl_observaciones_ruta"), Label)
+            lbl_observaciones_ruta.Text = DataBinder.Eval(e.Item.DataItem, "observaciones_ruta")
+
+            Dim col_hlk_editar As LinkButton = New LinkButton
+            col_hlk_editar = CType(e.Item.FindControl("col_hlk_editar"), LinkButton)
+            col_hlk_editar.Attributes.Add("data-href", DataBinder.Eval(e.Item.DataItem, "id_anticipo_ruta").ToString())
+            col_hlk_editar.Attributes.Add("data-identity", DataBinder.Eval(e.Item.DataItem, "id_anticipo_ruta").ToString())
+            col_hlk_editar.ToolTip = controles.iconosGrid("col_hlk_editar")
+        End If
     End Sub
     Sub loadData(idAnticipo As Integer)
         Using dbEntities As New dbRMS_JIEntities
@@ -135,5 +155,48 @@ Public Class frm_anticiposVerificacion
             Me.cmb_tipo_anticipo.DataBind()
         End Using
 
+    End Sub
+
+    Protected Sub participantes(sender As Object, e As EventArgs)
+
+        Using dbEntities As New dbRMS_JIEntities
+            Dim a = CType(sender, LinkButton)
+            Dim idRutaAnticipo = Convert.ToInt32(a.Attributes.Item("data-identity").ToString())
+            Me.id_ruta_anticipo.Value = idRutaAnticipo
+
+            Dim rol = dbEntities.tme_anticipo_ruta.Find(idRutaAnticipo)
+
+            Me.grd_conceptos.DataSource = dbEntities.tme_anticipo_ruta_participantes.Where(Function(p) p.id_ruta_anticipo = idRutaAnticipo).ToList()
+            Me.grd_conceptos.DataBind()
+
+            Me.RadWindow2.VisibleOnPageLoad = True
+            Me.RadWindow2.Visible = True
+        End Using
+
+    End Sub
+
+    Private Sub btn_guardar_participante_Click(sender As Object, e As EventArgs) Handles btn_guardar_participante.Click
+        Using dbEntities As New dbRMS_JIEntities
+            Dim idRutaAnticipo = Convert.ToInt32(Me.id_ruta_anticipo.Value)
+            Dim participante = New tme_anticipo_ruta_participantes
+            participante.id_ruta_anticipo = idRutaAnticipo
+            participante.numero_documento = Me.txt_numero_documento.Value
+            participante.nombres = Me.txt_nombre.Text
+            participante.primer_apellido = Me.txt_primer_apellido.Text
+            participante.segundo_apellido = Me.txt_segundo_apellido.Text
+            participante.valor = Me.txt_valor.Value
+            participante.telefono = Me.txt_numero_telefono.Text
+            participante.tipo_ocumento = Me.txt_tipo_documento.Text
+            dbEntities.tme_anticipo_ruta_participantes.Add(participante)
+            dbEntities.SaveChanges()
+
+            Me.grd_conceptos.DataSource = dbEntities.tme_anticipo_ruta_participantes.Where(Function(p) p.id_ruta_anticipo = idRutaAnticipo).ToList()
+            Me.grd_conceptos.DataBind()
+
+        End Using
+    End Sub
+
+    Private Sub btn_guardar_finalizar_Click(sender As Object, e As EventArgs) Handles btn_guardar_finalizar.Click
+        Me.RadWindow2.VisibleOnPageLoad = False
     End Sub
 End Class

@@ -45,6 +45,18 @@ Public Class frm_contratos
     Sub fillGrid(ByVal bndBind As Boolean)
         Using dbEntities As New dbRMS_JIEntities
 
+            Dim contratos = New List(Of vw_tme_contratos)
+            If Me.rbn_filtro.SelectedValue <> "" Then
+                If Me.rbn_filtro.SelectedValue = "1" Then
+                    contratos = dbEntities.vw_tme_contratos.Where(Function(p) p.entregables_pendientes > 0).ToList()
+                Else
+                    contratos = dbEntities.vw_tme_contratos.ToList()
+                End If
+            Else
+                contratos = dbEntities.vw_tme_contratos.ToList()
+            End If
+
+
             Me.grd_cate.DataSource = dbEntities.vw_tme_contratos.ToList()
 
             If bndBind Then
@@ -95,5 +107,8 @@ Public Class frm_contratos
                 hlnkEdit.Visible = False
             End If
         End If
+    End Sub
+    Private Sub rbn_filtro_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rbn_filtro.SelectedIndexChanged
+        fillGrid(True)
     End Sub
 End Class

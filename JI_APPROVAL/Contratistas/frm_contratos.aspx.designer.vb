@@ -59,6 +59,24 @@ Partial Public Class frm_contratos
     Protected WithEvents btn_nuevo As Global.Telerik.Web.UI.RadButton
 
     '''<summary>
+    '''lblt_groupBy control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_groupBy As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''rbn_filtro control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rbn_filtro As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
     '''lbltotal control.
     '''</summary>
     '''<remarks>

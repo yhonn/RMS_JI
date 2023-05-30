@@ -889,6 +889,17 @@ Public Class frm_viaje_legalizacion
                 'If municipio.mye_rate_usd > 0 Then
                 '    Me.rbn_zona_legalizacion.Items.Add(New ListItem("No aplica", "NA"))
                 'End If
+                Me.zr_data.Visible = True
+                Me.rbn_zona_legalizacion.Enabled = True
+                If municipio.zona_rural IsNot Nothing Then
+                    If municipio.zona_rural = True Then
+                        Me.rbn_zona_legalizacion.SelectedValue = "Rural"
+                        Me.rbn_zona_legalizacion.Enabled = False
+                        Me.zr_data.Visible = False
+                    End If
+                End If
+
+
                 Me.rbn_zona_legalizacion.DataBind()
             End If
 
@@ -938,7 +949,11 @@ Public Class frm_viaje_legalizacion
             If idMunicipio > 0 And Convert.ToInt32(numero_horas_viaje.Value) >= 8 And Convert.ToInt32(numero_horas_viaje.Value) <= 12 And numDias = 0 And zonaRural <> "" Then
                 Dim municipio = dbEntities.t_municipios.Find(idMunicipio)
 
-
+                If municipio.zona_rural IsNot Nothing Then
+                    If municipio.zona_rural = True Then
+                        zonaRural = "Rural"
+                    End If
+                End If
 
                 If municipio.mye_rate_usd > 0 And zonaRural = "No" Then
                     tarifa_almuerzo = municipio.mye_rate_almuerzo * Me.txt_tasa_ser.Value
@@ -952,7 +967,11 @@ Public Class frm_viaje_legalizacion
             Else
                 If idMunicipio > 0 And dia > 0 And zonaRural <> "" Then
                     Dim municipio = dbEntities.t_municipios.Find(idMunicipio)
-
+                    If municipio.zona_rural IsNot Nothing Then
+                        If municipio.zona_rural = True Then
+                            zonaRural = "Rural"
+                        End If
+                    End If
 
                     If municipio.mye_rate_usd > 0 And zonaRural = "No" Then
                         perdiem = municipio.mye_rate_usd * Me.txt_tasa_ser.Value
@@ -1810,7 +1829,9 @@ Public Class frm_viaje_legalizacion
                             Dim tbl_AppOrderO As New DataTable
 
                             'If came from StandBy State, We need to retur n to the ROL originator if is required**********************
-                            If clss_approval.get_ta_DocumentosInfoFIELDS("id_estadoDoc", "id_documento", Me.HiddenField1.Value) = cSTANDby Then
+                            Dim riniciarRuta = Convert.ToBoolean(clss_approval.get_ta_DocumentosInfoFIELDS("reiniciar_ruta_aprobacion", "id_documento", Me.HiddenField1.Value))
+                            Dim devolverAprobadorAnterior = Convert.ToBoolean(clss_approval.get_ta_DocumentosInfoFIELDS("devolver_aprobador_anterior", "id_documento", Me.HiddenField1.Value))
+                            If clss_approval.get_ta_DocumentosInfoFIELDS("id_estadoDoc", "id_documento", Me.HiddenField1.Value) = cSTANDby And riniciarRuta = False And devolverAprobadorAnterior = False Then
 
                                 tbl_AppOrderO = clss_approval.get_ta_AppDocumentoOrden_MAX(Me.HiddenField1.Value) ' To get the Max ORder values to make the same step again
 
@@ -2635,4 +2656,6 @@ Public Class frm_viaje_legalizacion
 
 
     End Sub
+
+
 End Class

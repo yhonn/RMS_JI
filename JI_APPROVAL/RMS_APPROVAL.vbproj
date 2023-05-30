@@ -162,6 +162,12 @@
       <HintPath>packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http, Version=2.2.22.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Net.Http.2.2.22\lib\net40\System.Net.Http.dll</HintPath>
@@ -268,12 +274,14 @@
     <Content Include="Administracion\frm_usuariosEdit.aspx" />
     <Content Include="Administracion\frm_usuariosEdit_v1.0.aspx" />
     <Content Include="Administrativo\facturas.ascx" />
+    <Content Include="Administrativo\frm_anticipoLegalizacion.aspx" />
     <Content Include="Administrativo\frm_anticipos.aspx" />
     <Content Include="Administrativo\frm_anticiposAd.aspx" />
     <Content Include="Administrativo\frm_anticiposEdit.aspx" />
     <Content Include="Administrativo\frm_anticiposVerificacion.aspx" />
     <Content Include="Administrativo\frm_corte_facturacion.aspx" />
     <Content Include="Administrativo\frm_par_facturacionPrint.aspx" />
+    <Content Include="Content\dist\js\aw_chart.js" />
     <Content Include="Contratistas\frm_contratosMod.aspx" />
     <Content Include="Contratistas\frm_contratosModAd.aspx" />
     <Content Include="Contratistas\frm_contratosModEntregables.aspx" />
@@ -1354,6 +1362,13 @@
     <Compile Include="Administrativo\facturas.ascx.vb">
       <DependentUpon>facturas.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administrativo\frm_anticipoLegalizacion.aspx.designer.vb">
+      <DependentUpon>frm_anticipoLegalizacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administrativo\frm_anticipoLegalizacion.aspx.vb">
+      <DependentUpon>frm_anticipoLegalizacion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Administrativo\frm_anticipos.aspx.designer.vb">
       <DependentUpon>frm_anticipos.aspx</DependentUpon>
@@ -2799,6 +2814,13 @@
       <DependentUpon>frm_TimeSheetDocs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="TimeSheet\frm_timesheetdownload.aspx.designer.vb">
+      <DependentUpon>frm_timesheetdownload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSheet\frm_timesheetdownload.aspx.vb">
+      <DependentUpon>frm_timesheetdownload.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="TimeSheet\frm_TimeSheetFollowing.aspx.designer.vb">
       <DependentUpon>frm_TimeSheetFollowing.aspx</DependentUpon>
     </Compile>
@@ -2819,6 +2841,13 @@
     <Compile Include="TimeSheet\frm_TimeSheetFollowingREP.aspx.vb">
       <DependentUpon>frm_TimeSheetFollowingREP.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TimeSheet\frm_TimeSheetFollowingREPPrint.aspx.designer.vb">
+      <DependentUpon>frm_TimeSheetFollowingREPPrint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSheet\frm_TimeSheetFollowingREPPrint.aspx.vb">
+      <DependentUpon>frm_TimeSheetFollowingREPPrint.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="TimeSheet\frm_TimeSheetFollowingREP_pay.aspx.designer.vb">
       <DependentUpon>frm_TimeSheetFollowingREP_pay.aspx</DependentUpon>
@@ -3677,9 +3706,11 @@
     <Content Include="TimeSheet\frm_TimeSheet.aspx" />
     <Content Include="TimeSheet\frm_TimeSheetAdd.aspx" />
     <Content Include="TimeSheet\frm_TimeSheetDocs.aspx" />
+    <Content Include="TimeSheet\frm_timesheetdownload.aspx" />
     <Content Include="TimeSheet\frm_TimeSheetFollowing.aspx" />
     <Content Include="TimeSheet\frm_TimeSheetEdit.aspx" />
     <Content Include="TimeSheet\frm_TimeSheetFollowingREP.aspx" />
+    <Content Include="TimeSheet\frm_TimeSheetFollowingREPPrint.aspx" />
     <Content Include="TimeSheet\frm_TimeSheetFollowingREP_pay.aspx" />
     <Content Include="TimeSheet\frm_TimeSheet_app_edit.aspx" />
     <Content Include="TimeSheet\frm_ts_employee_profile.aspx" />
@@ -3748,7 +3779,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52306</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52317/</IISUrl>
+          <IISUrl>http://localhost:52318/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -507,7 +507,7 @@
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
                                                             <asp:Label runat="server" ID="Label19" CssClass="control-label text-bold">Monto:</asp:Label>
                                                             <br />
-                                                            <telerik:RadNumericTextBox ID="txt_monto_pasajes"  AutoPostBack="true" runat="server" value="0" Width="90%" MinValue="0">
+                                                            <telerik:RadNumericTextBox ID="txt_monto_pasajes" NumberFormat-DecimalDigits="0" AutoPostBack="true" runat="server" value="0" Width="90%" MinValue="0">
                                                                 <ClientEvents OnValueChanging="calc_monto_pasajes" />
                                                             </telerik:RadNumericTextBox>
                                                         </div>
@@ -555,13 +555,13 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-3">
                                                             <asp:Label runat="server" ID="Label29" CssClass="control-label text-bold">Número de participantes:</asp:Label>
                                                             <br />
-                                                            <telerik:RadNumericTextBox ID="txt_numero_participantes" runat="server"  Width="90%" MinValue="0">
+                                                            <telerik:RadNumericTextBox ID="txt_numero_participantes" NumberFormat-DecimalDigits="0" runat="server"  Width="90%" MinValue="0">
                                                             </telerik:RadNumericTextBox>
                                                         </div>
                                                         <div class="col-sm-12 col-md-12 col-lg-3">
                                                             <asp:Label runat="server" ID="Label30" CssClass="control-label text-bold">Monto:</asp:Label>
                                                             <br />
-                                                            <telerik:RadNumericTextBox ID="txt_monto_reuniones" runat="server" value="0" Width="90%" MinValue="0">
+                                                            <telerik:RadNumericTextBox ID="txt_monto_reuniones" runat="server" NumberFormat-DecimalDigits="0" value="0" Width="90%" MinValue="0">
                                                                  <ClientEvents OnValueChanging="calc_monto_reuniones" />
                                                             </telerik:RadNumericTextBox>
                                                             <asp:RequiredFieldValidator ID="rv_monto_evento" runat="server"
@@ -600,7 +600,7 @@
                                                         <div class="col-sm-12 col-md-12 col-lg-3">
                                                             <asp:Label runat="server" ID="Label35" CssClass="control-label text-bold">Monto:</asp:Label>
                                                             <br />
-                                                            <telerik:RadNumericTextBox ID="txt_monto_miscelaneos" runat="server" value="0" Width="90%" MinValue="0">
+                                                            <telerik:RadNumericTextBox ID="txt_monto_miscelaneos" NumberFormat-DecimalDigits="0" runat="server" value="0" Width="90%" MinValue="0">
                                                                 <ClientEvents OnValueChanging="calc_monto_miscelaneos" />
                                                             </telerik:RadNumericTextBox>
                                                             <asp:RequiredFieldValidator ID="rv_monto_miscelaneos" runat="server"
@@ -651,7 +651,7 @@
                                                                     ControlToValidate="cmb_municipio"  Visible="false" CssClass="Error" Display="Dynamic"
                                                                     ErrorMessage="Campo obligatorio" ValidationGroup="1">*</asp:RequiredFieldValidator>
                                                         </div>
-                                                         <div class="col-sm-6 col-md-6 col-lg-3">
+                                                         <div class="col-sm-6 col-md-6 col-lg-3" runat="server" visible="false" id="zr_data">
                                                             <asp:Label runat="server" ID="Label25" CssClass="control-label text-bold">¿Es zona rural?</asp:Label>
                                                             <br />
                                                               <asp:RadioButtonList runat="server" ID="rbn_zona_legalizacion"  runat="server"
@@ -666,7 +666,7 @@
                                                          <div class="col-sm-6 col-md-6 col-lg-3" runat="server" visible="false" id="viaje_8">
                                                             <asp:Label runat="server" ID="Label20" CssClass="control-label text-bold">M&E Rate</asp:Label>
                                                             <br />
-                                                            <telerik:RadNumericTextBox ID="txt_per_diem_8" AutoPostBack="false" enabled="false" Filter="Contains" emptymessage="Seleccione ..." runat="server" Width="90%">
+                                                            <telerik:RadNumericTextBox ID="txt_per_diem_8" NumberFormat-DecimalDigits="0" AutoPostBack="false" enabled="false" Filter="Contains" emptymessage="Seleccione ..." runat="server" Width="90%">
                                                             </telerik:RadNumericTextBox>
                                                         </div>
                                                      </div>
@@ -687,13 +687,13 @@
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
                                                             <asp:Label runat="server" ID="Label10" CssClass="control-label text-bold">M&E Rate</asp:Label>
                                                                 <br />
-                                                                <telerik:RadNumericTextBox ID="txt_per_diem" enabled="false" runat="server"  Width="90%" MinValue="0">
+                                                                <telerik:RadNumericTextBox ID="txt_per_diem" NumberFormat-DecimalDigits="0" enabled="false" runat="server"  Width="90%" MinValue="0">
                                                                 </telerik:RadNumericTextBox>
                                                         </div>
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
                                                              <asp:Label runat="server" ID="Label38" CssClass="control-label text-bold">Valor alojamiento por noche</asp:Label>
                                                                 <br />
-                                                                <telerik:RadNumericTextBox ID="txt_monto_alojamiento" runat="server"  Width="90%" MinValue="0">
+                                                                <telerik:RadNumericTextBox ID="txt_monto_alojamiento" NumberFormat-DecimalDigits="0" runat="server"  Width="90%" MinValue="0">
                                                                     <ClientEvents OnValueChanging="calc_monto_alojamiento" />
                                                                 </telerik:RadNumericTextBox>
                                                         </div>
@@ -751,7 +751,7 @@
                                                         <div class="col-sm-6 col-md-6 col-lg-3">
                                                             <asp:Label runat="server" ID="Label15" CssClass="control-label text-bold">Descuento alimentación</asp:Label>
                                                                 <br />
-                                                                <telerik:RadNumericTextBox ID="txt_descuento_alimentacion" enabled="false" runat="server" value="0"  Width="90%" MinValue="0">
+                                                                <telerik:RadNumericTextBox ID="txt_descuento_alimentacion" NumberFormat-DecimalDigits="0" enabled="false" runat="server" value="0"  Width="90%" MinValue="0">
                                                                 </telerik:RadNumericTextBox>
                                                                 <asp:hiddenfield runat="server" id="descuento" value="0" />
                                                                 <asp:hiddenfield runat="server" id="descuento_desayuno" value="0" />
@@ -858,14 +858,14 @@
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="monto_pasajes" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_pasajes column" HeaderStyle-Width="23%"
                                                                 HeaderText="Monto pasajes" SortExpression="monto_pasajes"
                                                                 UniqueName="colm_monto_pasajes">
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="monto_total" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_total column" HeaderStyle-Width="15%"
                                                                 HeaderText="Subtotal" SortExpression="monto_total"
                                                                 UniqueName="colm_monto_total">
@@ -948,7 +948,7 @@
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="monto_total" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_total column" HeaderStyle-Width="23%"
                                                                 HeaderText="Monto" SortExpression="monto_total"
                                                                 UniqueName="colm_monto_total">
@@ -1019,7 +1019,7 @@
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="monto_total" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_total column" HeaderStyle-Width="23%"
                                                                 HeaderText="Monto" SortExpression="monto_total"
                                                                 UniqueName="colm_monto_total">
@@ -1098,7 +1098,7 @@
                                                             <telerik:GridBoundColumn DataField="valor_perdiem"
                                                                 FilterControlAltText="Filter valor_perdiem column" HeaderStyle-Width="12%"
                                                                 HeaderText="M&IE Rate" SortExpression="valor_perdiem"
-                                                                DataFormatString="{0:n}" 
+                                                                DataFormatString="{0:n0}" 
                                                                 UniqueName="colm_valor_perdiem">
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
@@ -1109,28 +1109,28 @@
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="descuento_alimentacion" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter descuento_alimentacion column" HeaderStyle-Width="23%"
                                                                 HeaderText="Descuento alimentación" SortExpression="descuento_alimentacion"
                                                                 UniqueName="colm_descuento_alimentacion">
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="valor_total_alimentacion" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_alimentacion column" HeaderStyle-Width="23%"
                                                                 HeaderText="Monto alimentación" SortExpression="valor_total_alimentacion"
                                                                 UniqueName="colm_valor_total_alimentacion">
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="monto_alojamiento" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_alojamiento column" HeaderStyle-Width="23%"
                                                                 HeaderText="Monto alojamiento por noche" SortExpression="monto_alojamiento"
                                                                 UniqueName="colm_monto_alojamiento">
                                                                 <HeaderStyle CssClass="wrapWord"  />
                                                             </telerik:GridBoundColumn>
                                                             <telerik:GridBoundColumn DataField="monto_total" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                 FilterControlAltText="Filter monto_total column" HeaderStyle-Width="18%"
                                                                 HeaderText="Subtotal" SortExpression="monto_total"
                                                                 UniqueName="colm_monto_total">
@@ -1274,7 +1274,7 @@
                                     <div class="col-sm-12">
                                         <asp:Label ID="lblt_writcomments" runat="server"  CssClass="control-label text-bold"  Text="Comentarios"></asp:Label>
                                         <br />
-                                        <telerik:RadTextBox ID="txtcoments" Runat="server" Height="100px"  TextMode="MultiLine" Width="100%">
+                                        <telerik:RadTextBox ID="txtcoments" Runat="server" Height="100px" OnClientClick=" this.disabled = true; this.value = 'Processing...';"  TextMode="MultiLine" Width="100%">
                                         </telerik:RadTextBox>         
                                     </div>
                                                                                     
@@ -1325,7 +1325,7 @@
                      <telerik:RadButton ID="btn_guardar_legalizacion" runat="server" Text="Guardar" Enabled="true" AutoPostBack="true" CssClass="btn btn-sm pull-right margin-r-5"
                         ValidationGroup="2" CausesValidation="true">
                     </telerik:RadButton>
-                    <telerik:RadButton ID="btn_enviar_aprobacion" runat="server" Text="Enviar por aprobación" Enabled="false" AutoPostBack="true" CssClass="btn btn-sm pull-right margin-r-5"
+                    <telerik:RadButton ID="btn_enviar_aprobacion" runat="server" Text="Enviar por aprobación" OnClientClick=" this.disabled = true; this.value = 'Processing...';" Enabled="false" AutoPostBack="true" CssClass="btn btn-sm pull-right margin-r-5"
                         ValidationGroup="2">
                     </telerik:RadButton>
                     <asp:Label ID="lblerrorG" runat="server" CssClass="Error pull-right" Visible="False">* Complete campos</asp:Label>

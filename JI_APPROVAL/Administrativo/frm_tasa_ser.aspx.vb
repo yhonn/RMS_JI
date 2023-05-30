@@ -64,7 +64,9 @@ Public Class frm_tasa_ser
         Using dbEntities As New dbRMS_JIEntities
             Dim tasaSer = dbEntities.vw_tme_tasa_ser.ToList()
             Me.grd_cate.DataSource = tasaSer
-            Me.grd_cate.DataBind()
+            If bndBind Then
+                Me.grd_cate.DataBind()
+            End If
         End Using
     End Sub
 

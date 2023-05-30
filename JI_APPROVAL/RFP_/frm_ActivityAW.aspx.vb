@@ -1248,7 +1248,7 @@ Public Class frm_ActivityAW
 
                     'oFicha.id_mecanismo_contratacion = Me.cmb_mecanismo_contratacion.SelectedValue
                     'oFicha.id_sub_mecanismo = Me.cmb_sub_mecanismo_contratacion.SelectedValue
-                    oFicha.id_sub_mecanismo = Me.cmb_sub_mecanismo_contratacion2.SelectedValue
+                    oFicha.id_sub_mecanismo = Me.cmb_sub_mecanismo_contratacion.SelectedValue
 
 
                     ''oFicha.id_ejecutor = Me.cmb_ejecutor.SelectedValue

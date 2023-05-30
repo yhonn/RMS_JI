@@ -617,6 +617,12 @@
                              </div>
                         </div>
                     </div>
+                     <div class="form-group row">
+                        <div class="col-sm-12 text-center">                                              
+                                <asp:Label ID="lblerr_user" runat="server" Font-Names="Arial" ForeColor=Red Visible="true"></asp:Label>
+                            <br /><br />
+                        </div>
+                    </div>
                     <asp:HiddenField runat="server" ID="identity" Value="0" />
                     <asp:HiddenField runat="server" ID="tipo" Value="0" />
 
@@ -703,12 +709,7 @@
                                         <asp:Button ID="btn_Cancelled" runat="server" Text="Cancelar"  OnClick="btn_Cancelled_Click"  OnClientClick=" this.disabled = true; this.value = 'Processing...';"    UseSubmitBehavior="false"   CssClass="btn-lg btn-danger" Width="65%" />                                                  
                                     </div>        --%>                                    
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-12 text-center">                                              
-                                            <asp:Label ID="lblerr_user" runat="server" Font-Names="Arial" ForeColor=Red Visible="true"></asp:Label>
-                                        <br /><br />
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

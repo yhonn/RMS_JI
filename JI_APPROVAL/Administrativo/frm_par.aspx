@@ -207,7 +207,7 @@
                                         </telerik:GridBoundColumn>
                                         <telerik:GridNumericColumn HeaderStyle-Width="110px" FilterControlWidth="110px" DataField="valor_total"
                                              ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                            DataType="System.Decimal" HeaderText="Valor" Aggregate="Sum" DataFormatString="{0:n}">
+                                            DataType="System.Decimal" HeaderText="Valor" Aggregate="Sum" DataFormatString="{0:n0}">
                                             <FooterStyle Font-Bold="true"></FooterStyle>
                                         </telerik:GridNumericColumn>
                                         <telerik:GridBoundColumn  DataField="id_usuario_app"  FilterControlAltText="Filter id_usuario_app column"  SortExpression="id_usuario_app" UniqueName="id_usuario_app" Visible="true" Display="false"></telerik:GridBoundColumn>

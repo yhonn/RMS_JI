@@ -142,16 +142,26 @@
                                         <Selecting AllowRowSelect="True"></Selecting>                                  
                                         <Resizing AllowColumnResize="true" AllowResizeToFit="true" />
                                     </ClientSettings>
-                                    <MasterTableView AutoGenerateColumns="False" DataKeyNames="id_anticipo_ruta_tem" AllowAutomaticUpdates="True" >
+                                    <MasterTableView AutoGenerateColumns="False" DataKeyNames="id_anticipo_ruta" AllowAutomaticUpdates="True" >
                                         <Columns>
-                                            <telerik:GridBoundColumn DataField="id_anticipo_ruta_tem"
-                                                FilterControlAltText="Filter id_anticipo_ruta_tem column"
-                                                SortExpression="id_anticipo_ruta_tem" UniqueName="id_anticipo_ruta_tem"
-                                                Visible="False" HeaderText="id_anticipo_ruta_tem"
+                                            <telerik:GridBoundColumn DataField="id_anticipo_ruta"
+                                                FilterControlAltText="Filter id_anticipo_ruta column"
+                                                SortExpression="id_anticipo_ruta" UniqueName="id_anticipo_ruta"
+                                                Visible="False" HeaderText="id_anticipo_ruta"
                                                 ReadOnly="True">
                                             </telerik:GridBoundColumn>
+                                            <telerik:GridTemplateColumn UniqueName="colm_personas" Visible="true">
+                                                <HeaderStyle Width="32px" />
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="col_hlk_editar" runat="server" Width="32px"
+                                                        ImageUrl="../Imagenes/iconos/Family.png" ToolTip="Eliminar"
+                                                        OnClick="participantes">
+                                                        <asp:Image ID="Image1" runat="server" ImageUrl="../Imagenes/iconos/Family.png" Style="border-width: 0px;" />
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
                                             <telerik:GridBoundColumn DataField="ciudad_salida"
-                                                FilterControlAltText="Filter ciudad_salida column" HeaderStyle-Width="135px"
+                                                FilterControlAltText="Filter ciudad_origen column" HeaderStyle-Width="135px"
                                                 HeaderText="Municipio / ciudad de salida" SortExpression="ciudad_salida"
                                                 UniqueName="colm_ciudad_salidan">
                                                 <HeaderStyle CssClass="wrapWord"  />
@@ -261,7 +271,158 @@
                         <asp:Label ID="lblerrorG" runat="server" CssClass="Error pull-right" Visible="False">* Complete campos</asp:Label>
                     </div>
                 </div>
+                 <telerik:RadWindowManager runat="Server" ID="RadWindowManager1" EnableViewState="true"  Width="700" Height="400">
+                                <Windows>
+                                     <telerik:RadWindow RenderMode="Lightweight" runat="server" Width="700" Behaviors="Close, Pin, Move" Height="400" id="RadWindow2" Modal="true" EnableShadow="false" VisibleOnPageLoad="false" CssClass="windowcss">
+                                         <ContentTemplate>
+                                               <div class="form-group row">
+                                                    <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label4" CssClass="control-label text-bold">Numero de documento</asp:Label>
+                                                        <br />
+                                                         <telerik:RadNumericTextBox ID="txt_numero_documento" runat="server" decimal Width="90%" MinValue="0">
+                                                             <NumberFormat AllowRounding="true" DecimalDigits="0" />
+                                                        </telerik:RadNumericTextBox>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                                                    ControlToValidate="txt_numero_documento" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label9" CssClass="control-label text-bold">Tipo de documento</asp:Label>
+                                                        <br />
+                                                         <telerik:RadTextBox ID="txt_tipo_documento" runat="server"  Width="90%" MaxLength="1000">
+                                                        </telerik:RadTextBox>
+                                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server"
+                                                                    ControlToValidate="txt_tipo_documento" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label12" CssClass="control-label text-bold">Nombres</asp:Label>
+                                                        <br />
+                                                         <telerik:RadTextBox ID="txt_nombre" runat="server"  Width="90%" MaxLength="1000">
+                                                        </telerik:RadTextBox>
+                                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server"
+                                                                    ControlToValidate="txt_nombre" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label13" CssClass="control-label text-bold">Primer apellido</asp:Label>
+                                                        <br />
+                                                         <telerik:RadTextBox ID="txt_primer_apellido" runat="server"  Width="90%" MaxLength="1000">
+                                                        </telerik:RadTextBox>
+                                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server"
+                                                                    ControlToValidate="txt_primer_apellido" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label14" CssClass="control-label text-bold">Segundo apellido</asp:Label>
+                                                        <br />
+                                                         <telerik:RadTextBox ID="txt_segundo_apellido" runat="server"  Width="90%" MaxLength="1000">
+                                                        </telerik:RadTextBox>
+                                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server"
+                                                                    ControlToValidate="txt_segundo_apellido" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label15" CssClass="control-label text-bold">Valor</asp:Label>
+                                                        <br />
+                                                         <telerik:RadNumericTextBox ID="txt_valor" runat="server"  Width="90%" MaxLength="1000">
+                                                        </telerik:RadNumericTextBox>
+                                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server"
+                                                                    ControlToValidate="txt_valor" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <asp:Label runat="server" ID="Label16" CssClass="control-label text-bold">Número de teléfono</asp:Label>
+                                                        <br />
+                                                         <telerik:RadTextBox ID="txt_numero_telefono" runat="server"  Width="90%" MaxLength="1000">
+                                                        </telerik:RadTextBox>
+                                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server"
+                                                                    ControlToValidate="txt_numero_telefono" CssClass="Error" Display="Dynamic"
+                                                                    ErrorMessage="Campo obligatorio" ValidationGroup="2">*</asp:RequiredFieldValidator>
+                                                    </div>
+                                                   <div class="col-sm-6 col-md-6 col-lg-4">
+                                                        <telerik:RadButton ID="btn_guardar_participante" runat="server" autopostback="true" CssClass="btn btn-sm" Text="Agregar persona" ValidationGroup="3" Width="100px" style="margin-top:10px;">
+                                                        </telerik:RadButton>
+                                                    </div>
+                                                </div>
+                                               
+                                               <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                        <telerik:RadGrid ID="grd_conceptos" runat="server" AllowAutomaticDeletes="True"  CellSpacing="0" AllowPaging="True" PageSize="100" AutoGenerateColumns="False" Width="100%"
+                                                            ShowFooter="false" 
+                                                            ShowColumnFooters="false"
+                                                            ShowGroupFooters="false"
+                                                            ShowGroupPanel="false">
+                                                            <ClientSettings EnableRowHoverStyle="true">
+                                                                <Selecting AllowRowSelect="True"></Selecting>                                  
+                                                                <Resizing AllowColumnResize="true" AllowResizeToFit="true" />
+                                                            </ClientSettings>
+                                                            <MasterTableView AutoGenerateColumns="False" DataKeyNames="id_participante" AllowAutomaticUpdates="True" >
+                                                                <Columns>
+                                                                    <telerik:GridBoundColumn DataField="id_participante"
+                                                                        FilterControlAltText="Filter id_participante column"
+                                                                        SortExpression="id_participante" UniqueName="id_participante"
+                                                                        Visible="False" HeaderText="id_participante"
+                                                                        ReadOnly="True">
+                                                                    </telerik:GridBoundColumn>
+                                                                   
+                                                                    <telerik:GridBoundColumn DataField="numero_documento"
+                                                                        FilterControlAltText="Filter numero_documento column" HeaderStyle-Width="30%"
+                                                                        HeaderText="Participante" SortExpression="numero_documento"
+                                                                        UniqueName="numero_documento">
+                                                                        <HeaderStyle CssClass="wrapWord"  />
+                                                                    </telerik:GridBoundColumn>
+                                                                    <telerik:GridBoundColumn DataField="nombres"
+                                                                        FilterControlAltText="Filter nombres column" HeaderStyle-Width="30%"
+                                                                        HeaderText="Nombres" SortExpression="nombres"
+                                                                        UniqueName="nombres">
+                                                                        <HeaderStyle CssClass="wrapWord"  />
+                                                                    </telerik:GridBoundColumn>
+                                                                    <telerik:GridBoundColumn DataField="segundo_apellido"
+                                                                        FilterControlAltText="Filter segundo_apellido column" HeaderStyle-Width="30%"
+                                                                        HeaderText="Segundo apellido" SortExpression="segundo_apellido"
+                                                                        UniqueName="segundo_apellido">
+                                                                        <HeaderStyle CssClass="wrapWord"  />
+                                                                    </telerik:GridBoundColumn>
+                                                                    <telerik:GridBoundColumn DataField="telefono"
+                                                                        FilterControlAltText="Filter telefono column" HeaderStyle-Width="30%"
+                                                                        HeaderText="Teléfono" SortExpression="telefono"
+                                                                        UniqueName="telefono">
+                                                                        <HeaderStyle CssClass="wrapWord"  />
+                                                                    </telerik:GridBoundColumn>
+                                                                    <telerik:GridBoundColumn DataField="valor"
+                                                                        FilterControlAltText="Filter valor column" HeaderStyle-Width="30%"
+                                                                        HeaderText="Valor" SortExpression="valor"
+                                                                        UniqueName="valor">
+                                                                        <HeaderStyle CssClass="wrapWord"  />
+                                                                    </telerik:GridBoundColumn>
+                                                                </Columns>
+                                                            </MasterTableView>
+                                                        </telerik:RadGrid>
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group row">
+                                                    <hr />
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-12">
+                                                       
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-8"></div>
+                                                    <div class="col-sm-4 text-right">
+                                                       <telerik:RadButton ID="btn_guardar_finalizar" runat="server" ValidationGroup="2" AutoPostBack="true" Text="Guardar rol" Width="100px" CssClass="btn btn-sm btn-primary btn-ok import">
+                                                    </telerik:RadButton>
+                                                    </div>
+                                                </div>
+                                         </ContentTemplate>
+                                     </telerik:RadWindow>
+
+                                </Windows>
+                            </telerik:RadWindowManager>
                 <asp:HiddenField runat="server" ID="id_anticipo" Value="0" />
+                <asp:HiddenField runat="server" ID="id_ruta_anticipo" Value="0" />
                 <asp:HiddenField runat="server" ID="identity" Value="0" />
                 <asp:HiddenField runat="server" ID="tipo" Value="0" />
                 <asp:HiddenField runat="server" ID="tiempo_estimado"/>

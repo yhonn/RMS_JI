@@ -109,8 +109,11 @@
 
                        </div>
 
-                      <div class="col-sm-4">                      
+                      <div class="col-sm-2">                      
                             <telerik:RadButton ID="btn_Period_Report" runat="server"  SingleClick="true" SingleClickText="Processing..." Text="Time Sheet Reports"  Width="50%" CssClass="btn btn-sm" Enabled ="false" ValidationGroup="1"></telerik:RadButton>
+                      </div>
+                      <div class="col-sm-2"> 
+                          <telerik:RadButton ID="btn_Period_Report_2" runat="server"  SingleClick="true" SingleClickText="Processing..." Text="Descargar hojas de tiempo"  Width="100%" CssClass="btn btn-sm" Enabled ="false" ValidationGroup="1"></telerik:RadButton>
                       </div>
                                       
                   </div>

@@ -851,6 +851,15 @@ Partial Public Class frm_viajeEdit
     Protected WithEvents grd_componente As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''lblerr_user control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblerr_user As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''identity control.
     '''</summary>
     '''<remarks>
@@ -948,15 +957,6 @@ Partial Public Class frm_viajeEdit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_NotApproved As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''lblerr_user control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblerr_user As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''mensajeNumeroDiasHabiles control.

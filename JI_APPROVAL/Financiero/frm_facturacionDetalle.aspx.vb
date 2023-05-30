@@ -54,6 +54,7 @@ Public Class frm_facturacionDetalle
             Me.lbl_dia.Text = factura.fecha_factura.Day
             Me.lbl_mes.Text = factura.fecha_factura.Month
             Me.lbl_anio.Text = factura.fecha_factura.Year
+            Me.resolucion.Text = factura.resolucion
             'Me.lbl_valor_total.Text = factura.tme_facturacion_productos.Sum(Function(p) p.valor).ToString("c2", cl_user.regionalizacionCulture)
             Me.lbl_nombre.Text = factura.nombre
             Me.lbl_direccion.Text = factura.direccion

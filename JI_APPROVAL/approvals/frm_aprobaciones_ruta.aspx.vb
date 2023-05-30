@@ -425,7 +425,8 @@ Partial Class frm_aprobaciones_ruta
             cmb_deliv.DataBind()
             cmb_deliv.SelectedValue = itemD("id_deliverable_stage").Text
 
-            If itemD("id_approval_tool").Text <> 3 Then 'Deliverable Tool assigment
+            Dim tool = itemD("tool_code").Text
+            If itemD("tool_code").Text <> "DELIV-RMS01" Then 'Deliverable Tool assigment
                 cmb_deliv.Visible = False
             Else
                 cmb_deliv.Visible = True

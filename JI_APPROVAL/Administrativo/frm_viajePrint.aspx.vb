@@ -94,7 +94,7 @@ Public Class frm_viajePrint
             '                                                                        Key .ciudad_destino = p.t_municipios.t_departamentos.nombre_departamento & " - " & p.t_municipios.nombre_municipio
             '}).ToList()
 
-            For Each item In viaje.tme_solicitud_viaje_itinerario.ToList()
+            For Each item In viaje.tme_solicitud_viaje_itinerario.OrderBy(Function(p) p.fecha_viaje).ToList()
                 Dim fecha = DateTime.Now
                 Dim rnd As New Random()
                 Dim aleatorio As String = ""

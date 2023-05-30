@@ -338,13 +338,13 @@ Partial Public Class frm_ActivitySolicitation
     Protected WithEvents chk_todosII As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
-    '''lblt_subregionII control.
+    '''lblt_subregionII_ control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblt_subregionII As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblt_subregionII_ As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''cmb_subregionII control.
@@ -482,13 +482,13 @@ Partial Public Class frm_ActivitySolicitation
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''lbl_purpose control.
+    '''lblt_purpose control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_purpose As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblt_purpose As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''txt_purpose control.

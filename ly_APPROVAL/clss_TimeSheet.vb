@@ -4,6 +4,7 @@ Imports System.Linq.Expressions
 Imports System.Configuration
 Imports System.Data.SqlClient
 Imports ly_SIME
+Imports System.Globalization
 
 Namespace APPROVAL
 
@@ -370,7 +371,7 @@ Namespace APPROVAL
             Return (myType.IsGenericType) AndAlso (myType.GetGenericTypeDefinition() Is GetType(Nullable(Of )))
         End Function
 
-        Public Function get_TimeSheetTable(ByVal vYear As Integer, ByVal vMonth As Integer, ByVal idTimeSheet As Integer, ByVal idEmployeeType As Integer, ByVal ts_leave As Integer) As String
+        Public Function get_TimeSheetTable(ByVal vYear As Integer, ByVal vMonth As Integer, ByVal idTimeSheet As Integer, ByVal idEmployeeType As Integer, ByVal ts_leave As Integer, Optional culture As CultureInfo = Nothing) As String
 
             Dim tbl_table As New DataTable
             Dim start_Date As Date = DateSerial(vYear, vMonth, 1)
@@ -409,7 +410,11 @@ Namespace APPROVAL
             Dim DateValue As Date
             For i = 1 To DaysInMonth 'Adding Row
                 DateValue = New Date(vYear, vMonth, i)
-                tblRow.Item(i + 5) = DateValue.ToString("ddd")
+                If culture Is Nothing Then
+                    tblRow.Item(i + 5) = DateValue
+                Else
+                    tblRow.Item(i + 5) = DateValue.ToString("ddd", culture)
+                End If
             Next
             '************CHANGE FOR OTHER KIND OF PERIOD***********
 
@@ -496,13 +501,13 @@ Namespace APPROVAL
             '***********************************************************************************
             Dim strTable As String = ""
             Dim strTableHeader As String = ""
-            Dim strCellHeader As String = "<th class='text-center padding-required '>{0}</th>"
+            Dim strCellHeader As String = "<th class='text-center padding-required ' style='width:3px!important;'>{0}</th>"
             Dim strTableBody As String = ""
             Dim strTableRows As String = ""
             Dim strCellBody As String = " <td {0} class=' {1} {2} padding-required '>{3}</td> "
             Dim strTHCellBody As String = "<th {0} scope='row' class=' {1} {2} padding-required '>{3}</th>"
             Dim strTableFooter As String = ""
-            Dim strCellFooter As String = "<th class='{0} text-center padding-required '>{1}</th>"
+            Dim strCellFooter As String = "<th class='{0} text-center padding-required ' style='width:3px!important;'>{1}</th>"
 
             Dim TOTrows(tbl_table.Rows.Count, DaysInMonth) As Decimal
             Dim rowIndex As Integer = 1
@@ -515,7 +520,7 @@ Namespace APPROVAL
 
             strTableHeader = String.Format("<thead ><tr class='bg-primary'>")
 
-            strTableHeader &= String.Format("<th colspan='2' class='padding-required' style='width:25%!important;' >DATE</th>")
+            strTableHeader &= String.Format("<th colspan='2' class='padding-required' style='width:10%!important;' >DATE</th>")
             '************CHANGE FOR OTHER KIND OF PERIOD***********
             For i = 1 To DaysInMonth 'Adding Columns
                 strTableHeader &= String.Format(strCellHeader, i.ToString)
@@ -663,6 +668,7 @@ Namespace APPROVAL
 
 
             Return strTable
+
 
         End Function
 
@@ -1624,7 +1630,7 @@ Namespace APPROVAL
 
                     Dim ta_timesheetDetail As List(Of ta_timesheet_detail) = db.ta_timesheet_detail.Where(Function(p) p.id_timesheet = idTimeSheet And p.id_billable_time = idBillableTime).ToList
 
-                    If ta_timesheetDetail.count > 0 Then 'Has values for this billable item
+                    If ta_timesheetDetail.Count > 0 Then 'Has values for this billable item
 
                         FindVal = False
 
@@ -2040,7 +2046,7 @@ Namespace APPROVAL
 			                                                            timesheet_estado,
 			                                                            id_programa,
 			                                                            id_employee_type,
-			                                                            employee_type from  vw_ta_timesheet
+			                                                            employee_type, numero_documento from  vw_ta_timesheet
 			                                                              where anio = {0} and mes = {1} 
 			                                                               and ts_leave_update = 0 
 				                                                            and id_timesheet_estado = 3
@@ -2267,23 +2273,23 @@ Namespace APPROVAL
 
 
 
-        Public Function Save_TimeSheet_support_docs(ByVal TimeSheet_support_docs As ta_Timesheet_support_docs, Optional ID As Integer = 0) As String
+        Public Function Save_TimeSheet_support_docs(ByVal TimeSheet_support_docs As ta_timesheet_support_docs, Optional ID As Integer = 0) As String
 
             Try
 
                 Using db As New dbRMS_JIEntities
 
                     Dim result As String = 0
-                    Dim TimeSheet_support_docs_upd As ta_Timesheet_support_docs
+                    Dim TimeSheet_support_docs_upd As ta_timesheet_support_docs
 
                     If ID = 0 Then
 
-                        db.ta_Timesheet_support_docs.Add(TimeSheet_support_docs)
+                        db.ta_timesheet_support_docs.Add(TimeSheet_support_docs)
                         'db.Entry(TimeSheet).GetDatabaseValues()
 
                     Else
 
-                        TimeSheet_support_docs_upd = db.ta_Timesheet_support_docs.Find(ID)
+                        TimeSheet_support_docs_upd = db.ta_timesheet_support_docs.Find(ID)
 
                         TimeSheet_support_docs_upd.archivo = TimeSheet_support_docs.archivo
                         TimeSheet_support_docs_upd.id_doc_soporte = TimeSheet_support_docs.id_doc_soporte

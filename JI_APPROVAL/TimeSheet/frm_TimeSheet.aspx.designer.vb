@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class frm_TimeSheet
-    
+
     '''<summary>
     '''lblt_titulo_pantalla control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_titulo_pantalla As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_subtitulo_pantalla control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_subtitulo_pantalla As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_text_Error control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_text_Error As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_GroupRolID control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_GroupRolID As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''h_Filter control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents h_Filter As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''txt_doc control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt_doc As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''btn_buscar control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_buscar As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''btn_nuevo control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_nuevo As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''btn_leave_approval control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_leave_approval As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''RadButton1 control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RadButton1 As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''Botom_testing control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Botom_testing As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''lbl_anio control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_anio As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''cmb_year control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmb_year As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''RequiredFieldValidator5 control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''lblMonth control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblMonth As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''cmb_Month control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmb_Month As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''RequiredFieldValidator6 control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator6 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''btn_Period_Report control.
     '''</summary>
@@ -174,7 +174,16 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_Period_Report As Global.Telerik.Web.UI.RadButton
-    
+
+    '''<summary>
+    '''btn_Period_Report_2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btn_Period_Report_2 As Global.Telerik.Web.UI.RadButton
+
     '''<summary>
     '''grd_cate control.
     '''</summary>
@@ -183,7 +192,7 @@ Partial Public Class frm_TimeSheet
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents grd_cate As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''SqlDataSource2 control.
     '''</summary>

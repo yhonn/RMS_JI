@@ -201,25 +201,25 @@
                                         <telerik:GridBoundColumn DataField="cantidad" HeaderStyle-Font-Bold="true"
                                             FilterControlAltText="Filter cantidad column" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
                                             HeaderText="Cantidad" SortExpression="cantidad" 
-                                            UniqueName="cantidad" DataFormatString="{0:N}">
+                                            UniqueName="cantidad" DataFormatString="{0:n0}">
                                             <ItemStyle CssClass="textrightalign" />
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="unidad_medida" HeaderStyle-Font-Bold="true"
                                             FilterControlAltText="Filter unidad_medida column"
                                             HeaderText="Unidad de medida" SortExpression="unidad_medida"
-                                            UniqueName="unidad_medida" DataFormatString="{0:N}">
+                                            UniqueName="unidad_medida" DataFormatString="{0:n0}">
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="precio_unitario" FooterStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" 
                                             HeaderStyle-HorizontalAlign="Right"
                                             FilterControlAltText="Filter precio_unitario column" FooterText="Valor total COP: "
                                             HeaderText="Valor unitario" SortExpression="precio_unitario" 
-                                            UniqueName="precio_unitario" DataFormatString="{0:N}">
+                                            UniqueName="precio_unitario" DataFormatString="{0:n0}">
                                             <ItemStyle CssClass="textrightalign" />
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="valor_total" FooterStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                            FilterControlAltText="Filter valor_total column" Aggregate="Sum" FooterAggregateFormatString="{0:N}"
+                                            FilterControlAltText="Filter valor_total column" Aggregate="Sum" FooterAggregateFormatString="{0:n0}"
                                             HeaderText="Valor total" SortExpression="valor_total" FooterText="Total : " 
-                                            UniqueName="valor_total" DataFormatString="{0:N}">
+                                            UniqueName="valor_total" DataFormatString="{0:n0}">
                                             <ItemStyle CssClass="textrightalign" />
                                         </telerik:GridBoundColumn>
                                        <%-- <telerik:GridCalculatedColumn HeaderText="Total Price" UniqueName="TotalPrice" DataType="System.Double"
@@ -285,8 +285,8 @@
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="valor_total" HeaderStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                            DataFormatString="{0:n}" 
-                                            Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: " 
+                                            DataFormatString="{0:n0}" 
+                                            Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: " 
                                             FilterControlAltText="Filter valor_total column" HeaderStyle-Width="23%"
                                             HeaderText="Valor total" SortExpression="valor_total"
                                             UniqueName="valor_total">

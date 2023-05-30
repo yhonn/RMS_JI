@@ -110,6 +110,8 @@ Partial Class frm_aprobacionesAD
             cl_AppDef.set_ta_tipoDocumentoFIELDS("nivel_aprobacion", Me.txt_level.Text, "id_tipoDocumento", 0)
             cl_AppDef.set_ta_tipoDocumentoFIELDS("cod_actividad", cod_Act, "id_tipoDocumento", 0)
             cl_AppDef.set_ta_tipoDocumentoFIELDS("id_approval_tool", Me.cmb_tools.SelectedValue, "id_tipoDocumento", 0)
+            cl_AppDef.set_ta_tipoDocumentoFIELDS("devolver_aprobador_anterior", If(Me.rbn_accion_stand_by.SelectedValue = "1", True, False), "id_tipoDocumento", 0)
+            cl_AppDef.set_ta_tipoDocumentoFIELDS("reiniciar_ruta_aprobacion", If(Me.rbn_accion_stand_by.SelectedValue = "2", True, False), "id_tipoDocumento", 0)
 
             If cl_AppDef.save_ta_tipoDocumento() <> -1 Then
                 cl_AppDef.save_tipoDocumentosAPP(Me.lbl_id_sesion_temp.Text)

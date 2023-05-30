@@ -75,7 +75,7 @@
                                 <tr>
                                     <td style="text-align: center; padding: 10px;">
                                         <b>
-                                            DOCUMENTO SOPORTE EN ADQUISICIONES EFECTUADAS A NO OBLIGADOS A FACTURAR         (Autorizacion Numeracion de facturacion 18764032444980 de  Agosto 03 de 2022)  Rango autorizado  JINE  No.001 al 1000 Vigencia 12 meses
+                                            <asp:label id="resolucion" runat="server"></asp:label>
                                         </b>
                                     </td>
                                 </tr>

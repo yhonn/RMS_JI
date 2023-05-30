@@ -142,7 +142,7 @@
                                          
                                            <div class="form-group row">
                                                <div class="col-sm-3 text-right">
-                                                   <asp:Label runat="server" ID="lblt_subregionII" CssClass="control-label text-bold">ZOI</asp:Label>
+                                                   <asp:Label runat="server" ID="lblt_subregionII_" CssClass="control-label text-bold">Subregión</asp:Label>
                                                </div>
                                                <div class="col-sm-8">
 
@@ -256,7 +256,7 @@
                                       <br />
                                       <div class="form-group row">
                                         <div class="col-sm-2 text-right">
-                                            <asp:Label runat="server" ID="lbl_purpose" CssClass="control-label text-bold">Purpose</asp:Label>
+                                            <asp:Label runat="server" ID="lblt_purpose" CssClass="control-label text-bold">Purpose</asp:Label>
                                         </div>
                                         <div class="col-sm-8">
                                             <telerik:RadTextBox ID="txt_purpose" runat="server" Rows="6" TextMode="MultiLine" Width="85%" Resize="Both" MaxLength="1000">

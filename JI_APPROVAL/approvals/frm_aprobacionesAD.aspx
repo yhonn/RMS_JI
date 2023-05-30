@@ -221,6 +221,22 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_level" ErrorMessage="Required" ValidationGroup="1" ForeColor="Red" ></asp:RequiredFieldValidator>
                                        </div>
                                     </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-2 text-left">
+                                         <!--Tittle -->
+                                           <asp:Label ID="Label1" runat="server" CssClass="control-label text-bold"  Text="Al solicitar ajustes:"></asp:Label>  
+                                        </div>
+                                       <div class="col-sm-8">
+                                           <!--Control -->
+                                            <asp:RadioButtonList ID="rbn_accion_stand_by" runat="server"
+                                                RepeatColumns="1" Style="height: 26px" AutoPostBack="true">
+                                                <asp:ListItem Value="1">Solicitar ajustes al aprobador anterior &nbsp;</asp:ListItem>
+                                                <asp:ListItem Value="2">Reiniciar la ruta de aprobación &nbsp;</asp:ListItem>
+                                                <asp:ListItem Value="0">Continuar flujo de aprobación &nbsp;</asp:ListItem>
+                                            </asp:RadioButtonList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="rbn_accion_stand_by" ErrorMessage="Required" ValidationGroup="1" ForeColor="Red" ></asp:RequiredFieldValidator>
+                                       </div>
+                                    </div>
                                   
                                     </div>
                                </div> 

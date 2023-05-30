@@ -22,12 +22,17 @@
             </div>
             <div class="box-body">
                 <div class="form-group row">
-                    <%--<div class="col-sm-2">
-                        <a id="A1" runat="server" href="~/reportes/xls?id=1" class="btn btn-primary btn-sm pull-right margin-r-5"><i class="fa fa-download"></i> Descargar datos</a>
+                    <div class="col-sm-2 text-left">
+                        <!--Tittle -->
+                            <asp:Label ID="lblt_groupBy" runat="server" CssClass="control-label text-bold"  Text="Filtrar por"></asp:Label> 
                     </div>
-                     <div class="col-sm-2 text-right">   
-                        <asp:LinkButton ID="lnk_help" Text="Try" Width="12%" class="btn btn-default btn-sm margin-r-5" data-toggle="Try" OnClick="showhelp('viajes.mp4');" ><i class="fa fa-question-circle fa-2x"></i>&nbsp;&nbsp;</asp:LinkButton>   
-                    </div>--%>
+                    <div class="col-sm-8">
+                          <asp:RadioButtonList ID="rbn_filtro" runat="server"
+                            RepeatColumns="1" Style="height: 26px" AutoPostBack="true">
+                            <asp:ListItem Value="1">Pendientes &nbsp;</asp:ListItem>
+                            <asp:ListItem Value="0">Todos los entregables &nbsp;</asp:ListItem>
+                        </asp:RadioButtonList>
+                    </div>
                 </div>
                 <hr />
                 <%--<div class="form-group row">

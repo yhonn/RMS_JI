@@ -77,7 +77,7 @@ Namespace APPROVAL
 
             Sql = String.Format(" SELECT id_rol, id_usuario, id_programa, id_ruta, id_categoria, nombre_empleado, usuario, email,  " &
                                 "       descripcion_aprobacion, condicion, nivel_aprobacion, email_notificacion, ruta_completa, " &
-                                "       descripcion_cat, orden, id_tipoDocumento, duracion, id_approval_tool, trigger_tool, nombre_rol, id_estadoTipo, estado_tipo_prefijo, id_deliverable_stage, deliverable_stage" &
+                                "       descripcion_cat, orden, id_tipoDocumento, duracion, id_approval_tool, trigger_tool, nombre_rol, id_estadoTipo, estado_tipo_prefijo, id_deliverable_stage, deliverable_stage, tool_code" &
                                 "   From vw_ta_ruta_aprobacion  " &
                                 "     WHERE (id_tipoDocumento = {0}) ORDER BY orden ", id_tipoDocumento)
 

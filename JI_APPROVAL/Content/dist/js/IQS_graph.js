@@ -64,13 +64,15 @@ function set_Chart_IQS(avance,tipo) {
     //var avance = $("#valor_avance").val();
     // var avance = 25.75;
 
-    Highcharts.chart('container-money', 
+
+    $('#container-money').highcharts(
+        //Highcharts.chart('container-money', 
         Highcharts.merge(gaugeOptions, {
             yAxis: {
                 min: 0,
                 max: 100,
                 title: {
-                    text: tipo + ' Percentage Executed'
+                    text: tipo + ' Percentage Obligated'
                 }
             },
 
@@ -106,8 +108,8 @@ function set_Chart_IQS_time(avance, tipo) {
 
     //var avance = $("#valor_avance").val();
     // var avance = 25.75;
-
-    Highcharts.chart('container-time',
+    $('#container-time').highcharts(
+   // Highcharts.chart('container-time',
         Highcharts.merge(gaugeOptions, {
             yAxis: {
                 min: 0,

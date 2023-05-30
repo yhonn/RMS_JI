@@ -1439,7 +1439,58 @@ Partial Class frm_DocAprobacion
                     Me.hd_is_tool.Value = tbl_AppOrden.Rows(0)("trigger_tool").ToString
 
                 End Using
+            ElseIf Tool_code = "TRAVEL-RM01" Then '--Time Tools
 
+                Me.ToolsViewer.Visible = True
+
+                Using db As New dbRMS_JIEntities
+
+                    Dim idDoc As Integer = Convert.ToInt32(Me.HiddenField1.Value)
+                    Dim tipoAprobacion = 0
+                    Dim identity = 0
+                    Dim urlTool = ""
+                    If db.ta_documento_viaje.Where(Function(p) p.id_documento = idDoc).FirstOrDefault() IsNot Nothing Then
+                        '1 = Solicitud de viaje
+                        tipoAprobacion = 1
+                        Tool_name = "Solicitud de " + Tool_name
+                        identity = db.ta_documento_viaje.Where(Function(p) p.id_documento = idDoc).FirstOrDefault().id_viaje
+                        urlTool = "../administrativo/frm_viajePrint?Id=" & identity
+                    ElseIf db.ta_documento_legalizacion_viaje.Where(Function(p) p.id_documento = idDoc).FirstOrDefault() IsNot Nothing Then
+                        '2 = legalización de viaje
+                        tipoAprobacion = 2
+                        identity = db.ta_documento_legalizacion_viaje.Where(Function(p) p.id_documento = idDoc).FirstOrDefault().id_viaje
+                        Tool_name = "Legalización de " + Tool_name
+                        urlTool = "../administrativo/frm_viaje_legalizacionPrint?Id=" & identity
+                    ElseIf db.ta_documento_viaje_informe.Where(Function(p) p.id_documento = idDoc).FirstOrDefault() IsNot Nothing Then
+                        '3 = informe de viaje
+                        tipoAprobacion = 2
+                        identity = db.ta_documento_viaje_informe.Where(Function(p) p.id_documento = idDoc).FirstOrDefault().id_viaje
+                        Tool_name = "Informe de " + Tool_name
+                        urlTool = "../administrativo/frm_viaje_informePrint?Id=" & identity
+                    End If
+                    'Dim idTimeSheet As Integer = db.ta_documento_viaje.Where(Function(p) p.id_documento = idDoc).FirstOrDefault().id_timesheet
+                    Me.lbl_tool_viewer.Text = Tool_name
+                    'Me.hrefVIEWER.Attributes.Add("href", "~/TimeSheet/frm_TimeSheetFollowingREP.aspx?ID=" & idTimeSheet)
+                    Me.hrefVIEWER.Attributes.Add("href", "javascript:OpenRadWindowTool('" & urlTool & "');")
+                    'urlDir = "~/TimeSheet/frm_TimeSheetFollowingREP.aspx?ID=" & idTimeSheet
+                End Using
+            ElseIf Tool_code = "PAR-RMS01" Then '--Time Tools
+
+                Me.ToolsViewer.Visible = True
+
+                Using db As New dbRMS_JIEntities
+
+                    Dim idDoc As Integer = Convert.ToInt32(Me.HiddenField1.Value)
+                    Dim tipoAprobacion = 0
+                    Dim identity = db.ta_documento_par.Where(Function(p) p.id_documento = idDoc).FirstOrDefault().id_par
+
+                    'Dim idTimeSheet As Integer = db.ta_documento_viaje.Where(Function(p) p.id_documento = idDoc).FirstOrDefault().id_timesheet
+                    Me.lbl_tool_viewer.Text = Tool_name
+                    Dim urlTool = "../administrativo/frm_parDetalle?Id=" & identity
+                    'Me.hrefVIEWER.Attributes.Add("href", "~/TimeSheet/frm_TimeSheetFollowingREP.aspx?ID=" & idTimeSheet)
+                    Me.hrefVIEWER.Attributes.Add("href", "javascript:OpenRadWindowTool('" & urlTool & "');")
+                    'urlDir = "~/TimeSheet/frm_TimeSheetFollowingREP.aspx?ID=" & idTimeSheet
+                End Using
             End If
 
 

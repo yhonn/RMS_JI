@@ -995,6 +995,15 @@ Partial Public Class frm_viaje_legalizacion
     Protected WithEvents RequiredFieldValidator11 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''zr_data control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents zr_data As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Label25 control.
     '''</summary>
     '''<remarks>

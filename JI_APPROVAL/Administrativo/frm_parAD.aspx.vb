@@ -488,10 +488,12 @@ Public Class frm_parAD
     Protected Sub btn_guardar_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_guardar.Click
         Try
             If validarValorPar() Then
-                guardarPar(False)
-                Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
-                Me.MsgGuardar.Redireccion = "~/administrativo/frm_par"
-                ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+                If guardarPar(False) Then
+                    Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
+                    Me.MsgGuardar.Redireccion = "~/administrativo/frm_par"
+                    ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+                End If
+
             End If
 
         Catch ex As DbEntityValidationException
@@ -820,173 +822,220 @@ Public Class frm_parAD
             Else
                 createdtcolumsAportes()
             End If
-            Using dbEntities As New dbRMS_JIEntities
-                Dim oPar = New tme_pares
-                oPar.id_usuario_crea = Me.Session("E_IdUser").ToString()
-                Dim usuario = dbEntities.t_usuarios.Find(oPar.id_usuario_crea)
-                Dim id_par = Convert.ToInt32(Me.idPar.Value)
-                If id_par = 0 Then
 
+            Dim totalComponentes = 0
 
-                    Dim codInicialPT = 386
-                    oPar.fecha_crea = Date.Now
-                    Dim idSubRegion = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
-                    Dim subR = dbEntities.t_subregiones.Find(idSubRegion)
-                    oPar.fecha_solicitud = Me.dt_fecha_solicitud.SelectedDate
-                    oPar.tasa_ser_cotizacion = Me.txt_tasa_ser.Value
-                    oPar.id_tasa_ser_cotizacion = Convert.ToInt32(Me.id_tasa_ser.Value)
-                    oPar.id_region = subR.id_region
-                    oPar.fecha_requiere_servicio = Me.dt_fecha_requiere_servicios.SelectedDate
-                    oPar.id_tipo_par = Convert.ToInt32(Me.cmb_tipo_par.SelectedValue)
-                    oPar.id_subregion = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
-                    Dim subRegion = dbEntities.t_subregiones.Find(oPar.id_subregion)
-
-
-                    Dim parSubregion = dbEntities.tme_pares.Where(Function(p) p.t_subregiones.id_cod_reg = subRegion.id_cod_reg).ToList()
-
-                    Dim consecutivoPar = subRegion.t_consecutivo_par_regional.consecutivo_inicial + parSubregion.Count()
-
-
-
-
-                    Dim codPar = ""
-                    'If parSubregion.Count() > 0 Then
-                    '    consecutivoPar = subRegion.t_consecutivo_par_regional.consecutivo_inicial + parSubregion.Count()
-                    'Else
-                    'End If
-                    If consecutivoPar < 1000 And consecutivoPar > 99 Then
-                        codPar = "0"
-                    ElseIf consecutivoPar < 100 And consecutivoPar > 9 Then
-                        codPar = "00"
-                    ElseIf consecutivoPar < 10 Then
-                        codPar = "000"
+            For Each row In Me.grd_componente.Items
+                If TypeOf row Is GridDataItem Then
+                    Dim dataItem As GridDataItem = CType(row, GridDataItem)
+                    Dim idComponente As CheckBox = CType(row.Cells(0).FindControl("ctrl_id"), CheckBox)
+                    If idComponente.Checked = True Then
+                        totalComponentes += 1
                     End If
+                End If
+            Next
+            If totalComponentes > 0 Then
+                Using dbEntities As New dbRMS_JIEntities
+                    Dim oPar = New tme_pares
+                    oPar.id_usuario_crea = Me.Session("E_IdUser").ToString()
+                    Dim usuario = dbEntities.t_usuarios.Find(oPar.id_usuario_crea)
+                    Dim id_par = Convert.ToInt32(Me.idPar.Value)
+                    If id_par = 0 Then
+
+
+                        Dim codInicialPT = 386
+                        oPar.fecha_crea = Date.Now
+                        Dim idSubRegion = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
+                        Dim subR = dbEntities.t_subregiones.Find(idSubRegion)
+                        oPar.fecha_solicitud = Me.dt_fecha_solicitud.SelectedDate
+                        oPar.tasa_ser_cotizacion = Me.txt_tasa_ser.Value
+                        oPar.id_tasa_ser_cotizacion = Convert.ToInt32(Me.id_tasa_ser.Value)
+                        oPar.id_region = subR.id_region
+                        oPar.fecha_requiere_servicio = Me.dt_fecha_requiere_servicios.SelectedDate
+                        oPar.id_tipo_par = Convert.ToInt32(Me.cmb_tipo_par.SelectedValue)
+                        oPar.id_subregion = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
+                        Dim subRegion = dbEntities.t_subregiones.Find(oPar.id_subregion)
+
+
+                        Dim parSubregion = dbEntities.tme_pares.Where(Function(p) p.t_subregiones.id_cod_reg = subRegion.id_cod_reg).ToList()
+
+                        Dim consecutivoPar = subRegion.t_consecutivo_par_regional.consecutivo_inicial + parSubregion.Count()
 
 
 
 
-                    oPar.codigo_par = "JI-" & subRegion.prefijo_subregion & "-" & codPar & consecutivoPar
-
-                    'oFactura.ciudad = Me.txt_ciudad.Text
-                    oPar.id_tipo_solicitud = Convert.ToInt32(Me.cmb_proposito_par.SelectedValue)
-                    oPar.id_municipio_entrega = Convert.ToInt32(Me.cmb_municipio_entrega.SelectedValue)
-                    'oPar.asociado_actividad = If(Me.rbn_asociado_actividad.SelectedValue = "1", True, False)
-                    oPar.asociado_comunicaciones = If(Me.rbn_comunicaciones.SelectedValue = "1", True, False)
-                    'If oPar.asociado_actividad Then
-                    '    oPar.id_ficha_proyecto = Convert.ToInt32(Me.cmb_sub_actividad.SelectedValue)
-                    'End If
-                    oPar.id_cargo_a = Convert.ToInt32(Me.cmb_cargo_par.SelectedValue)
-                    oPar.id_cargo = Convert.ToInt32(Me.id_cargo.Value)
-                    'oPar.codigo_facturación = Me.txt_codigo_facturacion.Text
-                    oPar.proposito = Me.txt_proposito_servicio.Text
-                    oPar.id_tipo_adjunto_par = Convert.ToInt32(Me.cmb_adjuntos_par.SelectedValue)
-                    oPar.observaciones_adicionales = Me.txt_descripcion_adjuntos.Text
-
-                    For Each file As UploadedFile In soporte_adjunto.UploadedFiles
-                        Dim fecha = DateTime.Now
-                        Dim exten = file.GetExtension()
-                        Dim nombreArchivo = fecha.Year & fecha.Month & fecha.Day & fecha.Hour & fecha.Minute & fecha.Second & "_" & oPar.codigo_par & "_" & Regex.Replace(file.GetNameWithoutExtension(), "[^A-Za-z0-9\-/]", "") & "" & exten
-
-                        Dim Path As String
-                        Path = Server.MapPath(dbEntities.t_programa_settings.FirstOrDefault(Function(p) p.id_programa = id_programa).documents_folder)
-                        file.SaveAs(Path + nombreArchivo)
-
-                        oPar.soporte_adjunto = nombreArchivo
-                    Next
-
-
-                    If oPar.id_tipo_par = 2 Then
-
-                        Dim parPT = dbEntities.tme_pares.Where(Function(p) p.id_tipo_par = 2).ToList()
-                        Dim consecutivoPT = codInicialPT + parPT.Count()
-                        Dim codPT = ""
-
-                        If consecutivoPT < 1000 And consecutivoPT > 99 Then
-                            codPT = "0"
-                        ElseIf consecutivoPT < 100 And consecutivoPT > 9 Then
-                            codPT = "00"
-                        ElseIf consecutivoPT < 10 Then
-                            codPT = "000"
+                        Dim codPar = ""
+                        'If parSubregion.Count() > 0 Then
+                        '    consecutivoPar = subRegion.t_consecutivo_par_regional.consecutivo_inicial + parSubregion.Count()
+                        'Else
+                        'End If
+                        If consecutivoPar < 1000 And consecutivoPar > 99 Then
+                            codPar = "0"
+                        ElseIf consecutivoPar < 100 And consecutivoPar > 9 Then
+                            codPar = "00"
+                        ElseIf consecutivoPar < 10 Then
+                            codPar = "000"
                         End If
 
-                        oPar.codigo_pt = "PT-" & codPT & consecutivoPT
-                        'oPar.codigo_pt = Me.txt_codigo_pt.Text
-                        'oPar.id_estructura_marco_logico = Convert.ToInt32(Me.cmb_componente.SelectedValue)
-                        oPar.fecha_inicio_evento = Me.dt_fecha_inicio_evento.SelectedDate
-                        oPar.fecha_fin_evento = Me.dt_fecha_finalizacion_evento.SelectedDate
-                        oPar.id_tipo_evento = Convert.ToInt32(Me.cmb_tipo_evento.SelectedValue)
-                        oPar.numero_horas = Me.txt_nro_horas.Value
-                        oPar.nombre_evento = Me.txt_nombre_evento.Text
-                        oPar.id_entidad_evento = Convert.ToInt32(Me.cmb_entidad.SelectedValue)
-                        'oPar.usuario_responable_evento = Me.txt_responsable.Text
-                        'oPar.entidad_responsable_evento = Me.txt_entidad.Text
-                        oPar.asociado_recursos_apalancados = If(Me.rbn_recursos_apalancados.SelectedValue = "1", True, False)
-                    End If
-
-                    dbEntities.tme_pares.Add(oPar)
-                    dbEntities.SaveChanges()
-                    'oPar.celular = Me.txt_celular_.Text
-                    'oPar.correo = Me.txt_correo.Text
-                    'oPar.numero_factura = codPar.Single()
-                    'dbEntities.tme_facturacion.Add(oPar)
-                    'dbEntities.SaveChanges()
-
-                    Dim cantidad As Decimal
-                    Dim descripcion As String
-                    Dim unidadMedida As String
-                    Dim valorUnitario As Decimal
-                    Dim valorTotal As Decimal
-                    Dim id_uMedida As Decimal
-
-                    For Each row As DataRow In dtConceptos.Rows
-                        Dim oParDetalle As New tme_par_detalle
-                        cantidad = row("cantidad")
-                        descripcion = row("descripcion")
-                        valorUnitario = row("valor_unitario")
-                        unidadMedida = row("unidad_medida")
-                        valorTotal = row("valor")
-                        id_uMedida = row("id_unidad_medida")
-
-                        oParDetalle.id_par = oPar.id_par
-                        oParDetalle.cantidad = cantidad
-                        oParDetalle.descripcion = descripcion
-                        oParDetalle.precio_unitario = valorUnitario
-                        'oParDetalle.unidad_medida = unidadMedida
-                        oParDetalle.id_unidad_medida = id_uMedida
-                        dbEntities.tme_par_detalle.Add(oParDetalle)
-                        dbEntities.SaveChanges()
-                    Next
 
 
-                    Dim id_aporte As Decimal
 
-                    For Each row As DataRow In dtAportes.Rows
-                        Dim oParAporte As New tme_par_aporte
-                        id_aporte = row("id_aporte")
+                        oPar.codigo_par = "JI-" & subRegion.prefijo_subregion & "-" & codPar & consecutivoPar
+
+                        'oFactura.ciudad = Me.txt_ciudad.Text
+                        oPar.id_tipo_solicitud = Convert.ToInt32(Me.cmb_proposito_par.SelectedValue)
+                        oPar.id_municipio_entrega = Convert.ToInt32(Me.cmb_municipio_entrega.SelectedValue)
+                        'oPar.asociado_actividad = If(Me.rbn_asociado_actividad.SelectedValue = "1", True, False)
+                        oPar.asociado_comunicaciones = If(Me.rbn_comunicaciones.SelectedValue = "1", True, False)
+                        'If oPar.asociado_actividad Then
+                        '    oPar.id_ficha_proyecto = Convert.ToInt32(Me.cmb_sub_actividad.SelectedValue)
+                        'End If
+                        oPar.id_cargo_a = Convert.ToInt32(Me.cmb_cargo_par.SelectedValue)
+                        oPar.id_cargo = Convert.ToInt32(Me.id_cargo.Value)
+                        'oPar.codigo_facturación = Me.txt_codigo_facturacion.Text
+                        oPar.proposito = Me.txt_proposito_servicio.Text
+                        oPar.id_tipo_adjunto_par = Convert.ToInt32(Me.cmb_adjuntos_par.SelectedValue)
+                        oPar.observaciones_adicionales = Me.txt_descripcion_adjuntos.Text
+
+                        For Each file As UploadedFile In soporte_adjunto.UploadedFiles
+                            Dim fecha = DateTime.Now
+                            Dim exten = file.GetExtension()
+                            Dim nombreArchivo = fecha.Year & fecha.Month & fecha.Day & fecha.Hour & fecha.Minute & fecha.Second & "_" & oPar.codigo_par & "_" & Regex.Replace(file.GetNameWithoutExtension(), "[^A-Za-z0-9\-/]", "") & "" & exten
+
+                            Dim Path As String
+                            Path = Server.MapPath(dbEntities.t_programa_settings.FirstOrDefault(Function(p) p.id_programa = id_programa).documents_folder)
+                            file.SaveAs(Path + nombreArchivo)
+
+                            oPar.soporte_adjunto = nombreArchivo
+                        Next
 
 
-                        oParAporte.id_par = oPar.id_par
-                        oParAporte.id_aporte = id_aporte
-                        dbEntities.tme_par_aporte.Add(oParAporte)
-                        dbEntities.SaveChanges()
-                    Next
+                        If oPar.id_tipo_par = 2 Then
 
-                    For Each row In Me.grd_componente.Items
-                        If TypeOf row Is GridDataItem Then
-                            Dim dataItem As GridDataItem = CType(row, GridDataItem)
-                            Dim idComponente As CheckBox = CType(row.Cells(0).FindControl("ctrl_id"), CheckBox)
-                            If idComponente.Checked = True Then
-                                Dim idEstructura As Integer = dataItem.GetDataKeyValue("id_estructura_marcologico")
-                                Dim oMarco = New tme_par_marco_logico
-                                oMarco.id_par = oPar.id_par
-                                oMarco.id_marco_logico = idEstructura
-                                dbEntities.tme_par_marco_logico.Add(oMarco)
-                                dbEntities.SaveChanges()
+                            Dim parPT = dbEntities.tme_pares.Where(Function(p) p.id_tipo_par = 2).ToList()
+                            Dim consecutivoPT = codInicialPT + parPT.Count()
+                            Dim codPT = ""
+
+                            If consecutivoPT < 1000 And consecutivoPT > 99 Then
+                                codPT = "0"
+                            ElseIf consecutivoPT < 100 And consecutivoPT > 9 Then
+                                codPT = "00"
+                            ElseIf consecutivoPT < 10 Then
+                                codPT = "000"
                             End If
-                        End If
-                    Next
 
-                    If enviarAprobacion Then
+                            oPar.codigo_pt = "PT-" & codPT & consecutivoPT
+                            'oPar.codigo_pt = Me.txt_codigo_pt.Text
+                            'oPar.id_estructura_marco_logico = Convert.ToInt32(Me.cmb_componente.SelectedValue)
+                            oPar.fecha_inicio_evento = Me.dt_fecha_inicio_evento.SelectedDate
+                            oPar.fecha_fin_evento = Me.dt_fecha_finalizacion_evento.SelectedDate
+                            oPar.id_tipo_evento = Convert.ToInt32(Me.cmb_tipo_evento.SelectedValue)
+                            oPar.numero_horas = Me.txt_nro_horas.Value
+                            oPar.nombre_evento = Me.txt_nombre_evento.Text
+                            oPar.id_entidad_evento = Convert.ToInt32(Me.cmb_entidad.SelectedValue)
+                            'oPar.usuario_responable_evento = Me.txt_responsable.Text
+                            'oPar.entidad_responsable_evento = Me.txt_entidad.Text
+                            oPar.asociado_recursos_apalancados = If(Me.rbn_recursos_apalancados.SelectedValue = "1", True, False)
+                        End If
+
+                        dbEntities.tme_pares.Add(oPar)
+                        dbEntities.SaveChanges()
+                        'oPar.celular = Me.txt_celular_.Text
+                        'oPar.correo = Me.txt_correo.Text
+                        'oPar.numero_factura = codPar.Single()
+                        'dbEntities.tme_facturacion.Add(oPar)
+                        'dbEntities.SaveChanges()
+
+                        Dim cantidad As Decimal
+                        Dim descripcion As String
+                        Dim unidadMedida As String
+                        Dim valorUnitario As Decimal
+                        Dim valorTotal As Decimal
+                        Dim id_uMedida As Decimal
+
+                        For Each row As DataRow In dtConceptos.Rows
+                            Dim oParDetalle As New tme_par_detalle
+                            cantidad = row("cantidad")
+                            descripcion = row("descripcion")
+                            valorUnitario = row("valor_unitario")
+                            unidadMedida = row("unidad_medida")
+                            valorTotal = row("valor")
+                            id_uMedida = row("id_unidad_medida")
+
+                            oParDetalle.id_par = oPar.id_par
+                            oParDetalle.cantidad = cantidad
+                            oParDetalle.descripcion = descripcion
+                            oParDetalle.precio_unitario = valorUnitario
+                            'oParDetalle.unidad_medida = unidadMedida
+                            oParDetalle.id_unidad_medida = id_uMedida
+                            dbEntities.tme_par_detalle.Add(oParDetalle)
+                            dbEntities.SaveChanges()
+                        Next
+
+
+                        Dim id_aporte As Decimal
+
+                        For Each row As DataRow In dtAportes.Rows
+                            Dim oParAporte As New tme_par_aporte
+                            id_aporte = row("id_aporte")
+
+
+                            oParAporte.id_par = oPar.id_par
+                            oParAporte.id_aporte = id_aporte
+                            dbEntities.tme_par_aporte.Add(oParAporte)
+                            dbEntities.SaveChanges()
+                        Next
+
+                        For Each row In Me.grd_componente.Items
+                            If TypeOf row Is GridDataItem Then
+                                Dim dataItem As GridDataItem = CType(row, GridDataItem)
+                                Dim idComponente As CheckBox = CType(row.Cells(0).FindControl("ctrl_id"), CheckBox)
+                                If idComponente.Checked = True Then
+                                    Dim idEstructura As Integer = dataItem.GetDataKeyValue("id_estructura_marcologico")
+                                    Dim oMarco = New tme_par_marco_logico
+                                    oMarco.id_par = oPar.id_par
+                                    oMarco.id_marco_logico = idEstructura
+                                    dbEntities.tme_par_marco_logico.Add(oMarco)
+                                    dbEntities.SaveChanges()
+                                End If
+                            End If
+                        Next
+
+                        If enviarAprobacion Then
+
+                            Dim id_categoriaAPP = 2044
+                            Dim cls_par As APPROVAL.clss_par = New APPROVAL.clss_par(Convert.ToInt32(Me.Session("E_IDprograma")))
+
+                            Dim tblUserApprovalTimeSheet As DataTable = New DataTable
+                            Dim par = dbEntities.vw_tme_par.Where(Function(p) p.id_par = oPar.id_par).FirstOrDefault()
+
+                            If par.valor_total / par.tasa_ser_cotizacion > 50000 Then
+                                tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_mayor_50000(par.id_usuario, id_categoriaAPP)
+                            ElseIf par.asociado_comunicaciones = True Then
+                                tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_comunicaciones(par.id_usuario, id_categoriaAPP)
+                            ElseIf par.id_tipo_par = 1 Then
+                                tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_administrativo(par.id_usuario, id_categoriaAPP)
+                            Else
+                                tblUserApprovalTimeSheet = cls_par.get_parApprovalUserEventos(par.id_usuario, id_categoriaAPP)
+                            End If
+
+
+                            If tblUserApprovalTimeSheet.Rows.Count() = 0 Then
+                                Me.lblerr_user.Text = "El PAR " & par.codigo_par & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de PAR, contáctese con el administrador."
+                                Me.lblerr_user.Visible = True
+                                guardarPar = False
+                            Else
+                                Dim id_documento = guardarDocumento(par, usuario)
+                                guardarPar = True
+                            End If
+
+                        Else
+                            guardarPar = True
+                        End If
+
+
+                    Else
+                        oPar = dbEntities.tme_pares.Where(Function(p) p.id_par = id_par).ToList().FirstOrDefault()
 
                         Dim id_categoriaAPP = 2044
                         Dim cls_par As APPROVAL.clss_par = New APPROVAL.clss_par(Convert.ToInt32(Me.Session("E_IDprograma")))
@@ -1014,44 +1063,15 @@ Public Class frm_parAD
                             guardarPar = True
                         End If
 
-                    Else
-                        guardarPar = True
+
                     End If
 
+                End Using
+            Else
+                Me.lblerr_user.Text = "Seleccione los componentes!"
+                guardarPar = False
+            End If
 
-                Else
-                    oPar = dbEntities.tme_pares.Where(Function(p) p.id_par = id_par).ToList().FirstOrDefault()
-
-                    Dim id_categoriaAPP = 2044
-                    Dim cls_par As APPROVAL.clss_par = New APPROVAL.clss_par(Convert.ToInt32(Me.Session("E_IDprograma")))
-
-                    Dim tblUserApprovalTimeSheet As DataTable = New DataTable
-                    Dim par = dbEntities.vw_tme_par.Where(Function(p) p.id_par = oPar.id_par).FirstOrDefault()
-
-                    If par.valor_total / par.tasa_ser_cotizacion > 50000 Then
-                        tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_mayor_50000(par.id_usuario, id_categoriaAPP)
-                    ElseIf par.asociado_comunicaciones = True Then
-                        tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_comunicaciones(par.id_usuario, id_categoriaAPP)
-                    ElseIf par.id_tipo_par = 1 Then
-                        tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_administrativo(par.id_usuario, id_categoriaAPP)
-                    Else
-                        tblUserApprovalTimeSheet = cls_par.get_parApprovalUserEventos(par.id_usuario, id_categoriaAPP)
-                    End If
-
-
-                    If tblUserApprovalTimeSheet.Rows.Count() = 0 Then
-                        Me.lblerr_user.Text = "El PAR " & par.codigo_par & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de PAR, contáctese con el administrador."
-                        Me.lblerr_user.Visible = True
-                        guardarPar = False
-                    Else
-                        Dim id_documento = guardarDocumento(par, usuario)
-                        guardarPar = True
-                    End If
-
-
-                End If
-
-            End Using
         Catch ex As DbEntityValidationException
             Dim st1 As String
             Dim st2 As String

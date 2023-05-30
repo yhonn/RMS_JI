@@ -511,7 +511,7 @@ Public Class frm_ActivityDocumentos
 
 
         e.Item.Text = String.Format(" {0} ==>> {1} ==>> {2:d} ==>> {3:d} ", DataBinder.Eval(e.Item.DataItem, "AWARD_CODE").ToString(), DataBinder.Eval(e.Item.DataItem, "nombre_proyecto").ToString(), DateINI, DateFIN)
-        e.Item.Value = DataBinder.Eval(e.Item.DataItem, "ID_AWARDED_APP").ToString
+        e.Item.Value = DataBinder.Eval(e.Item.DataItem, "ID_AWARDED_ACTIVITY").ToString
 
 
     End Sub

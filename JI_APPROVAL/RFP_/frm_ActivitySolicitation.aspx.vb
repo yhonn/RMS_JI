@@ -1571,6 +1571,8 @@ Public Class frm_ActivitySolicitation
 
 
             Dim idPrograma = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
+            Dim currency = dbEntities.t_programa_currency.FirstOrDefault(Function(p) p.id_programa = idPrograma And p.set_default = True)
+            oTA_AWARDED_APP.id_programa_currency = currency.id_programa_currency
             Dim cls_Solicitation As ly_APPROVAL.APPROVAL.cls_solicitations = New ly_APPROVAL.APPROVAL.cls_solicitations(idPrograma, cl_user)
 
             Dim idAWARDED As Integer

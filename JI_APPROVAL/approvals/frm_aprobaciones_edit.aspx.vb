@@ -46,6 +46,16 @@ Partial Class frm_aprobaciones_edit
         Me.txt_level.Text = cl_AppDef.get_ta_tipoDocumentoFIELDS("nivel_aprobacion", "id_tipoDocumento", id_tipoDoc)
         Me.cmb_category.SelectedValue = cl_AppDef.get_ta_tipoDocumentoFIELDS("id_categoria", "id_tipoDocumento", id_tipoDoc)
 
+        Dim accionStandBy = cl_AppDef.get_ta_tipoDocumentoFIELDS("devolver_aprobador_anterior", "id_tipoDocumento", id_tipoDoc)
+        Dim accionStandBy2 = cl_AppDef.get_ta_tipoDocumentoFIELDS("reiniciar_ruta_aprobacion", "id_tipoDocumento", id_tipoDoc)
+
+        If accionStandBy Then
+            Me.rbn_accion_stand_by.SelectedValue = "1"
+        ElseIf accionStandBy2 Then
+            Me.rbn_accion_stand_by.SelectedValue = "2"
+        Else
+            Me.rbn_accion_stand_by.SelectedValue = "0"
+        End If
 
         grd_documentos.DataSource = cl_AppDef.get_DocumentTypes()
         grd_documentos.DataBind()
@@ -152,6 +162,8 @@ Partial Class frm_aprobaciones_edit
             cl_AppDef.set_ta_tipoDocumentoFIELDS("condicion", Me.txt_condicion.Text, "id_tipoDocumento", Me.HiddenField1.Value)
             cl_AppDef.set_ta_tipoDocumentoFIELDS("nivel_aprobacion", Me.txt_level.Text, "id_tipoDocumento", Me.HiddenField1.Value)
             cl_AppDef.set_ta_tipoDocumentoFIELDS("cod_actividad", codact, "id_tipoDocumento", Me.HiddenField1.Value)
+            cl_AppDef.set_ta_tipoDocumentoFIELDS("devolver_aprobador_anterior", If(Me.rbn_accion_stand_by.SelectedValue = "1", True, False), "id_tipoDocumento", Me.HiddenField1.Value)
+            cl_AppDef.set_ta_tipoDocumentoFIELDS("reiniciar_ruta_aprobacion", If(Me.rbn_accion_stand_by.SelectedValue = "2", True, False), "id_tipoDocumento", Me.HiddenField1.Value)
 
             If cl_AppDef.save_ta_tipoDocumento() <> -1 Then
                 Session.Remove("cl_AppDef") 'Remove the session

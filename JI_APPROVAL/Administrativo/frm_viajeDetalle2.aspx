@@ -449,7 +449,7 @@
                                         <telerik:GridBoundColumn DataField="monto_pasajes"
                                             FilterControlAltText="Filter monto_pasajes column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="Monto pasajes" SortExpression="monto_pasajes"
-                                            Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                            Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                             UniqueName="monto_pasajes">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
@@ -510,7 +510,7 @@
                                          <telerik:GridBoundColumn DataField="monto_total"
                                             FilterControlAltText="Filter monto_total column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="Monto" SortExpression="monto_total"
-                                            Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                            Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                             UniqueName="monto_total">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
@@ -559,7 +559,7 @@
                                          <telerik:GridBoundColumn DataField="monto_total"
                                             FilterControlAltText="Filter monto_total column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="Monto" SortExpression="monto_total"
-                                            Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                            Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                             UniqueName="monto_total">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
@@ -617,7 +617,7 @@
                                          <telerik:GridBoundColumn DataField="valor_perdiem"
                                             FilterControlAltText="Filter valor_perdiem column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="M&IE Rate" SortExpression="valor_perdiem"
-                                            DataFormatString="{0:n}"
+                                            DataFormatString="{0:n0}"
                                             UniqueName="valor_perdiem">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
@@ -629,29 +629,29 @@
                                         </telerik:GridBoundColumn>
                                         <telerik:GridBoundColumn DataField="descuento_alimentacion"
                                             FilterControlAltText="Filter descuento_alimentacion column"  HeaderStyle-Font-Bold="true"
-                                            HeaderText="Descuento alimentación" SortExpression="descuento_alimentacion" Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
-                                            DataFormatString="{0:n}"
+                                            HeaderText="Descuento alimentación" SortExpression="descuento_alimentacion" Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
+                                            DataFormatString="{0:n0}"
                                             UniqueName="descuento_alimentacion">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="valor_total_alimentacion"
                                             FilterControlAltText="Filter valor_total_alimentacion column"  HeaderStyle-Font-Bold="true"
-                                            HeaderText="Monto alimentación" SortExpression="valor_total_alimentacion" Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
-                                            DataFormatString="{0:n}"
+                                            HeaderText="Monto alimentación" SortExpression="valor_total_alimentacion" Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
+                                            DataFormatString="{0:n0}"
                                             UniqueName="valor_total_alimentacion">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="monto_alojamiento"
                                             FilterControlAltText="Filter monto_alojamiento column"  HeaderStyle-Font-Bold="true"
-                                            HeaderText="Monto alojamiento por noche" SortExpression="monto_alojamiento" Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
-                                            DataFormatString="{0:n}"
+                                            HeaderText="Monto alojamiento por noche" SortExpression="monto_alojamiento" Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
+                                            DataFormatString="{0:n0}"
                                             UniqueName="monto_alojamiento">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
                                          <telerik:GridBoundColumn DataField="monto_total"
                                             FilterControlAltText="Filter monto_total column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="Monto total" SortExpression="monto_total"
-                                            Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                            Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                             UniqueName="monto_total">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>

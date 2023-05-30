@@ -361,6 +361,7 @@ Public Class frm_viajesAD
                                   If(Me.rbn_transporte_aereo.SelectedValue = "0", "NO", "SÍ"), If(Me.rbn_vehiculo_proyecto.SelectedValue = "0", "NO", "SI"),
                                   If(Me.rbn_transporte_fluvial.SelectedValue = "0", "NO", "SÍ"), If(Me.rbn_servicio_publico.SelectedValue = "0", "NO", "SÍ"), Me.txt_linea_aerea.Text,
                                     Me.txt_vehiculo_proyecto.Text, Me.txt_transporte_fluvial.Text, Me.txt_servicio_publico.Text)
+            dtItinerario.DefaultView.Sort = "fecha_viaje ASC"
             Session("dtItinerario") = dtItinerario
             Me.txt_vehiculo_proyecto.Text = String.Empty
             Me.txt_transporte_fluvial.Text = String.Empty
@@ -725,10 +726,11 @@ Public Class frm_viajesAD
         Try
 
             If validarTotalDias() = False Then
-                guardar(False)
-                Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
-                Me.MsgGuardar.Redireccion = "~/administrativo/frm_viajes"
-                ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+                If guardar(False) Then
+                    Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
+                    Me.MsgGuardar.Redireccion = "~/administrativo/frm_viajes"
+                    ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+                End If
             Else
                 Me.mensajeNumeroDiasHabiles.Visible = True
             End If
@@ -754,131 +756,167 @@ Public Class frm_viajesAD
             Else
                 createdtcolumsAlojamiento()
             End If
-            Using dbEntities As New dbRMS_JIEntities
-                Dim id_viaje = Convert.ToInt32(Me.idviaje.Value)
-                Dim viaje = New tme_solicitud_viaje
-                viaje.id_usuario = Me.Session("E_IdUser").ToString()
-                Dim usuario = dbEntities.t_usuarios.Find(viaje.id_usuario)
-                If id_viaje = 0 Then
-                    usuario.habilitar_agregar_viaje = False
-                    dbEntities.Entry(usuario).State = Entity.EntityState.Modified
-                    dbEntities.SaveChanges()
 
-                    'Dim codigoSolicitud = dbEntities.Database.SqlQuery(Of Integer)("SELECT NEXT VALUE FOR SequenceSolicitudViaje")
-                    viaje.fecha_crea = DateTime.Now
-                    'viaje.fecha_inicio_viaje = Me.dt_fecha_inicio.SelectedDate
-                    'viaje.fecha_fin_viaje = Me.dt_fecha_fin.SelectedDate
-                    viaje.numero_contacto = Me.txt_numero_contacto.Text
-                    viaje.motivo_viaje = Me.txt_motivo_viaje.Text
+            Dim totalComponentes = 0
 
-
-                    Dim consecutivoViaje = dbEntities.tme_solicitud_viaje.Count()
-
-
-                    viaje.codigo_solicitud_viaje = "V-JI-" & consecutivoViaje + 1
-                    viaje.id_tipo_viaje = Convert.ToInt32(Me.rbn_tipo_viaje.SelectedValue)
-                    viaje.id_cargo = usuario.id_job_title
-                    viaje.id_sub_region = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
-                    dbEntities.tme_solicitud_viaje.Add(viaje)
-                    dbEntities.SaveChanges()
-
-                    Dim fecha_viaje As Date
-                    Dim hora_salida As String
-                    Dim ciudad_origen As String
-                    Dim ciudad_destino As String
-                    Dim id_municipio_origen As Integer
-                    Dim id_municipio_destino As Integer
-                    Dim requiere_transporte_aereo As Boolean
-                    Dim requiere_vehiculo_proyecto As Boolean
-                    Dim requiere_transporte_fluvial As Boolean
-                    Dim requiere_servicio_publico As Boolean
-                    Dim transporte_aereo As String
-                    Dim vehiculo_proyecto As String
-                    Dim transporte_fluvial As String
-                    Dim servicio_publico As String
-
-                    Dim fecha_llegada As Date
-                    Dim fecha_salida As Date
-                    Dim id_municipio_hotel As Integer
-                    Dim hotel As String
-
-
-                    For Each row As DataRow In dtItinerario.Rows
-                        Dim viajeItinerario = New tme_solicitud_viaje_itinerario
-                        viajeItinerario.id_viaje = viaje.id_viaje
-
-                        fecha_viaje = row("fecha_viaje")
-                        hora_salida = row("hora_salida")
-                        ciudad_origen = row("ciudad_origen")
-                        ciudad_destino = row("ciudad_destino")
-                        id_municipio_origen = row("id_municipio_origen")
-                        id_municipio_destino = row("id_municipio_destino")
-                        requiere_transporte_aereo = row("requiere_transporte_aereo")
-                        requiere_vehiculo_proyecto = row("requiere_vehiculo_proyecto")
-                        requiere_transporte_fluvial = row("requiere_transporte_fluvial")
-                        requiere_servicio_publico = row("requiere_servicio_publico")
-                        transporte_aereo = row("transporte_aereo")
-                        vehiculo_proyecto = row("vehiculo_proyecto")
-                        transporte_fluvial = row("transporte_fluvial")
-                        servicio_publico = row("servicio_publico")
-
-                        viajeItinerario.fecha_viaje = fecha_viaje
-                        viajeItinerario.hora_salida = hora_salida
-                        viajeItinerario.requiere_linea_aerea = requiere_transporte_aereo
-                        viajeItinerario.requiere_vehiculo_proyecto = requiere_vehiculo_proyecto
-                        viajeItinerario.requiere_transporte_fluvial = requiere_transporte_fluvial
-                        viajeItinerario.requiere_servicio_publico = requiere_servicio_publico
-                        viajeItinerario.observaciones_vehiculo_proyecto = vehiculo_proyecto
-                        viajeItinerario.observaciones_servicio_publico = servicio_publico
-                        viajeItinerario.observaciones_transporte_fluvial = transporte_fluvial
-                        viajeItinerario.linea_aerea = transporte_aereo
-                        viajeItinerario.id_municipio_origen = id_municipio_origen
-                        viajeItinerario.id_municipio_destino = id_municipio_destino
-
-                        dbEntities.tme_solicitud_viaje_itinerario.Add(viajeItinerario)
-                        dbEntities.SaveChanges()
-                    Next
-
-                    For Each row As DataRow In dtAlojamiento.Rows
-                        Dim viajeHotel = New tme_solicitud_viaje_hotel
-                        viajeHotel.id_viaje = viaje.id_viaje
-                        fecha_llegada = row("fecha_llegada")
-                        fecha_salida = row("fecha_salida")
-                        id_municipio_hotel = row("id_municipio")
-                        hotel = row("hotel")
-
-                        viajeHotel.hotel = hotel
-                        viajeHotel.id_municipio = id_municipio_hotel
-                        viajeHotel.fecha_salida = fecha_salida
-                        viajeHotel.fecha_llegada = fecha_llegada
-
-                        dbEntities.tme_solicitud_viaje_hotel.Add(viajeHotel)
-                        dbEntities.SaveChanges()
-                    Next
-
-                    For Each row In Me.grd_componente.Items
-                        If TypeOf row Is GridDataItem Then
-                            Dim dataItem As GridDataItem = CType(row, GridDataItem)
-                            Dim idComponente As CheckBox = CType(row.Cells(0).FindControl("ctrl_id"), CheckBox)
-                            If idComponente.Checked = True Then
-                                Dim idEstructura As Integer = dataItem.GetDataKeyValue("id_estructura_marcologico")
-                                Dim oMarco = New tme_solicitud_viaje_marco_logico
-                                oMarco.id_viaje = viaje.id_viaje
-                                oMarco.id_estructura_marcologico = idEstructura
-                                dbEntities.tme_solicitud_viaje_marco_logico.Add(oMarco)
-                                dbEntities.SaveChanges()
-                            End If
-                        End If
-                    Next
-
-                    Dim viajeItinerarioList = dbEntities.tme_solicitud_viaje_itinerario.Where(Function(p) p.id_viaje = viaje.id_viaje).ToList()
-                    If viajeItinerarioList.Count() > 0 Then
-                        viaje.fecha_inicio_viaje = viajeItinerarioList.OrderBy(Function(p) p.fecha_viaje).FirstOrDefault().fecha_viaje
-                        viaje.fecha_fin_viaje = viajeItinerarioList.OrderByDescending(Function(p) p.fecha_viaje).FirstOrDefault().fecha_viaje
+            For Each row In Me.grd_componente.Items
+                If TypeOf row Is GridDataItem Then
+                    Dim dataItem As GridDataItem = CType(row, GridDataItem)
+                    Dim idComponente As CheckBox = CType(row.Cells(0).FindControl("ctrl_id"), CheckBox)
+                    If idComponente.Checked = True Then
+                        totalComponentes += 1
                     End If
-                    dbEntities.Entry(viaje).State = Entity.EntityState.Modified
-                    dbEntities.SaveChanges()
-                    If enviarAprobacion Then
+                End If
+            Next
+
+            If totalComponentes > 0 Then
+                Using dbEntities As New dbRMS_JIEntities
+                    Dim id_viaje = Convert.ToInt32(Me.idviaje.Value)
+                    Dim viaje = New tme_solicitud_viaje
+                    viaje.id_usuario = Me.Session("E_IdUser").ToString()
+                    Dim usuario = dbEntities.t_usuarios.Find(viaje.id_usuario)
+                    If id_viaje = 0 Then
+                        usuario.habilitar_agregar_viaje = False
+                        dbEntities.Entry(usuario).State = Entity.EntityState.Modified
+                        dbEntities.SaveChanges()
+
+                        'Dim codigoSolicitud = dbEntities.Database.SqlQuery(Of Integer)("SELECT NEXT VALUE FOR SequenceSolicitudViaje")
+                        viaje.fecha_crea = DateTime.Now
+                        'viaje.fecha_inicio_viaje = Me.dt_fecha_inicio.SelectedDate
+                        'viaje.fecha_fin_viaje = Me.dt_fecha_fin.SelectedDate
+                        viaje.numero_contacto = Me.txt_numero_contacto.Text
+                        viaje.motivo_viaje = Me.txt_motivo_viaje.Text
+
+
+                        Dim consecutivoViaje = dbEntities.tme_solicitud_viaje.Count()
+
+
+                        viaje.codigo_solicitud_viaje = "V-JI-" & consecutivoViaje + 1
+                        viaje.id_tipo_viaje = Convert.ToInt32(Me.rbn_tipo_viaje.SelectedValue)
+                        viaje.id_cargo = usuario.id_job_title
+                        viaje.id_sub_region = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
+                        dbEntities.tme_solicitud_viaje.Add(viaje)
+                        dbEntities.SaveChanges()
+
+                        Dim fecha_viaje As Date
+                        Dim hora_salida As String
+                        Dim ciudad_origen As String
+                        Dim ciudad_destino As String
+                        Dim id_municipio_origen As Integer
+                        Dim id_municipio_destino As Integer
+                        Dim requiere_transporte_aereo As Boolean
+                        Dim requiere_vehiculo_proyecto As Boolean
+                        Dim requiere_transporte_fluvial As Boolean
+                        Dim requiere_servicio_publico As Boolean
+                        Dim transporte_aereo As String
+                        Dim vehiculo_proyecto As String
+                        Dim transporte_fluvial As String
+                        Dim servicio_publico As String
+
+                        Dim fecha_llegada As Date
+                        Dim fecha_salida As Date
+                        Dim id_municipio_hotel As Integer
+                        Dim hotel As String
+
+
+                        For Each row As DataRow In dtItinerario.Rows
+                            Dim viajeItinerario = New tme_solicitud_viaje_itinerario
+                            viajeItinerario.id_viaje = viaje.id_viaje
+
+                            fecha_viaje = row("fecha_viaje")
+                            hora_salida = row("hora_salida")
+                            ciudad_origen = row("ciudad_origen")
+                            ciudad_destino = row("ciudad_destino")
+                            id_municipio_origen = row("id_municipio_origen")
+                            id_municipio_destino = row("id_municipio_destino")
+                            requiere_transporte_aereo = row("requiere_transporte_aereo")
+                            requiere_vehiculo_proyecto = row("requiere_vehiculo_proyecto")
+                            requiere_transporte_fluvial = row("requiere_transporte_fluvial")
+                            requiere_servicio_publico = row("requiere_servicio_publico")
+                            transporte_aereo = row("transporte_aereo")
+                            vehiculo_proyecto = row("vehiculo_proyecto")
+                            transporte_fluvial = row("transporte_fluvial")
+                            servicio_publico = row("servicio_publico")
+
+                            viajeItinerario.fecha_viaje = fecha_viaje
+                            viajeItinerario.hora_salida = hora_salida
+                            viajeItinerario.requiere_linea_aerea = requiere_transporte_aereo
+                            viajeItinerario.requiere_vehiculo_proyecto = requiere_vehiculo_proyecto
+                            viajeItinerario.requiere_transporte_fluvial = requiere_transporte_fluvial
+                            viajeItinerario.requiere_servicio_publico = requiere_servicio_publico
+                            viajeItinerario.observaciones_vehiculo_proyecto = vehiculo_proyecto
+                            viajeItinerario.observaciones_servicio_publico = servicio_publico
+                            viajeItinerario.observaciones_transporte_fluvial = transporte_fluvial
+                            viajeItinerario.linea_aerea = transporte_aereo
+                            viajeItinerario.id_municipio_origen = id_municipio_origen
+                            viajeItinerario.id_municipio_destino = id_municipio_destino
+
+                            dbEntities.tme_solicitud_viaje_itinerario.Add(viajeItinerario)
+                            dbEntities.SaveChanges()
+                        Next
+
+                        For Each row As DataRow In dtAlojamiento.Rows
+                            Dim viajeHotel = New tme_solicitud_viaje_hotel
+                            viajeHotel.id_viaje = viaje.id_viaje
+                            fecha_llegada = row("fecha_llegada")
+                            fecha_salida = row("fecha_salida")
+                            id_municipio_hotel = row("id_municipio")
+                            hotel = row("hotel")
+
+                            viajeHotel.hotel = hotel
+                            viajeHotel.id_municipio = id_municipio_hotel
+                            viajeHotel.fecha_salida = fecha_salida
+                            viajeHotel.fecha_llegada = fecha_llegada
+
+                            dbEntities.tme_solicitud_viaje_hotel.Add(viajeHotel)
+                            dbEntities.SaveChanges()
+                        Next
+
+                        For Each row In Me.grd_componente.Items
+                            If TypeOf row Is GridDataItem Then
+                                Dim dataItem As GridDataItem = CType(row, GridDataItem)
+                                Dim idComponente As CheckBox = CType(row.Cells(0).FindControl("ctrl_id"), CheckBox)
+                                If idComponente.Checked = True Then
+                                    Dim idEstructura As Integer = dataItem.GetDataKeyValue("id_estructura_marcologico")
+                                    Dim oMarco = New tme_solicitud_viaje_marco_logico
+                                    oMarco.id_viaje = viaje.id_viaje
+                                    oMarco.id_estructura_marcologico = idEstructura
+                                    dbEntities.tme_solicitud_viaje_marco_logico.Add(oMarco)
+                                    dbEntities.SaveChanges()
+                                End If
+                            End If
+                        Next
+
+                        Dim viajeItinerarioList = dbEntities.tme_solicitud_viaje_itinerario.Where(Function(p) p.id_viaje = viaje.id_viaje).ToList()
+                        If viajeItinerarioList.Count() > 0 Then
+                            viaje.fecha_inicio_viaje = viajeItinerarioList.OrderBy(Function(p) p.fecha_viaje).FirstOrDefault().fecha_viaje
+                            viaje.fecha_fin_viaje = viajeItinerarioList.OrderByDescending(Function(p) p.fecha_viaje).FirstOrDefault().fecha_viaje
+                        End If
+                        dbEntities.Entry(viaje).State = Entity.EntityState.Modified
+                        dbEntities.SaveChanges()
+                        If enviarAprobacion Then
+
+                            Dim id_categoriaAPP = 2042
+                            Dim cls_viaje As APPROVAL.clss_viaje = New APPROVAL.clss_viaje(Convert.ToInt32(Me.Session("E_IDprograma")))
+                            Dim tblUserApprovalTimeSheet As DataTable = cls_viaje.get_ViajeApprovalUser(viaje.id_usuario, id_categoriaAPP)
+
+                            If tblUserApprovalTimeSheet.Rows.Count() = 0 Then
+                                Me.lblerr_user.Text = "El viaje " & viaje.codigo_solicitud_viaje & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de viajes, contáctese con el administrador."
+                                Me.lblerr_user.Visible = True
+                                guardar = False
+                                Me.idviaje.Value = viaje.id_viaje
+                            Else
+                                Dim id_documento = guardarDocumento(viaje, usuario)
+                                guardar = True
+                            End If
+
+                            'guardarRelacionDocumento(id_documento, viaje.id_viaje)
+
+                        Else
+                            guardar = True
+                        End If
+                    Else
+                        viaje = dbEntities.tme_solicitud_viaje.Where(Function(p) p.id_viaje = id_viaje).ToList().FirstOrDefault()
 
                         Dim id_categoriaAPP = 2042
                         Dim cls_viaje As APPROVAL.clss_viaje = New APPROVAL.clss_viaje(Convert.ToInt32(Me.Session("E_IDprograma")))
@@ -894,33 +932,16 @@ Public Class frm_viajesAD
                             guardar = True
                         End If
 
-                        'guardarRelacionDocumento(id_documento, viaje.id_viaje)
 
-                    Else
-                        guardar = True
-                    End If
-                Else
-                    viaje = dbEntities.tme_solicitud_viaje.Where(Function(p) p.id_viaje = id_viaje).ToList().FirstOrDefault()
-
-                    Dim id_categoriaAPP = 2042
-                    Dim cls_viaje As APPROVAL.clss_viaje = New APPROVAL.clss_viaje(Convert.ToInt32(Me.Session("E_IDprograma")))
-                    Dim tblUserApprovalTimeSheet As DataTable = cls_viaje.get_ViajeApprovalUser(viaje.id_usuario, id_categoriaAPP)
-
-                    If tblUserApprovalTimeSheet.Rows.Count() = 0 Then
-                        Me.lblerr_user.Text = "El viaje " & viaje.codigo_solicitud_viaje & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de viajes, contáctese con el administrador."
-                        Me.lblerr_user.Visible = True
-                        guardar = False
-                        Me.idviaje.Value = viaje.id_viaje
-                    Else
-                        Dim id_documento = guardarDocumento(viaje, usuario)
-                        guardar = True
                     End If
 
 
-                End If
+                End Using
+            Else
+                Me.lblerr_user.Text = "Seleccione los componentes!"
+                guardar = False
+            End If
 
-
-            End Using
 
         Catch ex As Exception
             Dim mensaje = ex.Message

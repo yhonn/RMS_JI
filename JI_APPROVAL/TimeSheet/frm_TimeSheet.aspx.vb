@@ -68,7 +68,8 @@ Partial Class frm_TimeSheet
                 controles.checkControls(Control, cl_user.id_idioma, cl_user)
             Next
         End If
-
+        Dim sManager = ScriptManager.GetCurrent(Me)
+        sManager.RegisterPostBackControl(Me.btn_Period_Report_2)
         If Not IsPostBack Then
 
 
@@ -601,7 +602,13 @@ Partial Class frm_TimeSheet
 
     End Function
 
+    Protected Sub btn_Period_Report_2_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btn_Period_Report_2.Click
+        'Me.Response.Redirect("~/TimeSheet/frm_timesheetdownload.aspx?y=" & cmb_year.SelectedValue.ToString & "&m=" & cmb_Month.SelectedValue.ToString)
+        Dim url As String = "frm_timesheetdownload?y=" & cmb_year.SelectedValue.ToString & "&m=" & cmb_Month.SelectedValue.ToString
+        Dim s As String = "window.open('" & url & "', '_blank');"
+        ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "TimeSheet Report", s, True)
 
+    End Sub
     Private Sub grd_cate_NeedDataSource(sender As Object, e As GridNeedDataSourceEventArgs) Handles grd_cate.NeedDataSource
         LoadGrid(False)
     End Sub

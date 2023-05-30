@@ -286,14 +286,14 @@
                                                         <HeaderStyle CssClass="wrapWord"  />
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="valor_unitario" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                        DataFormatString="{0:n}" 
+                                                        DataFormatString="{0:n0}" 
                                                         FilterControlAltText="Filter valor_unitario column" HeaderStyle-Width="13%"
                                                         HeaderText="Valor unitario" SortExpression="valor_unitario"
                                                         UniqueName="colm_valor_unitario">
                                                         <HeaderStyle CssClass="wrapWord"  />
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="valor" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                        Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                        Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                         FilterControlAltText="Filter valor column" HeaderStyle-Width="19%"
                                                         HeaderText="Valor total" SortExpression="valor"
                                                         UniqueName="colm_valor">
@@ -364,8 +364,8 @@
                                                         <HeaderStyle CssClass="wrapWord"  />
                                                     </telerik:GridBoundColumn>
                                                     <telerik:GridBoundColumn DataField="valor_total" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                        DataFormatString="{0:n}" 
-                                                        Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                        DataFormatString="{0:n0}" 
+                                                        Aggregate="Sum" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                         FilterControlAltText="Filter valor_total column" HeaderStyle-Width="23%"
                                                         HeaderText="Valor total" SortExpression="valor_total"
                                                         UniqueName="valor_total">
@@ -929,14 +929,14 @@
                                                                         <HeaderStyle CssClass="wrapWord"  />
                                                                     </telerik:GridBoundColumn>
                                                                     <telerik:GridBoundColumn DataField="valor_unitario" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                        DataFormatString="{0:n}" 
+                                                                        DataFormatString="{0:n0}" 
                                                                         FilterControlAltText="Filter valor_unitario column" HeaderStyle-Width="13%"
                                                                         HeaderText="Valor unitario" SortExpression="valor_unitario"
                                                                         UniqueName="colm_valor_unitario">
                                                                         <HeaderStyle CssClass="wrapWord"  />
                                                                     </telerik:GridBoundColumn>
                                                                     <telerik:GridBoundColumn DataField="valor" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                        Aggregate="Sum" DataFormatString="{0:n}" FooterAggregateFormatString="<b>Valor total: {0:n}</b>" FooterText="Valor total: "
+                                                                        Aggregate="Sum" DataFormatString="{0:n0}" FooterAggregateFormatString="<b>Valor total: {0:n0}</b>" FooterText="Valor total: "
                                                                         FilterControlAltText="Filter valor column" HeaderStyle-Width="19%"
                                                                         HeaderText="Valor total" SortExpression="valor"
                                                                         UniqueName="colm_valor">

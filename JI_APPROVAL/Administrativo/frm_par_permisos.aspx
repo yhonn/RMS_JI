@@ -250,25 +250,25 @@
                                                                             <telerik:GridBoundColumn DataField="cantidad" HeaderStyle-Font-Bold="true"
                                                                                 FilterControlAltText="Filter cantidad column" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
                                                                                 HeaderText="Quantity" SortExpression="cantidad" 
-                                                                                UniqueName="cantidad" DataFormatString="{0:N}">
+                                                                                UniqueName="cantidad" DataFormatString="{0:n0}">
                                                                                 <ItemStyle CssClass="textrightalign" />
                                                                             </telerik:GridBoundColumn>
                                                                             <telerik:GridBoundColumn DataField="unidad_medida" HeaderStyle-Font-Bold="true"
                                                                                 FilterControlAltText="Filter unidad_medida column"
                                                                                 HeaderText="Units" SortExpression="unidad_medida"
-                                                                                UniqueName="unidad_medida" DataFormatString="{0:N}">
+                                                                                UniqueName="unidad_medida" DataFormatString="{0:n0}">
                                                                             </telerik:GridBoundColumn>
                                                                             <telerik:GridBoundColumn DataField="precio_unitario" FooterStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" 
                                                                                 HeaderStyle-HorizontalAlign="Right"
                                                                                 FilterControlAltText="Filter precio_unitario column" FooterText="TOTAL ESTIMATED COP: "
                                                                                 HeaderText="Est. Unit Price COP" SortExpression="precio_unitario" 
-                                                                                UniqueName="precio_unitario" DataFormatString="{0:N}">
+                                                                                UniqueName="precio_unitario" DataFormatString="{0:n0}">
                                                                                 <ItemStyle CssClass="textrightalign" />
                                                                             </telerik:GridBoundColumn>
                                                                             <telerik:GridBoundColumn DataField="valor_total" FooterStyle-Font-Bold="true" HeaderStyle-Font-Bold="true" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                                                                FilterControlAltText="Filter valor_total column" Aggregate="Sum" FooterAggregateFormatString="{0:N}"
+                                                                                FilterControlAltText="Filter valor_total column" Aggregate="Sum" FooterAggregateFormatString="{0:n0}"
                                                                                 HeaderText="Est. Total Price COP" SortExpression="valor_total" 
-                                                                                UniqueName="valor_total" DataFormatString="{0:N}">
+                                                                                UniqueName="valor_total" DataFormatString="{0:n0}">
                                                                                 <ItemStyle CssClass="textrightalign" />
                                                                             </telerik:GridBoundColumn>
                                                                         </Columns>

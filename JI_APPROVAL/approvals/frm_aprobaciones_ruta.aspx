@@ -376,6 +376,10 @@
                                                                                             UniqueName="id_approval_tool" Visible="true" Display="false">
                                                                                         </telerik:GridBoundColumn>
 
+                                                                                    <telerik:GridBoundColumn DataField="tool_code" 
+                                                                                            UniqueName="tool_code" Visible="true" Display="false">
+                                                                                        </telerik:GridBoundColumn>
+
                                                                                 </Columns>
 
                                                                             <EditFormSettings>

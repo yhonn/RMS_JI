@@ -593,7 +593,7 @@
                                                                     UniqueName="fecha_radicacion">
                                                                     <HeaderStyle CssClass="wrapWord"  />
                                                                 </telerik:GridBoundColumn>
-                                                                 <telerik:GridBoundColumn DataField="valor_factura" DataFormatString="{0:n}"
+                                                                 <telerik:GridBoundColumn DataField="valor_factura" DataFormatString="{0:n0}"
                                                                     FilterControlAltText="Filter valor_factura column" HeaderStyle-Width="19%"
                                                                     HeaderText="Valor" SortExpression="valor_factura"
                                                                     UniqueName="valor_factura">
@@ -980,7 +980,7 @@
                                                                     UniqueName="hotel_alojamiento">
                                                                     <HeaderStyle CssClass="wrapWord"  />
                                                                 </telerik:GridBoundColumn>
-                                                                 <telerik:GridBoundColumn DataField="valor_total" DataFormatString="{0:n}"
+                                                                 <telerik:GridBoundColumn DataField="valor_total" DataFormatString="{0:n0}"
                                                                     FilterControlAltText="Filter valor_total column" HeaderStyle-Width="19%"
                                                                     HeaderText="Valor total" SortExpression="valor_total"
                                                                     UniqueName="valor_total">

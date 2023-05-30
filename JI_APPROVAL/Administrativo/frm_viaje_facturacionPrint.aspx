@@ -153,7 +153,7 @@
                                             UniqueName="fecha_radicacion">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn DataField="valor_factura" DataFormatString="{0:n}"
+                                            <telerik:GridBoundColumn DataField="valor_factura" DataFormatString="{0:n0}"
                                             FilterControlAltText="Filter valor_factura column" HeaderStyle-Width="19%"
                                             HeaderText="Valor" SortExpression="valor_factura"
                                             UniqueName="valor_factura">
@@ -216,7 +216,7 @@
                                                  <telerik:GridBoundColumn DataField="valor_factura_tiquetes" ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
                                                     FilterControlAltText="Filter valor_factura_tiquetes column"  HeaderStyle-Font-Bold="true"
                                                     HeaderText="Valor factura" SortExpression="valor_factura_tiquetes"
-                                                    DataFormatString="{0:n}" 
+                                                    DataFormatString="{0:n0}" 
                                                     UniqueName="valor_factura_tiquetes">
                                                     <ItemStyle CssClass="textrightalign" />
                                                     <HeaderStyle CssClass="textrightalign"  />
@@ -315,7 +315,7 @@
                                             UniqueName="hotel_alojamiento">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
-                                            <telerik:GridBoundColumn DataField="valor_total" DataFormatString="{0:n}"
+                                            <telerik:GridBoundColumn DataField="valor_total" DataFormatString="{0:n0}"
                                             FilterControlAltText="Filter valor_total column" HeaderStyle-Width="19%"
                                             HeaderText="Valor total" SortExpression="valor_total"
                                             UniqueName="valor_total">

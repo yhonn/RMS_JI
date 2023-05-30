@@ -131,7 +131,7 @@ Public Class frm_facturacionAD
                 oFactura.numero_factura = "JINE-" & consecutivoFact + 1
             End If
 
-
+            oFactura.resolucion = "DOCUMENTO SOPORTE EN ADQUISICIONES EFECTUADAS A NO OBLIGADOS A FACTURAR  (Autorizacion Numeracion de facturacion 18764049212871 de Mayo 18 de 2023)  Rango autorizado  JINE  No.1001 al 2500 Vigencia 12 meses"
             oFactura.fecha_crea = Date.Now
             oFactura.id_usuario_crea = Me.Session("E_IdUser").ToString()
             oFactura.fecha_factura = Me.dt_fecha_factura.SelectedDate
