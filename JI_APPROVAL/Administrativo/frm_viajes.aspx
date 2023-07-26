@@ -310,7 +310,17 @@
                                            <ItemStyle Width="25px" />                                           
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridBoundColumn DataField="anulado" Visible="false"></telerik:GridBoundColumn>
-                                        
+                                         <telerik:GridTemplateColumn UniqueName="colm_generar_documento" Visible="true" AllowFiltering="false">
+                                            <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />   
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="col_hlk_generar_doc" runat="server" Width="25px"
+                                                        ImageUrl="../Imagenes/iconos/adjunto.png" ToolTip="Generar pdf"
+                                                        OnClick="generar_documento">
+                                                        <asp:Image ID="Image1" runat="server" ImageUrl="../Imagenes/iconos/adjunto.png" Style="border-width: 0px;" />
+                                                    </asp:LinkButton>
+                                                </ItemTemplate>
+                                            </telerik:GridTemplateColumn>
                                     </Columns>
                                 </MasterTableView>
                             </telerik:RadGrid>

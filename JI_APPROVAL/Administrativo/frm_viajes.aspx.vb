@@ -2,6 +2,8 @@
 Imports Telerik.Web.UI
 Imports System.Data.SqlClient
 Imports System.Configuration.ConfigurationManager
+Imports System.IO
+
 Public Class frm_viajes
     Inherits System.Web.UI.Page
 
@@ -224,6 +226,13 @@ Public Class frm_viajes
             hlnkCodigoReserva.Attributes.Add("data-href", DataBinder.Eval(e.Item.DataItem, "id_viaje").ToString())
             hlnkCodigoReserva.Attributes.Add("data-identity", DataBinder.Eval(e.Item.DataItem, "id_viaje").ToString())
             hlnkCodigoReserva.ToolTip = controles.iconosGrid("col_hlk_codigo_Reserva")
+
+
+            Dim col_hlk_generar_doc As LinkButton = New LinkButton
+            col_hlk_generar_doc = CType(e.Item.FindControl("col_hlk_generar_doc"), LinkButton)
+            col_hlk_generar_doc.Attributes.Add("data-href", DataBinder.Eval(e.Item.DataItem, "id_viaje").ToString())
+            col_hlk_generar_doc.Attributes.Add("data-identity", DataBinder.Eval(e.Item.DataItem, "id_viaje").ToString())
+            col_hlk_generar_doc.ToolTip = controles.iconosGrid("col_hlk_generar_doc")
 
             Dim imgHlnkCodigoReserva As Image = New Image
             imgHlnkCodigoReserva = CType(e.Item.FindControl("img_codigo_reserva"), Image)
@@ -476,5 +485,90 @@ Public Class frm_viajes
         End Using
 
 
+    End Sub
+
+    Sub generar_documento(sender As Object, e As EventArgs)
+
+        Using dbEntities As New dbRMS_JIEntities
+
+            Try
+                Dim oSys = dbEntities.t_sys.FirstOrDefault(Function(p) p.id_sys = 2)
+                Dim a = CType(sender, LinkButton)
+                Dim idViaje = Convert.ToInt32(a.Attributes.Item("data-identity").ToString())
+
+                Dim viaje = dbEntities.tme_solicitud_viaje.Find(idViaje)
+
+
+
+                Dim Path As String
+                Path = Server.MapPath("~/FileUploads/Documents/")
+
+
+                Dim startInfo = New ProcessStartInfo()
+                Dim myProcess As New Process
+                startInfo.UseShellExecute = False
+                startInfo.RedirectStandardOutput = True
+                startInfo.RedirectStandardInput = True
+                startInfo.RedirectStandardError = True
+                startInfo.FileName = "C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe"
+                startInfo.Arguments = String.Format("{0}administrativo/frm_viajeDetalle2?Id={1} {2}{3}.pdf", oSys.sys_url, viaje.id_viaje, Path, viaje.codigo_solicitud_viaje)
+
+                myProcess = Process.Start(startInfo)
+                myProcess.WaitForExit()
+                myProcess.Close()
+
+
+
+                Dim filenames As String() = System.IO.Directory.GetFiles(Path)
+                Dim outputFileName = "reporte_viaje_" & viaje.codigo_solicitud_viaje & ".pdf"
+                Dim outputPath = Path & outputFileName
+                Dim doc As New iTextSharp.text.Document()
+
+
+                Dim writer = New iTextSharp.text.pdf.PdfCopy(doc, New FileStream(outputPath, FileMode.Create))
+
+                If writer IsNot Nothing Then
+
+                End If
+
+                doc.Open()
+                Dim soportesViaje = New List(Of tme_soporte_legalizacion_viaje)
+                Dim docViaje As tme_soporte_legalizacion_viaje = New tme_soporte_legalizacion_viaje
+                docViaje.id_viaje = viaje.id_viaje
+                docViaje.soporte = viaje.codigo_solicitud_viaje & ".pdf"
+
+
+                soportesViaje.Add(docViaje)
+                soportesViaje = soportesViaje.Concat(dbEntities.tme_soporte_legalizacion_viaje.Where(Function(p) p.id_viaje = idViaje).ToList()).ToList()
+
+                For Each documento In soportesViaje
+
+                    Dim soportePath = Path & documento.soporte
+
+                    Dim reader = New iTextSharp.text.pdf.PdfReader(soportePath)
+                    reader.ConsolidateNamedDestinations()
+                    For i As Integer = 1 To reader.NumberOfPages Step 1
+                        Dim Page = writer.GetImportedPage(reader, i)
+                        writer.AddPage(Page)
+                    Next
+                    reader.Close()
+
+
+
+                Next
+
+                writer.Close()
+                doc.Close()
+
+
+                Dim s As String = "window.open('" & oSys.sys_url & "FileUploads/Documents/" & outputFileName & "', '_blank');"
+                ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "Viaje Report", s, True)
+
+
+            Catch ex As Exception
+                Dim errore = ex.Message
+            End Try
+
+        End Using
     End Sub
 End Class
