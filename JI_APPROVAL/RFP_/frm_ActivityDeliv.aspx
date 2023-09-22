@@ -122,7 +122,7 @@
                                                                                      >                                                              
                                                                             <HeaderTemplate>
                                                                                     <ul>
-                                                                                        <li style="font-weight:700;" >Contract Code / Status</li>
+                                                                                        <li style="font-weight:700;" >Technical Code / Status</li>
                                                                                         <li style="font-weight:100;" >Contract Mecanism</li> 
                                                                                         <li style="font-weight:100;" >Applicant</li>                                                                                                                                                                                                                                                                                                                       
                                                                                     </ul>
@@ -130,7 +130,7 @@
                                                                             <ItemTemplate>
                                                                                 <ul>
                                                                                     <li style="font-weight:700;" >
-                                                                                        <%# DataBinder.Eval(Container.DataItem, "AWARD_CODE")%> -- <%# DataBinder.Eval(Container.DataItem, "AWARD_STATUS")%> 
+                                                                                        <%# DataBinder.Eval(Container.DataItem, "codigo_RFA")%> -- <%# DataBinder.Eval(Container.DataItem, "AWARD_STATUS")%> 
                                                                                     </li>
                                                                                     <li style="font-weight:100;" >
                                                                                         <span style="font-weight:400;" > <%# DataBinder.Eval(Container.DataItem, "nombre_proyecto")%> </span>
@@ -380,7 +380,8 @@
                                                              CausesValidation="False"                                                                     
                                                              EmptyMessage="Select the approval ..."   
                                                              AllowCustomText="true" 
-                                                             Filter="Contains"                                         
+                                                             Filter="Contains"            
+                                                             Height="200px"
                                                              Width="50%" >                                                                                               
                                       </telerik:RadComboBox>                                       
                                       <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ErrorMessage="Select the approval flow using for approving this deliverable" ForeColor="Red" ControlToValidate="cmb_approvals" ValidationGroup="1"></asp:RequiredFieldValidator>

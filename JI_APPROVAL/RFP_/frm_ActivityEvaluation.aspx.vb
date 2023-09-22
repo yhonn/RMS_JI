@@ -1835,10 +1835,28 @@ Public Class frm_ActivityEvaluation
 
                 End If
 
+                Me.Buttons_approve.Visible = False
+                Me.conflicto_intereses.Visible = True
+
             Else
 
                 Me.H_ID_EVALUATION_APP.Value = oEVAL_APP.FirstOrDefault().ID_EVALUATION_APP
+                Dim idUsuario = Convert.ToInt32(Me.Session("E_IdUser").ToString())
+                Dim idEstadoCIPOSITIVE = Get_STATUS(4, 1, True)
+                Dim idEstadoCINEGAVITE = Get_STATUS(4, 1, False)
+                Dim oEvalCommCI = dbEntities.TA_EVALUATION_APP_COMM.Where(Function(p) p.ID_EVALUATION_APP = oEVAL_APP.FirstOrDefault().ID_EVALUATION_APP And p.ID_USUARIO_CREA = idUsuario And (p.ID_EVALUATION_APP_STATUS = idEstadoCIPOSITIVE Or p.ID_EVALUATION_APP_STATUS = idEstadoCINEGAVITE)).ToList()
+                If oEvalCommCI.Count() > 0 Then
+                    Me.conflicto_intereses.Visible = False
+                    Me.Buttons_approve.Visible = True
+                    Dim conflictoIntereses = oEvalCommCI.FirstOrDefault()
+                    If conflictoIntereses.ID_EVALUATION_APP_STATUS = idEstadoCINEGAVITE Then
+                        Me.Buttons_approve.Visible = False
+                    End If
 
+                Else
+                    Me.conflicto_intereses.Visible = True
+                    Me.Buttons_approve.Visible = False
+                End If
             End If
 
             If oRound.ID_VOTING_TYPE = 1 Then 'Score
@@ -1865,7 +1883,7 @@ Public Class frm_ActivityEvaluation
                 'Me.grd_answers.DataSource = dbEntities.VW_TA_EVALUATION_ANSWER.Where(Function(p) p.ID_SOLICITATION_APP = Id_solicitation_app).OrderBy(Function(o) o.order_numberQC).ToList()
                 'Me.grd_answers.DataBind()
                 Me.grd_screening.DataSourceID = ""
-                Me.grd_screening.DataSource = dbEntities.VW_ASSESMENT_QUESTIONS.Where(Function(p) p.id_measurement_survey = oRound.id_measurement_survey).OrderBy(Function(o) o.order_number).ThenBy(Function(a) a.order_numberQU).ToList()
+                Me.grd_screening.DataSource = dbEntities.VW_ASSESMENT_QUESTIONS.Where(Function(p) p.id_measurement_survey = oRound.id_measurement_survey And p.id_programa = idPrograma).OrderBy(Function(o) o.order_number).ThenBy(Function(a) a.order_numberQU).ToList()
                 Me.grd_screening.DataBind()
                 ASSESSMENT_TITTLE = dbEntities.VW_ASSESMENT_QUESTIONS.Where(Function(p) p.id_measurement_survey = oRound.id_measurement_survey).FirstOrDefault.survey_name
                 Me.lbl_round.Text = ASSESSMENT_TITTLE
@@ -2341,7 +2359,7 @@ Public Class frm_ActivityEvaluation
                 oTA_EVALUATION_APP_COMM.ID_EVALUATION_APP = idEVAL_app
                 oTA_EVALUATION_APP_COMM.ROUND = idEVALround
                 oTA_EVALUATION_APP_COMM.ID_EVALUATION_APP_STATUS = oTA_EVALUATION_APP.ID_EVALUATION_APP_STATUS
-                oTA_EVALUATION_APP_COMM.EVALUATION_COMM = strComm
+                oTA_EVALUATION_APP_COMM.EVALUATION_COMM = strComm & " -> comments: " & Me.txt_comentarios.Text
                 oTA_EVALUATION_APP_COMM.SCORE = scoreValues
                 oTA_EVALUATION_APP_COMM.VOTE = 0
                 oTA_EVALUATION_APP_COMM.POINTS = 0
@@ -8003,8 +8021,10 @@ Public Class frm_ActivityEvaluation
                         'ia ID Solicitation App
                         'is ID Activity SOlicitation
                         '*********************SET URL AGAING
+
+
                         Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
-                        Me.MsgGuardar.Redireccion = String.Format("~/RFP_/frm_ActivityEvaluation?ut={0}&id={1}&ia={2}&is={3}&ir={4}&_tab=ROUND_BOX#EVA_BOX", Me.Session("idGuiToken").ToString, Me.lbl_id_ficha.Text, Me.H_ID_SOLICITATION_APP.Value, Me.H_ID_ACTIVITY_SOLICITATION.Value, Me.H_ROUND_ID.Value)
+                        Me.MsgGuardar.Redireccion = String.Format("~/RFP_/frm_ActivityEvaluation?Id={0}", Me.lbl_id_ficha.Text)
                         'Me.MsgGuardar.Redireccion = ""
                         ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
 
@@ -8123,4 +8143,49 @@ Public Class frm_ActivityEvaluation
 
     End Sub
 
+    Private Sub btn_conflicto_intereses_Click(sender As Object, e As EventArgs) Handles btn_conflicto_intereses.Click
+        Using dbEntities As New dbRMS_JIEntities
+            Dim ID_EVAL_APP = Convert.ToInt32(Me.H_ID_EVALUATION_APP.Value)
+            Dim idPrograma = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
+            Dim idUSer As Integer = Convert.ToInt32(Me.Session("E_IdUser").ToString())
+
+            Dim evaAPP = dbEntities.TA_EVALUATION_APP.Find(ID_EVAL_APP)
+            Dim conflictoIntereses = Convert.ToInt32(Me.rbn_conflicto_intereses.SelectedValue)
+            Dim conflictoInteresesText = Me.lblt_conflicto_intereses.Text & " " & Me.rbn_conflicto_intereses.SelectedItem.Text
+            'evaAPP.conflicto_intereses = If(conflictoIntereses = 1, True, False)
+            'evaAPP.ID_EVALUATION_APP_STATUS = Get_STATUS(4, 1, If(conflictoIntereses = 1, False, True))
+            dbEntities.Entry(evaAPP).State = Entity.EntityState.Modified
+            dbEntities.SaveChanges()
+            Dim cls_Solicitation As ly_APPROVAL.APPROVAL.cls_solicitations = New ly_APPROVAL.APPROVAL.cls_solicitations(idPrograma, cl_user)
+
+            Dim Id_solicitation_app = Convert.ToInt32(Me.Request.QueryString("ia"))
+
+            Dim OSolicitationAPP = dbEntities.TA_SOLICITATION_APP.Find(Id_solicitation_app)
+            Dim oApply = dbEntities.TA_APPLY_APP.Where(Function(p) p.ID_SOLICITATION_APP = Id_solicitation_app).ToList()
+            Dim oActivityAPP = dbEntities.VW_TA_SOLICITATION_APP.Where(Function(P) P.ID_SOLICITATION_APP = OSolicitationAPP.ID_SOLICITATION_APP).ToList()
+
+
+            Dim oTA_EVALUATION_APP_COMM As New TA_EVALUATION_APP_COMM
+            Dim idRound = Convert.ToInt32(Me.Request.QueryString("ir"))
+            Dim oRound = dbEntities.TA_EVALUATION_ROUNDS.Find(idRound)
+            oTA_EVALUATION_APP_COMM.ID_EVALUATION_APP = ID_EVAL_APP
+            oTA_EVALUATION_APP_COMM.ROUND = idRound
+            oTA_EVALUATION_APP_COMM.ID_EVALUATION_APP_STATUS = Get_STATUS(4, 1, If(conflictoIntereses = 1, False, True))
+            oTA_EVALUATION_APP_COMM.EVALUATION_COMM = String.Format("CONFLICTO DE INTERESES para {0} : {1} ", String.Format("{0} ({1})", oActivityAPP.FirstOrDefault.ORGANIZATIONNAME, oActivityAPP.FirstOrDefault.NAMEALIAS), conflictoInteresesText)
+            oTA_EVALUATION_APP_COMM.SCORE = 0
+            oTA_EVALUATION_APP_COMM.VOTE = 0
+            oTA_EVALUATION_APP_COMM.POINTS = 0
+            oTA_EVALUATION_APP_COMM.ID_USUARIO_CREA = Convert.ToInt32(Me.Session("E_IdUser").ToString())
+            oTA_EVALUATION_APP_COMM.FECHA_CREA = Date.UtcNow
+            oTA_EVALUATION_APP_COMM.COMM_BOL = False
+            oTA_EVALUATION_APP_COMM.USER_TOKEN_UPDATE = Guid.Parse(Me.Session("idGuiToken").ToString)
+
+            cls_Solicitation.Save_TA_EVALUATION_APP_COMM(oTA_EVALUATION_APP_COMM, 0)
+
+            Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
+            Me.MsgGuardar.Redireccion = String.Format("~/RFP_/frm_ActivityEvaluation?ut={0}&id={1}&ia={2}&is={3}&ir={4}&_tab=ROUND_BOX#EVA_BOX", Me.Session("idGuiToken").ToString, Me.lbl_id_ficha.Text, Me.H_ID_SOLICITATION_APP.Value, Me.H_ID_ACTIVITY_SOLICITATION.Value, Me.H_ROUND_ID.Value)
+            ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+
+        End Using
+    End Sub
 End Class

@@ -307,7 +307,7 @@
                                                                           
                                                                               <asp:Repeater ID="rept_ORG_EVAL" runat="server">
                                                                                  <ItemTemplate>
-                                                                                    <li><a class="btn btn-default <%# If(Eval("CURR_ROUND") = 0, "disabled", "") %>  text-left" href="frm_ActivityEvaluation?ut=<%# Eval("SOLICITATION_TOKEN") %>&id=<%# Eval("ID_ACTIVITY") %>&ia=<%# Eval("ID_SOLICITATION_APP") %>&is=<%# Eval("ID_ACTIVITY_SOLICITATION") %>&ir=<%# Eval("ID_ROUND") %>&_tab=ROUND_BOX#EVA_BOX"><span class="pull-left">Evaluation Round #<%# Eval("ID_ROUND") %></span><span class="badge <%# Eval("VOTING_FLAG") %>"><%# Eval("VOTING_TYPE") %>&nbsp;&nbsp;<%# Eval("TOT_OBTAINED") %>&nbsp;/&nbsp;<%# Eval("TARGET_TO_OBTAIN") %>&nbsp;&nbsp;</span><span class='label <%# Eval("STATUS_FLAG") %> text-center text-sm pull-right' > <%# Eval("EVALUATION_APP_STATUS") %>&nbsp;&nbsp;&nbsp;<i class='fa <%# Eval("STATUS_ICON") %>'></i>&nbsp;&nbsp;&nbsp;<%# If(Eval("ID_EVALUATION_APP_STATUS") = 0, Func_Unit(Eval("ACCEPTED_DATE"), Date.UtcNow), Func_Unit(Eval("UPDATED_DATE"), Date.UtcNow)) %></span></a></li>
+                                                                                    <li><a class="btn btn-default <%# If(Eval("CURR_ROUND") = 0, "disabled", "") %>  text-left" href="frm_ActivityEvaluation?ut=<%# Eval("SOLICITATION_TOKEN") %>&id=<%# Eval("ID_ACTIVITY") %>&ia=<%# Eval("ID_SOLICITATION_APP") %>&is=<%# Eval("ID_ACTIVITY_SOLICITATION") %>&ir=<%# Eval("ID_ROUND") %>&_tab=ROUND_BOX#EVA_BOX"><span class="pull-left">Evaluation Round #<%# Eval("ID_ROUND") %></span><span class="badge <%# Eval("VOTING_FLAG") %>"><%# Eval("VOTING_TYPE") %>&nbsp;&nbsp;<%# Eval("TOT_OBTAINED_AVG") %>/&nbsp;<%# Eval("TARGET")%>&nbsp;(Min <%# Eval("TARGET_TO_OBTAIN_AVG") %>)</span><span class='label <%# Eval("STATUS_FLAG") %> text-center text-sm pull-right' > <%# Eval("EVALUATION_APP_STATUS") %>&nbsp;&nbsp;&nbsp;<i class='fa <%# Eval("STATUS_ICON") %>'></i>&nbsp;&nbsp;&nbsp;<%# If(Eval("ID_EVALUATION_APP_STATUS") = 0, Func_Unit(Eval("ACCEPTED_DATE"), Date.UtcNow), Func_Unit(Eval("UPDATED_DATE"), Date.UtcNow)) %></span></a></li>
                                                                                     <li>
                                                                                        <div class="progress-xxs">
                                                                                          <div class="progress-bar <%# Eval("nColor") %>" style="width:<%# Eval("PERC_OBTAINED_TO") %>%"></div>
@@ -973,11 +973,44 @@
                                                                              </div>
 
                                                                              <a name="EVA_WIN"  id="EVA_WIN"></a> 
+                                                                             <div  id="conflicto_intereses" runat="server" visible="false" style="display:block; padding-left:10px;" class="bg-gray-light">
+                                                                                 <div class="col-sm-12 ">
+                                                                                     <div  class="form-group row" >
+                                                                                         <asp:Label runat="server" ID="lblt_conflicto_intereses" CssClass="control-label text-bold">Declaro que en la presente convocatoria para la organización en evaluación lo siguiente:
+                                                                                         </asp:Label><br />
+                                                                                        <asp:RadioButtonList ID="rbn_conflicto_intereses" runat="server"
+                                                                                            RepeatColumns="1" Style="height: 26px" AutoPostBack="false">
+                                                                                            
+                                                                                            <asp:ListItem Value="2">No tengo conflicto de interes.<br /> Mediante la presente certifico que, en relación con esta convocatoria y proceso de Evaluación:
+                                                                                                <ul>
+                                                                                                    <li>No discutiré con ni revelaré a ningún funcionario y/o representante de ninguna entidad, organización persona jurídica o persona natural (con excepción a los miembros del equipo de evaluación y personal de contratos y donaciones del Programa de Justicia Inclusiva) cualquier aspecto relacionado con esta propuesta, proponente ni ningún aspecto del proceso de adquisición o asistencia, Evaluación cuya adjudicación está en proceso. El término “cualquier aspecto” incluye, pero no se limita a información como nombre de los proponentes, valor de la propuesta, metodologías, los términos de referencia, las deliberaciones del comité, la metodología y el proceso de evaluación de Justicia Inclusiva, el cronograma, resultado o cualquier aspecto relacionado con este proceso. Salvo cuando expresamente me sea autorizado por la Gerencia de Contratos y Donaciones, compartir, revelar, divulgar esta información constituirá una divulgación no autorizada de cualquier aspecto de un proceso de Evaluación y adjudicación en curso.</li>
+                                                                                                    <li>Reconozco que un factor clave para el éxito de este proceso de evaluación y adjudicación es la confidencialidad de todos los intervinientes y el cumplimiento de los procedimientos que conduzcan a adjudicar cuidadosamente la propuesta más favorable al programa; así mismo, que la falla en esos procedimientos y cuidado necesario, podría comprometer seriamente el proceso de evaluación.</li>
+                                                                                                    <li>
+                                                                                                        Reconozco que divulgar por anticipado, información relacionada con este proceso de evaluación puede resultar en la terminación de mi participación en este proceso y ocasionar que el mismo se frustre. Así mismo, que tal conducta constituye una falta grave al código de conducta que hace parte de mi contrato de trabajo suscrito con Chemonics International Inc, operador del Programa de Justicia Inclusiva.
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        Ni yo, ni ningún miembro de mi familia tiene un interés directo o indirecto o es parte en ninguna de las empresas o firmas que participan como proponentes en este proceso de evaluación; de igual forma me comprometo a que en el evento en que cualquiera firma, empresa u organización en la que yo o mi familia tenga interés, o esté vinculado de cualquier forma, presente una propuesta ante el Programa de Justicia Inclusiva bajo este proceso de evaluación, lo informaré inmediatamente y de manera formal y escrita a mi supervisor y me apartaré completamente del proceso.
+                                                                                                    </li>
+                                                                                                    <li>
+                                                                                                        No he copiado, reproducido ni compartido o divulgado ningún documento relacionado con esta convocatoria.
+                                                                                                    </li>
+                                                                                                </ul>
+
+                                                                                            </asp:ListItem>
+                                                                                            <asp:ListItem Value="1">Tengo conflicto de intereses</asp:ListItem>
+                                                                                        </asp:RadioButtonList>
+                                                                                     </div>
+                                                                                     <div  class="form-group row" >
+                                                                                        <div class="col-sm-3">     
+                                                                                            <asp:LinkButton ID="btn_conflicto_intereses" runat="server" AutoPostBack="True" SingleClick="true"  Text="Continuar" Width="80%" class="btn btn-success btn-sm margin-r-5 pull-left" data-toggle="Vote" ><i class="fa fa-edit fa-2x"></i>&nbsp;&nbsp;Continuar</asp:LinkButton>                                          
+                                                                                        </div>  
+                                                                                     </div>
+                                                                                 </div>
+                                                                             </div>
                                                                              <div  id="Buttons_approve" runat="server" style="display:block; padding-left:10px;" class="bg-gray-light">
 
                                                                                         <div id="app_comm"  runat="server" class="form-group row" style="height:450px;" >
                                                                                              <div class="col-sm-12 ">
-
                                                                                                          <asp:Label runat="server" ID="lblt_approvalComments" CssClass="control-label text-bold">Evaluation Comments</asp:Label><br /><br />
                                                                                                   
                                                                                                            <%-- <telerik:RadTextBox ID="txt_approve_comments" runat="server" Rows="5" TextMode="MultiLine" Width="97%" >
@@ -1019,7 +1052,7 @@
                                                                                                      </div>
                                                                                                  </div>
 
-                                                                                                 <div class="col-sm-3">                                                                                                     
+                                                                                                 <div class="col-sm-3">        
                                                                                                       <asp:LinkButton ID="btnlk_test" runat="server" AutoPostBack="True" SingleClick="true"  Text="test" Width="80%" class="btn btn-success btn-sm margin-r-5 pull-left" data-toggle="Vote" Visible="false" ><i class="fa fa-television fa-2x"></i>&nbsp;&nbsp;TESTING</asp:LinkButton>  
                                                                                                       <asp:LinkButton ID="btnlk_evaluate" runat="server" AutoPostBack="True" SingleClick="true"  Text="Evaluate Application" Width="80%" class="btn btn-success btn-sm margin-r-5 pull-left" data-toggle="Vote" ><i class="fa fa-edit fa-2x"></i>&nbsp;&nbsp;Evaluate Application</asp:LinkButton>                                          
                                                                                                       <asp:LinkButton ID="btnlk_accept_Evaluation" runat="server" AutoPostBack="True" SingleClick="true"  Text="Hold" Width="80%" class="btn btn-primary btn-sm margin-r-5 pull-left" Visible="false" data-toggle="Hold"  ><i class="fa fa-thumbs-o-up fa-2x"></i>&nbsp;&nbsp;Accept Evaluation</asp:LinkButton>                                          
@@ -1122,7 +1155,7 @@
                                          <div class="box-header bg-orange" >
                                                <h4 class="modal-title" runat="server" id="H2"><asp:Label runat="server" ID="lblt_Eval_Round">ASSESSMENT</asp:Label>&nbsp;&nbsp;&nbsp;<asp:Label runat="server" ID="lbl_round" >#1</asp:Label>  &nbsp;&nbsp;&nbsp;</h4>
                                                <h4 class="modal-title" runat="server" id="H3"><asp:Label runat="server" ID="lblt_Applicant">APPLICANT: </asp:Label>&nbsp;&nbsp;&nbsp;<asp:Label runat="server" ID="lbl_asses_organization" ></asp:Label></h4>
-                                               <h4 class="modal-title" runat="server" id="H4"><asp:Label runat="server" ID="lblt_amount">PROPOSAL AMOUNT: </asp:Label>&nbsp;&nbsp;&nbsp;<asp:Label runat="server" ID="lbl_amount_LOC" ></asp:Label>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<asp:Label runat="server" ID="lbl_amount" ></asp:Label></h4>
+                                               <h4 class="modal-title hidden" runat="server" id="H4"><asp:Label runat="server" ID="lblt_amount">PROPOSAL AMOUNT: </asp:Label>&nbsp;&nbsp;&nbsp;<asp:Label runat="server" ID="lbl_amount_LOC" ></asp:Label>&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<asp:Label runat="server" ID="lbl_amount" ></asp:Label></h4>
                                           </div>    
                                           <div class="box-body">
                                          
@@ -1249,13 +1282,23 @@
                                                               </telerik:RadGrid>  
                                                                
                                                            </div>
+                                                          <div class="form-group">
+                                                              <asp:Label runat="server" ID="Label1" CssClass="control-label text-bold">Comentarios</asp:Label>
+                                                                <br />
+                                                               <telerik:radtextbox cssclass="upper" id="txt_comentarios" runat="server" rows="3" textmode="MultiLine" width="97%" maxlength="1000">
+                                                                </telerik:radtextbox>
+                                                               <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server"
+                                                                ControlToValidate="txt_comentarios" CssClass="Error" Display="Dynamic"
+                                                                ErrorMessage="Campo obligatorio" ValidationGroup="5">
+                                                                *</asp:RequiredFieldValidator>
+                                                          </div>
                                                      </div>     
                                               </div>                                              
 
                                         </div> <%--box-body--%>
 
                                         <div class="box-footer">
-                                              <asp:LinkButton ID="btnlk_eval" runat="server" AutoPostBack="True" SingleClick="true"  Text="Evaluate Application"  Width="30%" class="btn btn-success btn-sm margin-r-5 pull-left" data-toggle="Vote" ><i class="fa fa-edit fa-2x"></i>&nbsp;&nbsp;Evaluate Application</asp:LinkButton>                                          
+                                              <asp:LinkButton ID="btnlk_eval" runat="server" ValidationGroup="5" AutoPostBack="True" SingleClick="true"  Text="Evaluate Application"  Width="30%" class="btn btn-success btn-sm margin-r-5 pull-left" data-toggle="Vote" ><i class="fa fa-edit fa-2x"></i>&nbsp;&nbsp;Evaluate Application</asp:LinkButton>                                          
                                               <asp:LinkButton ID="btnlk_cancel_eval" runat="server" SingleClick="true"  Text="Cancel" Width="30%" class="btn btn-warning btn-sm pull-left" data-toggle="Cancel" OnClientClick="javascript:CloseRadWindowTool('');"  ><i class="fa fa-undo fa-2x"></i>&nbsp;&nbsp;Cancel Evaluation</asp:LinkButton>                                          
                                        </div>
 

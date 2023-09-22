@@ -424,7 +424,7 @@
 
                                      <div class="form-group row">
                                           <div class="col-sm-3 text-right">
-                                            <asp:Label runat="server" ID="lblt_total_Amount_local" CssClass="control-label text-bold">Activity Amount (LBR)</asp:Label>
+                                            <asp:Label runat="server" ID="lblt_total_Amount_local" CssClass="control-label text-bold">Activity Amount (COP)</asp:Label>
                                           </div>
                                         <div class="col-sm-9">
                                             <telerik:RadNumericTextBox ID="txt_tot_amount_Local" runat="server"  NumberFormat-DecimalDigits="2" >

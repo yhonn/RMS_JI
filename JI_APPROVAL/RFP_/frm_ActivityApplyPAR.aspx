@@ -59,8 +59,8 @@
                               <div class="col-sm-7">
                                       <div class="alert alert-info alert-dismissable">
                                          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                         <h4><i class="icon fa fa-info"></i>&nbsp;&nbsp;The Application has been successfully submitted</h4>
-                                             We will get back to you soon, thank you
+                                         <h4><i class="icon fa fa-info"></i>&nbsp;&nbsp;La Solicitud ha sido enviada con éxito</h4>
+                                             Nos pondremos en contacto con usted pronto, gracias
                                        </div>
                              </div>
                         </div>
@@ -211,7 +211,7 @@
                                                       <div class="col-sm-12">
 
                                                            <div class="form-group">
-                                                                  <asp:Label runat="server" ID="lbl_purpose" CssClass="control-label text-bold">Purpose</asp:Label><br />
+                                                                  <asp:Label runat="server" ID="lblt_purpose" CssClass="control-label text-bold">Purpose</asp:Label><br />
                                                                   <telerik:RadTextBox ID="txt_purpose" runat="server" Rows="7" TextMode="MultiLine" Width="90%" MaxLength="2000"  ReadOnly="true" BorderStyle="None">
                                                                                             </telerik:RadTextBox>
                                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server"
@@ -239,7 +239,7 @@
                                                             <div class="col-sm-11">                                     
                                                                                 <div class="card card-warning">
                                                                                   <div class="card-header">
-                                                                                    <h3 class="card-title"> <i class="fas fa-info-circle"></i>nformation</h3>
+                                                                                    <h3 class="card-title"> <i class="fas fa-info-circle"></i><asp:Label runat="server" ID="lblt_information" CssClass="control-label text-bold">nformation</asp:Label></h3>
                                                                                     <div class="card-tools">
                                                                                       <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                                                                       </button>                                                                         
@@ -248,11 +248,11 @@
                                                                                   </div>
                                                                                   <!-- /.card-header -->
                                                                                   <div class="card-body">                                                                        
-                                                                                     <p class="text-danger"><i class="fas fa-check-circle"></i>&nbsp;Follow the steps below to proceed</p>
+                                                                                     <p class="text-danger"><i class="fas fa-check-circle"></i>&nbsp;<asp:Label runat="server" ID="lblt_steps" CssClass="control-label text-bold">Follow the steps below to proceed</asp:Label></p>
                                                                                       <ol>
-                                                                                          <li>Please read carefully the solicitation requirements.</li>
-                                                                                          <li>Please open the request documents by clicking on the clip mark <span class="fas fa-paperclip"></span>, in the solicitation documents shown below.</li>
-                                                                                          <li>Then click NEXT button to go to step 2 to start the application.</li>
+                                                                                          <li><asp:Label runat="server" ID="lblt_step1" CssClass="control-label">Please read carefully the solicitation requirements.</asp:Label></li>
+                                                                                          <li><asp:Label runat="server" ID="lblt_step2" CssClass="control-label">Please open the request documents by clicking on the clip mark </asp:Label><span class="fas fa-paperclip"></span>, <asp:Label runat="server" ID="lblt_step2_1" CssClass="control-label">in the solicitation documents shown below. </asp:Label></li>
+                                                                                          <li><asp:Label runat="server" ID="lblt_step3" CssClass="control-label">Then click NEXT button to go to step 2 to start the application.</asp:Label></li>
                                                                                       </ol>
                                                                                   </div>
                                                                                   <!-- /.card-body -->
@@ -335,7 +335,7 @@
                                                             <div class="col-sm-12">                                     
                                                                    <div class="card card-warning">
                                                                      <div class="card-header">
-                                                                       <h3 class="card-title"> <i class="fas fa-info-circle"></i>nformation</h3>
+                                                                       <h3 class="card-title"> <i class="fas fa-info-circle"></i><asp:Label runat="server" ID="lblt_information2" CssClass="control-label">nformation</asp:Label></h3>
                                                                        <div class="card-tools">
                                                                          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                                                          </button>                                                                         
@@ -344,13 +344,13 @@
                                                                      </div>
                                                                      <!-- /.card-header -->
                                                                      <div class="card-body">                                                                        
-                                                                        <p class="text-danger"><i class="fas fa-check-circle"></i>&nbsp;Before starting the application remember...</p>
+                                                                        <p class="text-danger"><i class="fas fa-check-circle"></i>&nbsp;<asp:Label runat="server" ID="lblt_before_start" CssClass="control-label">Before starting the application remember...</asp:Label></p>
                                                                          <ol>
-                                                                             <li>Please read carefully the solicitation requirements.</li>
-                                                                             <li>To start the application process,click on the <span class="fas fa-hourglass-start badge badge-warning">Start Application</span> button shown below.</li>
-                                                                             <li>This will take you to phase 3 where you can upload the required documents.</li>
-                                                                             <li>Once you have uploaded, please click Next to submit your application in Phase 4.</li>
-                                                                             <li>If you have any further questions please feel free to send your questions to &nbsp; <span class="fas fa-envelope"></span>&nbsp;&nbsp;<a href="mailto:email@email.com">email@email.com</a>, we will get back to you soon.</li>
+                                                                             <li><asp:Label runat="server" ID="lblt_sa_step1" CssClass="control-label">Please read carefully the solicitation requirements.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_sa_step2" CssClass="control-label">To start the application process,click on the</asp:Label> <span class="fas fa-hourglass-start badge badge-warning"><asp:Label runat="server" ID="lblt_sa_step2_2" CssClass="control-label">Start Application</asp:Label></span> <asp:Label runat="server" ID="lblt_sa_step2_3" CssClass="control-label">button shown below.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_sa_step3" CssClass="control-label">This will take you to phase 3 where you can upload the required documents.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_sa_step4" CssClass="control-label">Once you have uploaded, please click Next to submit your application in Phase 4.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_sa_step5" CssClass="control-label">If you have any further questions please feel free to send your questions to:</asp:Label> &nbsp; <span class="fas fa-envelope"></span>&nbsp;&nbsp;<a href="mailto:convocatorias@justiciainclusiva.org"><asp:Label runat="server" ID="lbl_sa_step5_2" CssClass="control-label">convocatorias@justiciainclusiva.org</asp:Label> </a><asp:Label runat="server" ID="lblt_sa_step5_3" CssClass="control-label">, we will get back to you soon.</asp:Label></li>
                                                                          </ol>
                                                                      </div>
                                                                      <!-- /.card-body -->
@@ -368,7 +368,7 @@
                                           </div>       
                                          <div class="col-sm-4 text-center">
                                                <div class="form-group">
-                                                      <asp:LinkButton ID="btn_save_app" runat="server" AutoPostBack="True" SingleClick="true"  Text="Export" class="btn btn-warning btn-lg" data-toggle="Start" Width="90%" ><i class="fas fa-hourglass-start fa-2x"></i>&nbsp;&nbsp;Start Application</asp:LinkButton>                                                                                         
+                                                      <asp:LinkButton ID="btn_save_app" runat="server" AutoPostBack="True" SingleClick="true"  Text="Export" class="btn btn-warning btn-lg" data-toggle="Start" Width="90%" ><i class="fas fa-hourglass-start fa-2x"></i>&nbsp;&nbsp;Iniciar aplicación.</asp:LinkButton>                                                                                         
                                                 </div>
                                           </div>        
                                          <div class="col-sm-4">
@@ -401,7 +401,7 @@
                                                             <div class="col-sm-12">                                     
                                                                    <div class="card card-warning">
                                                                      <div class="card-header">
-                                                                       <h3 class="card-title"> <i class="fas fa-info-circle"></i>nformation</h3>
+                                                                       <h3 class="card-title"> <i class="fas fa-info-circle"></i><asp:Label runat="server" ID="lblt_information3" CssClass="control-label">nformation</asp:Label></h3>
                                                                        <div class="card-tools">
                                                                          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                                                          </button>                                                                         
@@ -410,15 +410,15 @@
                                                                      </div>
                                                                      <!-- /.card-header -->
                                                                      <div class="card-body">                                                                        
-                                                                        <p class="text-danger"><i class="fas fa-check-circle"></i>&nbsp;Before uploading an application document remember...</p>
+                                                                        <p class="text-danger"><i class="fas fa-check-circle"></i>&nbsp;<asp:Label runat="server" ID="lblt_before_upload" CssClass="control-label">Before uploading an application document remember...</asp:Label></p>
                                                                          <ol>
-                                                                             <li>First, add the document title you want to upload.</li>
-                                                                             <li>Select the type of document you are going to upload.</li>
-                                                                             <li>Attach the document by clicking on the <span class="badge badge-secondary">Select</span> button.</li>
-                                                                             <li> Then click on <span class="fas fa-upload badge badge-info">Upload document</span> button.</li>
-                                                                             <li>To remove any uploaded file, click on the delete option <span class="fas fa-times"></span> from the application document list and replace by repeating steps 1-4.</li>
-                                                                             <li>Click on the NEXT button to proceed to Phase 4 once you have completed all uploads.</li>
-                                                                             <li>If you have any further questions please feel free to send your questions to &nbsp; <span class="fas fa-envelope"></span>&nbsp;&nbsp;<a href="mailto:email@email.com">email@email.com</a>, we will get back to you soon.</li>
+                                                                             <li><asp:Label runat="server" ID="lblt_up_step1" CssClass="control-label">First, add the document title you want to upload.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_up_step2" CssClass="control-label">Select the type of document you are going to upload.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_up_step3" CssClass="control-label">Attach the document by clicking on the</asp:Label> <asp:Label runat="server" ID="lblt_up_step3_2" CssClass="control-label">button.</asp:Label> <span class="badge badge-secondary"><asp:Label runat="server" ID="lblt_up_step3_1" CssClass="control-label">Select</asp:Label> </span> </li>
+                                                                             <li> <asp:Label runat="server" ID="lblt_up_step4" CssClass="control-label">Then click on </asp:Label> <span class="fas fa-upload badge badge-info"><asp:Label runat="server" ID="lblt_up_step4_1" CssClass="control-label">Upload document </asp:Label></span> <asp:Label runat="server" ID="lblt_up_step4_2" CssClass="control-label">button.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_up_step5" CssClass="control-label">To remove any uploaded file, click on the delete option </asp:Label><span class="fas fa-times"></span> <asp:Label runat="server" ID="lblt_up_step5_2" CssClass="control-label"> from the application document list and replace by repeating steps 1-4 </asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_up_step6" CssClass="control-label">Click on the NEXT button to proceed to Phase 4 once you have completed all uploads.</asp:Label></li>
+                                                                             <li><asp:Label runat="server" ID="lblt_up_step7" CssClass="control-label">If you have any further questions please feel free to send your questions to</asp:Label> &nbsp; <span class="fas fa-envelope"></span>&nbsp;&nbsp;<a href="mailto:convocatorias@justiciainclusiva.org">convocatorias@justiciainclusiva.org</a><asp:Label runat="server" ID="lblt_up_step8" CssClass="control-label"> , we will get back to you soon.</asp:Label> </li>
                                                                          </ol>
                                                                      </div>
                                                                      <!-- /.card-body -->
@@ -650,6 +650,17 @@
                                                                          <div  id="Buttons_app" runat="server" style="display:block;">                                                                      
                                                                           <br />
                                                                                    
+                                                                             <div class="col-sm-12">
+                                                                                    <asp:Label runat="server" ID="lblt_Economic_pro" CssClass="control-label text-bold">Economic Proposal (USD)</asp:Label> &nbsp;&nbsp;&nbsp;
+                                                                                    <telerik:RadNumericTextBox ID="txt_tot_amount" runat="server"  NumberFormat-DecimalDigits="2" Width="250px" >                                                                                        
+                                                                                    </telerik:RadNumericTextBox>
+                                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                                                                    ControlToValidate="txt_tot_amount" CssClass="Error" Display="Dynamic"
+                                                                                    ErrorMessage="Registre un nombre el proyecto" ValidationGroup="3">Budget Proposal required on the applying</asp:RequiredFieldValidator>
+
+                                                                                </div>    
+                                                                             <br />
+
                                                                                    <div class="col-sm-12">
                                                                                         <div class="form-group text-center"> 
                                                                                                    <asp:HiddenField runat="server" ID="id_app_" />
@@ -677,7 +688,7 @@
                                                                                                         Width="100px" ValidationGroup="1" Visible="false">
                                                                                                         </telerik:RadButton>                                                                          
 
-                                                                                                       <asp:LinkButton ID="btnlk_Apply" runat="server" AutoPostBack="True" SingleClick="true"  Text="Export" Width="200" class="btn btn-success btn-sm" data-toggle="Export" ValidationGroup="3"  ><i class="fa fa-paper-plane fa-2x"></i>&nbsp;&nbsp;Apply</asp:LinkButton>                                                                                                                                                
+                                                                                                       <asp:LinkButton ID="btnlk_Apply" runat="server" AutoPostBack="True" SingleClick="true"  Text="Export" Width="200" class="btn btn-success btn-sm" data-toggle="Export" ValidationGroup="3"  ><i class="fa fa-paper-plane fa-2x"></i>&nbsp;&nbsp;Aplicar</asp:LinkButton>                                                                                                                                                
                                                                                                        
                                                                                                                                            
                                                                                                 </div>

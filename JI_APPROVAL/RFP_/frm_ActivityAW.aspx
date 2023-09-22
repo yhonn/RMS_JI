@@ -204,7 +204,7 @@
                                                                             <ItemTemplate>
                                                                                 <ul>
                                                                                     <li style="font-weight:700;" >
-                                                                                        <%# DataBinder.Eval(Container.DataItem, "AWARD_CODE")%> -- <%# DataBinder.Eval(Container.DataItem, "AWARD_STATUS")%> 
+                                                                                        <%# DataBinder.Eval(Container.DataItem, "codigo_RFA")%> -- <%# DataBinder.Eval(Container.DataItem, "AWARD_STATUS")%> 
                                                                                     </li>
                                                                                     <li style="font-weight:100;" >
                                                                                         <span style="font-weight:400;" > <%# DataBinder.Eval(Container.DataItem, "nombre_proyecto")%> </span>
@@ -382,9 +382,9 @@
                                                        Visible="true" Display="false">
                                                    </telerik:GridBoundColumn>
 
-                                                   <telerik:GridBoundColumn DataField="codigo_SAPME" 
-                                                       FilterControlAltText="Filter codigo_SAPME column" HeaderText="Activity Code" 
-                                                       SortExpression="codigo_SAPME" UniqueName="codigo_SAPME">
+                                                   <telerik:GridBoundColumn DataField="codigo_RFA" 
+                                                       FilterControlAltText="Filter codigo_RFA column" HeaderText="Technical Code" 
+                                                       SortExpression="codigo_RFA" UniqueName="codigo_RFA">
                                                    </telerik:GridBoundColumn>
 
                                                      <telerik:GridBoundColumn DataField="codigo_MONITOR" 
@@ -812,7 +812,7 @@
 
                                                                          <div class="form-group row">
                                                                               <div class="col-sm-3 text-right">
-                                                                                <asp:Label runat="server" ID="lblt_total_Amount_local" CssClass="control-label text-bold">Activity Amount (LBR)</asp:Label>
+                                                                                <asp:Label runat="server" ID="lblt_total_Amount_local" CssClass="control-label text-bold">Activity Amount (COP)</asp:Label>
                                                                               </div>
                                                                             <div class="col-sm-9">
                                                                                 <telerik:RadNumericTextBox ID="txt_tot_amount_Local" runat="server"  NumberFormat-DecimalDigits="2" >
@@ -866,7 +866,7 @@
                                                                         </telerik:RadTextBox>
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group row">
+                                                                <div class="form-group row hidden">
                                                                     <div class="col-sm-3 text-right">
                                                                         <asp:Label runat="server" ID="lblt_codigo_ficha" CssClass="control-label text-bold">Activity Code</asp:Label>
                                                                     </div>
@@ -939,10 +939,10 @@
                                                            <br /><br />
                                                             <div class="form-group row">
 
-                                                                    <div class="col-sm-2 text-right">
+                                                                    <div class="col-sm-2 hidden text-right">
                                                                         <asp:Label runat="server" ID="lblt_codigo_award" CssClass="control-label text-bold">Award Code</asp:Label>
                                                                     </div>
-                                                                    <div class="col-sm-4">
+                                                                    <div class="col-sm-4 hidden">
                                                                         <div class="alert-sm bg-blue text-center" runat="server" id="div1" style="width: 300px;">
                                                                             <asp:Label ID="lbl_award_code" runat="server" CssClass="text-bold"></asp:Label>
                                                                         </div>
@@ -1012,38 +1012,7 @@
                                                                </div>
                                                            
                                                                <div class="form-group row">
-                                                                            <div class="col-sm-3 text-right">
-                                                                                <asp:Label runat="server" ID="lblt_Tot_Activity" CssClass="control-label text-bold">TOTAL ACTIVITY AMOUNT (USD)</asp:Label>
-                                                                            </div>
-                                                                            <div class="col-sm-2">
-                                                                                <telerik:RadNumericTextBox ID="txt_tot_activity_amount" runat="server"  NumberFormat-DecimalDigits="2" >
-                                                                                      <ClientEvents OnValueChanging="calc_Tot_Activity" />                                                                                    
-                                                                               </telerik:RadNumericTextBox>                                                                               
-                                                                            </div>
-                                                                           <div class="col-sm-3 text-right">
-                                                                                <asp:Label runat="server" ID="lblt_Tot_Activity_LOC" CssClass="control-label text-bold">TOTAL ACTIVITY AMOUNT (R$)</asp:Label>
-                                                                           </div>
-                                                                           <div class="col-sm-2">
-                                                                                <telerik:RadNumericTextBox ID="txt_tot_activity_amount_LOC" runat="server"  NumberFormat-DecimalDigits="2" >
-                                                                                    <ClientEvents OnValueChanging="calc_Tot_Activity_LOC" />
-                                                                                </telerik:RadNumericTextBox>                                                                               
-                                                                            </div>
-                                                                           
-                                                              </div>
-
-
-                                                                  <div class="form-group row">
-
-                                                                             <div class="col-sm-3 text-right">
-                                                                                <asp:Label runat="server" ID="lblt_currency" CssClass="control-label text-bold">LOCAL CURRENCY</asp:Label>
-                                                                             </div>
-
-                                                                              <div class="col-sm-2">
-                                                                                      <telerik:RadComboBox ID="cmb_currency" runat="server" Width="100px">
-                                                                                      </telerik:RadComboBox>
-                                                                                </div>
-
-                                                                           <div class="col-sm-3 text-right">
+                                                                   <div class="col-sm-3 text-right">
                                                                                <asp:Label runat="server" ID="lblt_exchange_rate2" CssClass="control-label text-bold">EXCHANGE RATE</asp:Label>
                                                                            </div>
 
@@ -1055,6 +1024,38 @@
                                                                             ControlToValidate="txt_Exchange_Rate_2" CssClass="Error" Display="Dynamic"
                                                                             ErrorMessage="* Required" ValidationGroup="3">*</asp:RequiredFieldValidator>
                                                                            </div>   
+                                                                            <div class="col-sm-3 text-right">
+                                                                                <asp:Label runat="server" ID="lblt_Tot_Activity" CssClass="control-label text-bold">TOTAL ACTIVITY AMOUNT (USD)</asp:Label>
+                                                                            </div>
+                                                                            <div class="col-sm-2">
+                                                                                <telerik:RadNumericTextBox ID="txt_tot_activity_amount" runat="server"  NumberFormat-DecimalDigits="2" >
+                                                                                      <ClientEvents OnValueChanging="calc_Tot_Activity" />                                                                                    
+                                                                               </telerik:RadNumericTextBox>                                                                               
+                                                                            </div>
+                                                                          
+                                                                           
+                                                              </div>
+
+
+                                                                  <div class="form-group row">
+                                                                       <div class="col-sm-3 text-right">
+                                                                                <asp:Label runat="server" ID="lblt_Tot_Activity_LOC" CssClass="control-label text-bold">TOTAL ACTIVITY AMOUNT (COP$)</asp:Label>
+                                                                           </div>
+                                                                           <div class="col-sm-2">
+                                                                                <telerik:RadNumericTextBox ID="txt_tot_activity_amount_LOC" runat="server"  NumberFormat-DecimalDigits="2" >
+                                                                                    <ClientEvents OnValueChanging="calc_Tot_Activity_LOC" />
+                                                                                </telerik:RadNumericTextBox>                                                                               
+                                                                            </div>
+                                                                             <div class="col-sm-3 text-right">
+                                                                                <asp:Label runat="server" ID="lblt_currency" CssClass="control-label text-bold">LOCAL CURRENCY</asp:Label>
+                                                                             </div>
+
+                                                                              <div class="col-sm-2">
+                                                                                      <telerik:RadComboBox ID="cmb_currency" runat="server" Width="100px">
+                                                                                      </telerik:RadComboBox>
+                                                                                </div>
+
+                                                                           
                                                                       
                                                                     </div>
 

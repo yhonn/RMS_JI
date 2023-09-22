@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class frm_ActivityApplyPAR
-    
+
     '''<summary>
     '''MsgGuardar control.
     '''</summary>
@@ -21,7 +21,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MsgGuardar As Global.RMS_APPROVAL.ModalConfirm2
-    
+
     '''<summary>
     '''MsgReturn control.
     '''</summary>
@@ -30,7 +30,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents MsgReturn As Global.RMS_APPROVAL.DeleteConfirm
-    
+
     '''<summary>
     '''lblt_titulo_pantalla control.
     '''</summary>
@@ -39,7 +39,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_titulo_pantalla As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_subtitulo_pantalla control.
     '''</summary>
@@ -48,7 +48,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_subtitulo_pantalla As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_informacionproyecto control.
     '''</summary>
@@ -57,7 +57,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_informacionproyecto As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_id_sesion_temp control.
     '''</summary>
@@ -66,7 +66,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_id_sesion_temp As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''identity_sol control.
     '''</summary>
@@ -75,7 +75,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents identity_sol As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''identity_doc control.
     '''</summary>
@@ -84,7 +84,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents identity_doc As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_id_ficha control.
     '''</summary>
@@ -93,7 +93,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_id_ficha As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_id_sol control.
     '''</summary>
@@ -102,7 +102,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_id_sol As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_id_sol_app control.
     '''</summary>
@@ -111,7 +111,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_id_sol_app As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''hfTab control.
     '''</summary>
@@ -120,7 +120,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents hfTab As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''Hiddenindi control.
     '''</summary>
@@ -129,7 +129,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Hiddenindi As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''SolicitationALERT control.
     '''</summary>
@@ -138,7 +138,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SolicitationALERT As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''SolicitationACCEPTED control.
     '''</summary>
@@ -147,7 +147,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SolicitationACCEPTED As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''SolicitationRejected control.
     '''</summary>
@@ -156,7 +156,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SolicitationRejected As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''SolicitationExpired control.
     '''</summary>
@@ -165,7 +165,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents SolicitationExpired As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''step_solic control.
     '''</summary>
@@ -174,7 +174,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents step_solic As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''lblt_solicitation control.
     '''</summary>
@@ -183,7 +183,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_solicitation As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''step_start_Application control.
     '''</summary>
@@ -192,7 +192,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents step_start_Application As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''lblt_start control.
     '''</summary>
@@ -201,7 +201,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_start As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''step_support_documents control.
     '''</summary>
@@ -210,7 +210,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents step_support_documents As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''lblt_support_documents control.
     '''</summary>
@@ -219,7 +219,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_support_documents As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''step_apply control.
     '''</summary>
@@ -228,7 +228,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents step_apply As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
+
     '''<summary>
     '''lblt_apply control.
     '''</summary>
@@ -237,7 +237,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_apply As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_tab_label control.
     '''</summary>
@@ -246,7 +246,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_tab_label As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_solicitation_code control.
     '''</summary>
@@ -255,7 +255,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_solicitation_code As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''divCodigo control.
     '''</summary>
@@ -264,7 +264,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents divCodigo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_COde control.
     '''</summary>
@@ -273,7 +273,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_COde As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_Activity_code control.
     '''</summary>
@@ -282,7 +282,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_Activity_code As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txt_activity_code control.
     '''</summary>
@@ -291,7 +291,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt_activity_code As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''lblt_solicitation_type control.
     '''</summary>
@@ -300,7 +300,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_solicitation_type As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''cmb_solicitation_type control.
     '''</summary>
@@ -309,7 +309,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmb_solicitation_type As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''lblt_solicitation_status control.
     '''</summary>
@@ -318,7 +318,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_solicitation_status As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''cmb_solicitation_status control.
     '''</summary>
@@ -327,7 +327,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmb_solicitation_status As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''lblt_fecha_inicio control.
     '''</summary>
@@ -336,7 +336,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_fecha_inicio As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_fecha_inicio control.
     '''</summary>
@@ -345,7 +345,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_fecha_inicio As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_fecha_final control.
     '''</summary>
@@ -354,7 +354,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_fecha_final As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_fecha_final control.
     '''</summary>
@@ -363,7 +363,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_fecha_final As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_Tittle control.
     '''</summary>
@@ -372,7 +372,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_Tittle As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txt_tittle control.
     '''</summary>
@@ -381,7 +381,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt_tittle As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator4 control.
     '''</summary>
@@ -390,16 +390,16 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator4 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
-    '''lbl_purpose control.
+    '''lblt_purpose control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_purpose As Global.System.Web.UI.WebControls.Label
-    
+    Protected WithEvents lblt_purpose As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''txt_purpose control.
     '''</summary>
@@ -408,7 +408,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt_purpose As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator5 control.
     '''</summary>
@@ -417,7 +417,61 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator5 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
+    '''<summary>
+    '''lblt_information control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_information As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_steps control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_steps As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_step1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_step1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_step2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_step2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_step2_1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_step2_1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_step3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_step3 As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''UpdatePanel2 control.
     '''</summary>
@@ -426,7 +480,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
-    
+
     '''<summary>
     '''grd_support_Documents control.
     '''</summary>
@@ -435,7 +489,106 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents grd_support_Documents As Global.Telerik.Web.UI.RadGrid
-    
+
+    '''<summary>
+    '''lblt_information2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_information2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_before_start control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_before_start As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step2_2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step2_2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step2_3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step2_3 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step3 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step4 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step5 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_sa_step5_2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_sa_step5_2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_sa_step5_3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_sa_step5_3 As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''btn_save_app control.
     '''</summary>
@@ -444,7 +597,142 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_save_app As Global.System.Web.UI.WebControls.LinkButton
-    
+
+    '''<summary>
+    '''lblt_information3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_information3 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_before_upload control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_before_upload As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step3 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step3_2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step3_2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step3_1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step3_1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step4 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step4_1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step4_1 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step4_2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step4_2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step5 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step5_2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step5_2 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step6 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step7 As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lblt_up_step8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_up_step8 As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''lblt_documente_tittle control.
     '''</summary>
@@ -453,7 +741,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_documente_tittle As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txt_document_tittle control.
     '''</summary>
@@ -462,7 +750,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt_document_tittle As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator6 control.
     '''</summary>
@@ -471,7 +759,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator6 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''lblt_Type_document control.
     '''</summary>
@@ -480,7 +768,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_Type_document As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''cmb_type_of_document control.
     '''</summary>
@@ -489,7 +777,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents cmb_type_of_document As Global.Telerik.Web.UI.RadComboBox
-    
+
     '''<summary>
     '''RequiredFieldValidator7 control.
     '''</summary>
@@ -498,7 +786,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''lblt_documento control.
     '''</summary>
@@ -507,7 +795,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_documento As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''AsyncUpload1 control.
     '''</summary>
@@ -516,7 +804,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents AsyncUpload1 As Global.Telerik.Web.UI.RadAsyncUpload
-    
+
     '''<summary>
     '''btn_agregar control.
     '''</summary>
@@ -525,7 +813,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_agregar As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''btnlk_add_doc control.
     '''</summary>
@@ -534,7 +822,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnlk_add_doc As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''Lblt_Documents control.
     '''</summary>
@@ -543,7 +831,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Lblt_Documents As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''PanelFirma control.
     '''</summary>
@@ -552,7 +840,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents PanelFirma As Global.System.Web.UI.UpdatePanel
-    
+
     '''<summary>
     '''grd_archivos control.
     '''</summary>
@@ -561,7 +849,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents grd_archivos As Global.Telerik.Web.UI.RadGrid
-    
+
     '''<summary>
     '''lblt_apply_code control.
     '''</summary>
@@ -570,7 +858,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_apply_code As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''div1 control.
     '''</summary>
@@ -579,7 +867,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents div1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_apply_code control.
     '''</summary>
@@ -588,7 +876,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_apply_code As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_apply_status control.
     '''</summary>
@@ -597,7 +885,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_apply_status As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''spanSTATUS control.
     '''</summary>
@@ -606,7 +894,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents spanSTATUS As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lbl_apply_status control.
     '''</summary>
@@ -615,7 +903,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_apply_status As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_Apply_time control.
     '''</summary>
@@ -624,7 +912,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_Apply_time As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_ORganization control.
     '''</summary>
@@ -633,7 +921,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_ORganization As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_organization control.
     '''</summary>
@@ -642,7 +930,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_organization As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lblt_status_date control.
     '''</summary>
@@ -651,7 +939,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_status_date As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''lbl_status_date control.
     '''</summary>
@@ -660,7 +948,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lbl_status_date As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Buttons_app control.
     '''</summary>
@@ -669,7 +957,34 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Buttons_app As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
+    '''<summary>
+    '''lblt_Economic_pro control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblt_Economic_pro As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''txt_tot_amount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txt_tot_amount As Global.Telerik.Web.UI.RadNumericTextBox
+
+    '''<summary>
+    '''RequiredFieldValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
     '''<summary>
     '''id_app_ control.
     '''</summary>
@@ -678,7 +993,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents id_app_ As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''tab_index_order control.
     '''</summary>
@@ -687,7 +1002,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tab_index_order As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''tab_index_max control.
     '''</summary>
@@ -696,7 +1011,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents tab_index_max As Global.System.Web.UI.WebControls.HiddenField
-    
+
     '''<summary>
     '''lblt_apply_desc control.
     '''</summary>
@@ -705,7 +1020,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_apply_desc As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''txt_apply_desc control.
     '''</summary>
@@ -714,7 +1029,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txt_apply_desc As Global.Telerik.Web.UI.RadTextBox
-    
+
     '''<summary>
     '''RequiredFieldValidator1 control.
     '''</summary>
@@ -723,7 +1038,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''btn_salir control.
     '''</summary>
@@ -732,7 +1047,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_salir As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''btn_continue control.
     '''</summary>
@@ -741,7 +1056,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_continue As Global.Telerik.Web.UI.RadButton
-    
+
     '''<summary>
     '''btnlk_Apply control.
     '''</summary>
@@ -750,7 +1065,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnlk_Apply As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''app_History control.
     '''</summary>
@@ -759,7 +1074,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents app_History As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''rept_ApplyDates control.
     '''</summary>
@@ -768,7 +1083,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rept_ApplyDates As Global.System.Web.UI.WebControls.Repeater
-    
+
     '''<summary>
     '''Buttons_approve control.
     '''</summary>
@@ -777,7 +1092,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Buttons_approve As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lblt_approvalComments control.
     '''</summary>
@@ -786,7 +1101,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_approvalComments As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''Editor_approve_comments control.
     '''</summary>
@@ -795,7 +1110,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents Editor_approve_comments As Global.Telerik.Web.UI.RadEditor
-    
+
     '''<summary>
     '''RequiredFieldValidator3 control.
     '''</summary>
@@ -804,7 +1119,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
+
     '''<summary>
     '''btnlk_comment control.
     '''</summary>
@@ -813,7 +1128,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnlk_comment As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''btnlk_Apply2 control.
     '''</summary>
@@ -822,7 +1137,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnlk_Apply2 As Global.System.Web.UI.WebControls.LinkButton
-    
+
     '''<summary>
     '''esp_ctrl_h4_eliminar_titulo control.
     '''</summary>
@@ -831,7 +1146,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents esp_ctrl_h4_eliminar_titulo As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''esp_ctrl_lbl_eliminar control.
     '''</summary>
@@ -840,7 +1155,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents esp_ctrl_lbl_eliminar As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btn_eliminarDocumento control.
     '''</summary>
@@ -849,7 +1164,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_eliminarDocumento As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''esp_ctrl_btnh_CANCELAR control.
     '''</summary>
@@ -858,7 +1173,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents esp_ctrl_btnh_CANCELAR As Global.System.Web.UI.HtmlControls.HtmlButton
-    
+
     '''<summary>
     '''H1 control.
     '''</summary>
@@ -867,7 +1182,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents H1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
+
     '''<summary>
     '''lblt_msn_tasa_cambio control.
     '''</summary>
@@ -876,7 +1191,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblt_msn_tasa_cambio As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
     '''btn_registrar_tc control.
     '''</summary>
@@ -885,7 +1200,7 @@ Partial Public Class frm_ActivityApplyPAR
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btn_registrar_tc As Global.System.Web.UI.WebControls.Button
-    
+
     '''<summary>
     '''Button2 control.
     '''</summary>

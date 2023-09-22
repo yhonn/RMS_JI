@@ -232,8 +232,7 @@ Public Class frm_ActivityDeliv
                 '    End If
                 'End If
 
-                Me.dt_fecha.MinDate = proyecto.fecha_inicio_proyecto
-                Me.dt_fecha.MaxDate = proyecto.fecha_fin_proyecto
+
                 'loadListas(idPrograma, proyecto)
                 'LoadData_code(id)
 
@@ -354,7 +353,8 @@ Public Class frm_ActivityDeliv
                 Me.lbl_monto_entregablesUSD.Text = If(tasaCambio > 0, String.Format(sesUser.regionalizacionCulture, "{0:N2} USD", Math.Round(TotEntregable / tasaCambio, 2, MidpointRounding.AwayFromZero)), 0)
                 Me.lbl_monto_entregablesPorc.Text = If(aportes > 0, String.Format(sesUser.regionalizacionCulture, "{0:P2}", TotEntregable / aportes), 0)
 
-
+                Me.dt_fecha.MinDate = oVW_TA_ACTIVITY.fecha_inicio_proyecto
+                Me.dt_fecha.MaxDate = oVW_TA_ACTIVITY.fecha_fin_proyecto
 
                 '***********************************************************************************************************************
 
@@ -433,7 +433,7 @@ Public Class frm_ActivityDeliv
         Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
         'Me.MsgGuardar.Redireccion = "~/Proyectos/frm_proyectosEntregables?id=" & Me.lbl_id_ficha.Text
         Dim idAW_ACT As Integer = Me.cmb_awards.SelectedValue
-        Me.MsgGuardar.Redireccion = "~/RFP_/frm_ActivityAW" & "id=" & Me.lbl_id_ficha.Text & "&Id_AW=" & idAW_ACT.ToString()
+        Me.MsgGuardar.Redireccion = "~/RFP_/frm_ActivityAW?" & "id=" & Me.lbl_id_ficha.Text & "&Id_AW=" & idAW_ACT.ToString()
         ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
     End Sub
 

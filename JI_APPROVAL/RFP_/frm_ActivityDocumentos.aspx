@@ -139,7 +139,7 @@
                                                                                      >                                                              
                                                                             <HeaderTemplate>
                                                                                     <ul>
-                                                                                        <li style="font-weight:700;" >Contract Code / Status</li>
+                                                                                        <li style="font-weight:700;" >Technical Code / Status</li>
                                                                                         <li style="font-weight:100;" >Contract Mecanism</li> 
                                                                                         <li style="font-weight:100;" >Applicant</li>                                                                                                                                                                                                                                                                                                                       
                                                                                     </ul>
@@ -147,7 +147,7 @@
                                                                             <ItemTemplate>
                                                                                 <ul>
                                                                                     <li style="font-weight:700;" >
-                                                                                        <%# DataBinder.Eval(Container.DataItem, "AWARD_CODE")%> -- <%# DataBinder.Eval(Container.DataItem, "AWARD_STATUS")%> 
+                                                                                        <%# DataBinder.Eval(Container.DataItem, "codigo_RFA")%> -- <%# DataBinder.Eval(Container.DataItem, "AWARD_STATUS")%> 
                                                                                     </li>
                                                                                     <li style="font-weight:100;" >
                                                                                         <span style="font-weight:400;" > <%# DataBinder.Eval(Container.DataItem, "nombre_proyecto")%> </span>

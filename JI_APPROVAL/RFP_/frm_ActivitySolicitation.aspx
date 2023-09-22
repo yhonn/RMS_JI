@@ -358,7 +358,7 @@
                                             <asp:Label runat="server" ID="lblt_persona_encargada" CssClass="control-label text-bold">Solicitation Lead</asp:Label>
                                         </div>
                                         <div class="col-sm-2">
-                                            <telerik:RadComboBox ID="cmb_persona_encargada" runat="server" Width="500px">
+                                            <telerik:RadComboBox ID="cmb_persona_encargada"  emptymessage="Seleccione..." Filter="Contains" Height="200px" runat="server" Width="500px">
                                             </telerik:RadComboBox>
                                         </div>
                                  </div>
@@ -1547,7 +1547,11 @@
                                               <asp:Label runat="server" ID="lblt_assement" CssClass="control-label text-bold">Assessment assigned</asp:Label>
                                           </div>
                                            <div class="col-sm-4">
-                                                 <telerik:RadComboBox ID="cmb_assessment" runat="server" Width="95%" Filter="Contains" AllowCustomText="true" EmptyMessage="Select the assessment" Enabled="false"  ></telerik:RadComboBox>
+                                                 <telerik:RadComboBox ID="cmb_assessment" ValidationGroup="8" runat="server" Width="95%" Filter="Contains" AllowCustomText="true" EmptyMessage="Select the assessment" Enabled="false"  ></telerik:RadComboBox>
+                                               <asp:RequiredFieldValidator ID="rv_cmb_assesment" runat="server"
+                                                    ControlToValidate="cmb_assessment" CssClass="Error" Display="Dynamic"
+                                                    ErrorMessage="registre una descripción" ValidationGroup="8">Required</asp:RequiredFieldValidator>
+
                                            </div>   
                                           <div class="col-sm-2 text-right">
                                               <asp:Label runat="server" ID="lblt_score_minimal" CssClass="control-label text-bold">Minimal Score</asp:Label>
@@ -1623,7 +1627,7 @@
 
                        </div>
                        <div class="box-footer">
-                           <asp:Button runat="server" ID="btn_registrar_tc" CssClass="btn btn-sm btn-primary btn-ok" Text="Save Evaluation Round" data-dismiss="modal" UseSubmitBehavior="false" />
+                           <asp:Button runat="server" ID="btn_registrar_tc" CssClass="btn btn-sm btn-primary btn-ok" ValidationGroup="8" Text="Save Evaluation Round" data-dismiss="modal" UseSubmitBehavior="false" />
                            <button class="btn btn-sm" data-dismiss="modal" aria-hidden="true" causesvalidation="false" runat="server" id="Button2" onclick="CloseRadWindowTool('');">Cancel</button>
                        </div>
 
@@ -1867,7 +1871,7 @@
             var obj_MAX_POINTS = $find('<%= txt_max_points.ClientID %>')
             var obj_MIN_SCORE = $find('<%= txt_min_score.ClientID %>')
             var obj_ASSESMENT = $find('<%= cmb_assessment.ClientID %>')
-            
+            ValidatorEnable(document.getElementById('<%= rv_cmb_assesment.ClientID %>'), false);
 
             switch (parseInt(C_value)) {
 
@@ -1877,6 +1881,8 @@
                     obj_MAX_POINTS.disable();
                     obj_MIN_SCORE.enable();
                     obj_ASSESMENT.enable();
+                    ValidatorEnable(document.getElementById('<%= rv_cmb_assesment.ClientID %>'), true);
+                    //ValidatorEnable($find('<%=rv_cmb_assesment.ClientID %>'), true);
                     break;
                 case 2:
                     obj_VOTES.enable();

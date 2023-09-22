@@ -1481,6 +1481,15 @@ Partial Public Class frm_ActivitySolicitation
     Protected WithEvents cmb_assessment As Global.Telerik.Web.UI.RadComboBox
 
     '''<summary>
+    '''rv_cmb_assesment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rv_cmb_assesment As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''lblt_score_minimal control.
     '''</summary>
     '''<remarks>

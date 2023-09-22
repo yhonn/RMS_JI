@@ -954,6 +954,11 @@ Public Class frm_ActivityApplyPAR
             oApply.USER_TOKEN_UPDATE = Guid.Parse(Me.Session("idGuiToken").ToString)
             oApply.APPLY_DESCRIPTION = Me.txt_apply_desc.Text.Trim
 
+            oApply.APPLY_AMOUNT = Me.txt_tot_amount.Value
+            oApply.APPLY_AMOUNT_LOC = Me.txt_tot_amount.Value
+            oApply.APPLY_EXCHANGE_RATE = 1
+
+
             dbEntities.Entry(oApply).State = Entity.EntityState.Modified
 
             If dbEntities.SaveChanges() Then
