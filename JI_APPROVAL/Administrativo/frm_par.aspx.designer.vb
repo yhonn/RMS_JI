@@ -68,6 +68,15 @@ Partial Public Class frm_par
     Protected WithEvents A1 As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
+    '''h_Filter control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents h_Filter As Global.System.Web.UI.WebControls.HiddenField
+
+    '''<summary>
     '''lblt_groupBy control.
     '''</summary>
     '''<remarks>

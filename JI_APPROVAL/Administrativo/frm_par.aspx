@@ -30,6 +30,7 @@
                         <a id="A1" runat="server" href="~/reportes/xls?id=2" class="btn btn-primary btn-sm pull-right margin-r-5"><i class="fa fa-download"></i> Descargar datos</a>
                     </div>
                     <div class="col-sm-2 text-right">   
+                        <asp:HiddenField runat="server" ID="h_Filter" Value="" />  
                         <asp:LinkButton ID="lnk_help" Text="Try" Width="12%" class="btn btn-default btn-sm margin-r-5" data-toggle="Try" OnClick="showhelp('registro_par_vf.mp4');" ><i class="fa fa-question-circle fa-2x"></i>&nbsp;&nbsp;</asp:LinkButton>   
                     </div>
                 </div>

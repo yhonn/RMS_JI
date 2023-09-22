@@ -308,6 +308,7 @@ Public Class frm_anticiposAd
             End If
             Dim subTotalEs = (Me.txt_total_desayuno.Value + Me.txt_total_almuerzo.Value + Me.txt_total_cena.Value) * Me.txt_cantidad_personas.Value
 
+
             dtRutas.Rows.Add(idunique, Me.cmb_zona_rural.SelectedValue, Me.cmb_municipio_salida.Text, Me.cmb_municipio_llegada.Text, Me.cmb_zona_rural.Text, Me.tiempo_estimado.Value,
                              Me.txt_cantidad_personas.Value, Me.txt_valor_trayecto.Value, Me.txt_valor_total.Value, Me.txt_observaciones_ruta.Text, estipendio, estipendioDesayuno,
                              estipendioAlmuerzo, estipendioCena, Me.txt_cantidad_desayuno.Value, Me.txt_cantidad_almuerzo.Value, Me.txt_cantidad_cena.Value,
@@ -317,7 +318,7 @@ Public Class frm_anticiposAd
                              (Me.txt_total_desayuno.Value + Me.txt_total_almuerzo.Value + Me.txt_total_cena.Value) * Me.txt_cantidad_personas.Value,
                              ((Me.txt_total_desayuno.Value + Me.txt_total_almuerzo.Value + Me.txt_total_cena.Value) * Me.txt_cantidad_personas.Value) + Me.txt_valor_total.Value,
                              If(estipendio = True, "SI", "NO"), If(estipendioDesayuno = True, "SI", "NO"), If(estipendioAlmuerzo = True, "SI", "NO"), If(estipendioCena = True, "SI", "NO"),
-                             Me.observaciones.Value, False, 0)
+                             Me.observaciones.Value, False, 0, Me.valor_desayuno.Value, Me.valor_almuerzo.Value, Me.valor_cena.Value)
             Session("dtRutas") = dtRutas
 
 
@@ -525,6 +526,9 @@ Public Class frm_anticiposAd
             dtRutas.Columns.Add("observaciones_trayecto", GetType(String))
             dtRutas.Columns.Add("esta_bd", GetType(Boolean))
             dtRutas.Columns.Add("id_anticipo_ruta", GetType(Integer))
+            dtRutas.Columns.Add("valor_unitario_desayuno", GetType(Decimal))
+            dtRutas.Columns.Add("valor_unitario_almuerzo", GetType(Decimal))
+            dtRutas.Columns.Add("valor_unitario_cena", GetType(Decimal))
         End If
     End Sub
 
@@ -606,7 +610,11 @@ Public Class frm_anticiposAd
             If validarFecha() Then
                 Me.alerta_dias.Visible = True
             Else
-                guardarAnticipo(False)
+                If guardarAnticipo(False) Then
+                    Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
+                    Me.MsgGuardar.Redireccion = "~/administrativo/frm_anticipos"
+                    ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+                End If
             End If
         Catch ex As Exception
 
@@ -693,7 +701,6 @@ Public Class frm_anticiposAd
                         Dim valor_cena As Decimal
 
                         For Each row As DataRow In dtRutas.Rows
-                            Dim oAnticipoCompras As New tme_anticipo_compra
                             idRuta = row("id_ruta")
                             cantidad_personas = row("cantidad_personas")
                             valor_trayecto = row("valor_trayecto")
@@ -708,9 +715,9 @@ Public Class frm_anticiposAd
                             cantidad_desayuno = row("cantidad_desayuno")
                             cantidad_almuerzo = row("cantidad_almuerzo")
                             cantidad_cena = row("cantidad_cena")
-                            valor_desayuno = row("valor_desayuno")
-                            valor_almuerzo = row("valor_almuerzo")
-                            valor_cena = row("valor_cena")
+                            valor_desayuno = row("valor_unitario_desayuno")
+                            valor_almuerzo = row("valor_unitario_almuerzo")
+                            valor_cena = row("valor_unitario_cena")
 
                             Dim oAnticipoRuta As New tme_anticipo_ruta
                             oAnticipoRuta.id_anticipo = anticipo.id_anticipo
@@ -719,6 +726,7 @@ Public Class frm_anticiposAd
                             oAnticipoRuta.valor_trayecto = valor_trayecto
                             oAnticipoRuta.observaciones = observaciones_ruta
                             oAnticipoRuta.requiere_estipendio = requiere_estipendio
+                            oAnticipoRuta.registro_modificacion = False
                             If id_lugar_estipendio > 0 Then
                                 oAnticipoRuta.id_lugar_estipendio = id_lugar_estipendio
                             End If
@@ -738,11 +746,18 @@ Public Class frm_anticiposAd
                     End If
 
                     If enviarAprobacion = True Then
-                        Dim id_categoriaAPP = 2048
-                        Dim cls_anticipo As APPROVAL.clss_anticipos = New APPROVAL.clss_anticipos(Convert.ToInt32(Me.Session("E_IDprograma")))
-                        Dim tblUserApprovalAnticipo As DataTable = cls_anticipo.get_SolicitudAnticipoApprovalUser(anticipo.id_usuario_crea, id_categoriaAPP)
 
-                        If tblUserApprovalAnticipo.Rows.Count() = 0 Then
+                        Dim codigoCategoria = ""
+                        If (anticipo.id_tipo_anticipo = 2) Then
+                            codigoCategoria = "ANT-EVENTOS"
+                        Else
+                            codigoCategoria = "ANT-COMPRAS"
+                        End If
+                        'Dim id_categoriaAPP = 2048
+                        Dim cls_anticipo As APPROVAL.clss_anticipos = New APPROVAL.clss_anticipos(Convert.ToInt32(Me.Session("E_IDprograma")))
+                        Dim tblUserApprovalAnticipos As DataTable = cls_anticipo.get_SolicitudAnticipoApprovalUser(anticipo.id_usuario_crea, codigoCategoria)
+
+                        If tblUserApprovalAnticipos.Rows.Count() = 0 Then
                             Me.lblerr_user.Text = "El anticipo " & anticipo.codigo_anticipo & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de anticipos, contáctese con el administrador."
                             Me.lblerr_user.Visible = True
                             guardarAnticipo = False
@@ -753,16 +768,23 @@ Public Class frm_anticiposAd
                         End If
 
 
+                    Else
+                        guardarAnticipo = True
 
                     End If
                 Else
 
-                    anticipo = db.tme_anticipos.Where(Function(p) p.id_anticipo = id_anticipo).ToList().FirstOrDefault()
-                    Dim id_categoriaAPP = 2048
+                    Dim codigoCategoria = ""
+                    If (anticipo.id_tipo_anticipo = 2) Then
+                        codigoCategoria = "ANT-EVENTOS"
+                    Else
+                        codigoCategoria = "ANT-COMPRAS"
+                    End If
+                    'Dim id_categoriaAPP = 2048
                     Dim cls_anticipo As APPROVAL.clss_anticipos = New APPROVAL.clss_anticipos(Convert.ToInt32(Me.Session("E_IDprograma")))
-                    Dim tblUserApprovalAnticipo As DataTable = cls_anticipo.get_SolicitudAnticipoApprovalUser(anticipo.id_usuario_crea, id_categoriaAPP)
+                    Dim tblUserApprovalAnticipos As DataTable = cls_anticipo.get_SolicitudAnticipoApprovalUser(anticipo.id_usuario_crea, codigoCategoria)
 
-                    If tblUserApprovalAnticipo.Rows.Count() = 0 Then
+                    If tblUserApprovalAnticipos.Rows.Count() = 0 Then
                         Me.lblerr_user.Text = "El anticipo " & anticipo.codigo_anticipo & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de anticipos, contáctese con el administrador."
                         Me.lblerr_user.Visible = True
                         guardarAnticipo = False
@@ -782,10 +804,17 @@ Public Class frm_anticiposAd
     End Function
 
     Public Function guardarDocumento(ByVal anticipo As tme_anticipos, ByVal usuario As t_usuarios) As Integer
-        Dim id_categoriaAPP = 2048
+
+        Dim codigoCategoria = ""
+        If (anticipo.id_tipo_anticipo = 2) Then
+            codigoCategoria = "ANT-EVENTOS"
+        Else
+            codigoCategoria = "ANT-COMPRAS"
+        End If
+        'Dim id_categoriaAPP = 2048
         Dim cls_anticipo As APPROVAL.clss_anticipos = New APPROVAL.clss_anticipos(Convert.ToInt32(Me.Session("E_IDprograma")))
-        Dim tblUserApprovalTimeSheet As DataTable = cls_anticipo.get_SolicitudAnticipoApprovalUser(anticipo.id_usuario_crea, id_categoriaAPP)
-        Dim id_tipoDoc = tblUserApprovalTimeSheet.Rows(0).Item("id_tipoDocumento")
+        Dim tblUserApprovalAnticipos As DataTable = cls_anticipo.get_SolicitudAnticipoApprovalUser(anticipo.id_usuario_crea, codigoCategoria)
+        Dim id_tipoDoc = tblUserApprovalAnticipos.Rows(0).Item("id_tipoDocumento")
 
 
         Dim descripcion = String.Format("Solicitud de anticipo {0} {1} - fecha {2}", usuario.nombre_usuario, usuario.apellidos_usuario, anticipo.fecha_anticipo)
@@ -833,7 +862,7 @@ Public Class frm_anticiposAd
         clss_approval.set_ta_AppDocumentoFIELDS("id_estadoDoc", cOPEN, "id_app_documento", 0)
         clss_approval.set_ta_AppDocumentoFIELDS("observacion", descripcion, "id_app_documento", 0) '.Replace("'", "''")
         clss_approval.set_ta_AppDocumentoFIELDS("id_usuario_app", Me.Session("E_IdUser"), "id_app_documento", 0)
-        clss_approval.set_ta_AppDocumentoFIELDS("id_role_app", tblUserApprovalTimeSheet.Rows(0).Item("id_rol"), "id_app_documento", 0)
+        clss_approval.set_ta_AppDocumentoFIELDS("id_role_app", tblUserApprovalAnticipos.Rows(0).Item("id_rol"), "id_app_documento", 0)
         clss_approval.set_ta_AppDocumentoFIELDS("datecreated", Date.UtcNow, "id_app_documento", 0)
 
         Dim id_appdocumento = clss_approval.save_ta_AppDocumento()
@@ -970,7 +999,16 @@ Public Class frm_anticiposAd
             If validarFecha() Then
                 Me.alerta_dias.Visible = True
             Else
-                guardarAnticipo(True)
+
+                If guardarAnticipo(True) Then
+
+                    Me.MsgGuardar.NuevoMensaje = cl_user.controles_otros.FirstOrDefault(Function(p) p.control_code = "GUARDADO").texto
+                    Me.MsgGuardar.Redireccion = "~/administrativo/frm_anticipos"
+                    ScriptManager.RegisterStartupScript(Me.Page, Page.[GetType](), "text", "Func()", True)
+
+                End If
+
+
             End If
         Catch ex As Exception
 

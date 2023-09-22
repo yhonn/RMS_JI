@@ -121,6 +121,13 @@
                         <td style="width: 210px; border-bottom: 1px solid black;" class="center"><asp:Label runat="server" ID="lbl_tipo_par"></asp:Label></td>
                     </tr>
                     <tr>
+                        <td class="subtituloPAR">Estrategía</td>
+                        <td style="width: 210px; border-bottom: 1px solid black;" class="center">
+                            <asp:Label runat="server" ID="lbl_estrategia"></asp:Label></td>
+                        <td style="width: 150px; padding-left: 20px" colspan="2" class="subtituloPAR"></td>
+
+                    </tr>
+                    <tr>
                         <td colspan="4">
                             <br />
                             <hr />

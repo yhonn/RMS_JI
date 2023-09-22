@@ -28,6 +28,7 @@ Public Class frm_par
             Else
                 cl_user.chk_Rights(Page.Controls, 2, frmCODE, 0, grd_cate)
                 cl_user.chk_Rights(Page.Controls, 4, frmCODE, 0)
+                cl_user.chk_Rights(Page.Controls, 5, frmCODE, 0)
             End If
             controles.code_mod = frmCODE
             For Each Control As Control In Page.Controls
@@ -115,10 +116,12 @@ Public Class frm_par
                     solicitudesPar = dbEntities.vw_tme_par.OrderByDescending(Function(p) p.id_par).ToList()
                 Case 2
                     solicitudesPar = dbEntities.vw_tme_par.Where(Function(p) (p.id_usuario_app.Contains(id_User)) Or
-                                                                                         (p.id_usuario_radica.Contains(id_User)) Or subR.Contains(p.id_subregion) Or p.id_usuario = id_User).OrderByDescending(Function(p) p.id_par).ToList()
+                                                                     (p.id_supervisor = id_User) Or
+                                                                     (p.id_usuario_radica.Contains(id_User)) Or subR.Contains(p.id_subregion) Or p.id_usuario = id_User).OrderByDescending(Function(p) p.id_par).ToList()
                 Case 3
                     solicitudesPar = dbEntities.vw_tme_par.Where(Function(p) (p.id_usuario_app.Contains(id_User)) Or
-                                                                                         (p.id_usuario_radica.Contains(id_User)) Or p.id_usuario = id_User).OrderByDescending(Function(p) p.id_par).ToList()
+                                                                     (p.id_supervisor = id_User) Or
+                                                                     (p.id_usuario_radica.Contains(id_User)) Or p.id_usuario = id_User).OrderByDescending(Function(p) p.id_par).ToList()
 
             End Select
 
@@ -187,7 +190,7 @@ Public Class frm_par
             hlkPermisos = CType(e.Item.FindControl("col_hlk_mod"), HyperLink)
             hlkPermisos.NavigateUrl = "frm_par_permisos?Id=" & DataBinder.Eval(e.Item.DataItem, "id_par").ToString()
 
-
+            Dim habilitarPermisos = Convert.ToString(Me.h_Filter.Value)
 
             Dim hlnkDetalle As HyperLink = New HyperLink
             hlnkDetalle = CType(e.Item.FindControl("col_hlk_detalle"), HyperLink)
@@ -207,6 +210,16 @@ Public Class frm_par
             hlnkSeguimiento = CType(e.Item.FindControl("col_hlk_seguimiento"), HyperLink)
             hlnkSeguimiento.Visible = False
             Dim id_estadDoc = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "id_estadoDoc").ToString())
+
+            Dim id_supervisor = Convert.ToInt32(DataBinder.Eval(e.Item.DataItem, "id_supervisor").ToString())
+
+            If id_supervisor = idUser Or habilitarPermisos <> "" Then
+                hlkPermisos.Visible = True
+            Else
+                hlkPermisos.Visible = False
+            End If
+
+
 
             Dim xxx = itemD("par_cancelado").Text.ToString()
             Dim par_cancelado As Boolean = Convert.ToBoolean(itemD("par_cancelado").Text.ToString())

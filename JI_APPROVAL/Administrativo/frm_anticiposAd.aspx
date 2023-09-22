@@ -362,7 +362,7 @@
                         </div>
                          <div class="form-group row" runat="server" visible="false" id="infoEstipendio">
                              <div class="col-sm-6 col-md-6 col-lg-4">
-                                <asp:Label runat="server" ID="Label17" CssClass="control-label text-bold">Estipendio de esayuno?:</asp:Label>
+                                <asp:Label runat="server" ID="Label17" CssClass="control-label text-bold">Estipendio de desayuno?:</asp:Label>
                                 <br />
                                 <asp:RadioButtonList ID="rbn_estipendio_desayuno" runat="server"
                                     RepeatColumns="2" Style="height: 26px" AutoPostBack="true">

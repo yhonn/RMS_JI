@@ -17,27 +17,27 @@ Public Class frm_viajeDetalle2
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Using dbEntities As New dbRMS_JIEntities
-            Try
-                If Me.Session("E_IdUser").ToString = "" Then
-                End If
-            Catch ex As Exception
-                Me.Response.Redirect("~/frm_login")
-            End Try
-            If HttpContext.Current.Session.Item("clUser") IsNot Nothing Then
-                cl_user = Session.Item("clUser")
-                If Not cl_user.chk_accessMOD(0, frmCODE) Then
-                    Me.Response.Redirect("~/Proyectos/no_access2")
-                Else
-                    'cl_user.chk_Rights(Page.Controls, 2, frmCODE, 0, grd_cate)
-                    cl_user.chk_Rights(Page.Controls, 4, frmCODE, 0)
-                End If
-                controles.code_mod = frmCODE
-                For Each Control As Control In Page.Controls
-                    controles.checkControls(Control, cl_user.id_idioma, cl_user)
-                Next
-            End If
-            Dim id_programa = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
-            PathArchivos = dbEntities.t_programa_settings.FirstOrDefault(Function(p) p.id_programa = id_programa).documents_folder
+            'Try
+            '    If Me.Session("E_IdUser").ToString = "" Then
+            '    End If
+            'Catch ex As Exception
+            '    Me.Response.Redirect("~/frm_login")
+            'End Try
+            'If HttpContext.Current.Session.Item("clUser") IsNot Nothing Then
+            '    cl_user = Session.Item("clUser")
+            '    If Not cl_user.chk_accessMOD(0, frmCODE) Then
+            '        Me.Response.Redirect("~/Proyectos/no_access2")
+            '    Else
+            '        'cl_user.chk_Rights(Page.Controls, 2, frmCODE, 0, grd_cate)
+            '        cl_user.chk_Rights(Page.Controls, 4, frmCODE, 0)
+            '    End If
+            '    controles.code_mod = frmCODE
+            '    For Each Control As Control In Page.Controls
+            '        controles.checkControls(Control, cl_user.id_idioma, cl_user)
+            '    Next
+            'End If
+            'Dim id_programa = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
+            'PathArchivos = dbEntities.t_programa_settings.FirstOrDefault(Function(p) p.id_programa = id_programa).documents_folder
             If Not Me.IsPostBack Then
                 clss_approval = New APPROVAL.clss_approval(Me.Session("E_IDPrograma"))
                 Session.Remove("dtConceptos")
@@ -84,16 +84,16 @@ Public Class frm_viajeDetalle2
             Dim id_viaje = viaje.id_viaje
 
             Dim legalizadionDetalle = dbEntities.vw_tme_solicitud_viaje_legalizacion.Where(Function(p) p.id_viaje = id_viaje).ToList()
-            Me.grd_pasajes.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 1).ToList()
+            Me.grd_pasajes.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 1).OrderBy(Function(p) p.fecha).ToList()
             Me.grd_pasajes.DataBind()
 
-            Me.grd_reuniones.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 2).ToList()
+            Me.grd_reuniones.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 2).OrderBy(Function(p) p.fecha).ToList()
             Me.grd_reuniones.DataBind()
 
-            Me.grd_miscelaneos.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 3).ToList()
+            Me.grd_miscelaneos.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 3).OrderBy(Function(p) p.fecha).ToList()
             Me.grd_miscelaneos.DataBind()
 
-            Me.grd_alimentacion_alojamiento.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 4).ToList()
+            Me.grd_alimentacion_alojamiento.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 4).OrderBy(Function(p) p.fecha).ThenBy(Function(p) p.porcentaje_perdiem).ToList()
             Me.grd_alimentacion_alojamiento.DataBind()
 
 
@@ -142,6 +142,10 @@ Public Class frm_viajeDetalle2
             '                                                                        Key .ciudad_origen = p.t_municipios1.t_departamentos.nombre_departamento & " - " & p.t_municipios1.nombre_municipio,
             '                                                                        Key .ciudad_destino = p.t_municipios.t_departamentos.nombre_departamento & " - " & p.t_municipios.nombre_municipio
             '}).ToList()
+
+            If viaje.id_estrategia IsNot Nothing Then
+                Me.lbl_estrategia.Text = viaje.tme_estrategia.estrategia
+            End If
 
             For Each item In viaje.tme_solicitud_viaje_itinerario.OrderBy(Function(p) p.fecha_viaje).ToList()
                 Dim fecha = DateTime.Now

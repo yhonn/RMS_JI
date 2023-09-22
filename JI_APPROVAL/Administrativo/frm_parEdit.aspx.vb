@@ -114,18 +114,21 @@ Public Class frm_parEdit
             If regionesUsuario.Count() = 1 Then
                 Dim subRegion = regionesUsuario.Select(Function(p) _
                                             New With {Key .nombre_subregion = p.t_subregiones.t_regiones.nombre_region & " - " & p.t_subregiones.nombre_subregion,
-                                                      Key .id_subregion = p.id_subregion}).ToList()
+                                                      Key .id_subregion = p.id_subregion,
+                                                      Key .visible = p.t_subregiones.visible}).Where(Function(p) p.visible.Value = True).ToList()
                 Me.cmb_sub_Region.DataSource = subRegion
             ElseIf regionesUsuario.Count() > 0 Then
                 Dim subRegion = regionesUsuario.Select(Function(p) _
                                              New With {Key .nombre_subregion = p.t_subregiones.t_regiones.nombre_region & " - " & p.t_subregiones.nombre_subregion,
-                                                       Key .id_subregion = p.id_subregion}).ToList()
+                                                       Key .id_subregion = p.id_subregion,
+                                                       Key .visible = p.t_subregiones.visible}).Where(Function(p) p.visible.Value = True).ToList()
                 Me.cmb_sub_Region.DataSource = subRegion
                 Me.subRegionVisible.Visible = True
             Else
                 Dim subRegion = dbEntities.t_subregiones.Where(Function(p) p.t_regiones.id_programa = ID).Select(Function(p) _
                                              New With {Key .nombre_subregion = p.t_regiones.nombre_region & " - " & p.nombre_subregion,
-                                                       Key .id_subregion = p.id_subregion}).ToList()
+                                                       Key .id_subregion = p.id_subregion,
+                                                       Key .visible = p.visible}).Where(Function(p) p.visible.Value = True).ToList()
                 Me.cmb_sub_Region.DataSource = subRegion
                 Me.subRegionVisible.Visible = True
             End If
@@ -172,6 +175,9 @@ Public Class frm_parEdit
             Me.txt_proposito_servicio.Text = par.proposito
             Me.cmb_adjuntos_par.SelectedValue = par.id_tipo_adjunto_par
             Me.txt_descripcion_adjuntos.Text = par.observaciones_adicionales
+            If par.id_estrategia IsNot Nothing Then
+                Me.cmb_estrategia.SelectedValue = par.id_estrategia
+            End If
             If Me.cmb_tipo_par.SelectedValue = "2" Then
                 'Me.cmb_objetivo.SelectedValue = par.tme_estructura_marcologico.tme_estructura_marcologico2.id_estructura_marcologico_padre
                 'cargarResultadoEsperado()
@@ -366,6 +372,12 @@ Public Class frm_parEdit
             Me.cmb_proposito_par.DataTextField = "tipo_solicitud"
             Me.cmb_proposito_par.DataValueField = "id_tipo_solicitud"
             Me.cmb_proposito_par.DataBind()
+
+            Me.cmb_estrategia.DataSourceID = ""
+            Me.cmb_estrategia.DataSource = dbEntities.tme_estrategia.Where(Function(p) p.id_programa = id_programa).ToList()
+            Me.cmb_estrategia.DataTextField = "estrategia"
+            Me.cmb_estrategia.DataValueField = "id_estrategia"
+            Me.cmb_estrategia.DataBind()
 
             Me.cmb_tipo_par.DataSourceID = ""
             Me.cmb_tipo_par.DataSource = dbEntities.tme_tipo_par.Where(Function(p) p.id_programa = id_programa).ToList()
@@ -772,9 +784,9 @@ Public Class frm_parEdit
         If valorParDolares <= 1000 Then
             numDiasHabiles = 4
         ElseIf valorParDolares > 1000 And valorParDolares < 3500 Then
-            numDiasHabiles = 4
+            numDiasHabiles = 7
         ElseIf valorParDolares >= 3500 Then
-            numDiasHabiles = 6
+            numDiasHabiles = 14
         End If
 
 
@@ -787,10 +799,10 @@ Public Class frm_parEdit
             mensaje = "Los PAR inferiores a 1.000 USD se deben solicitar mínimo con 5 días hábiles de anticipación"
             habilitarGuardar = False
         ElseIf valorParDolares > 1000 And valorParDolares < 3500 And Me.dt_fecha_requiere_servicios.SelectedDate < fechaHabil Then
-            mensaje = "Los PAR entre 1.001 USD y 3.499 USD se deben solicitar mínimo con 5 días hábiles de anticipación"
+            mensaje = "Los PAR entre 1.001 USD y 3.499 USD se deben solicitar mínimo con 8 días hábiles de anticipación"
             habilitarGuardar = False
         ElseIf valorParDolares >= 3500 And Me.dt_fecha_requiere_servicios.SelectedDate < fechaHabil Then
-            mensaje = "Los PAR mayores a 3.499 USD se deben solicitar mínimo con 7 días hábiles de anticipación"
+            mensaje = "Los PAR mayores a 3.499 USD se deben solicitar mínimo con 15 días hábiles de anticipación"
             habilitarGuardar = False
         End If
 
@@ -959,7 +971,7 @@ Public Class frm_parEdit
             If totalComponentes > 0 Then
                 Using dbEntities As New dbRMS_JIEntities
 
-                    Dim codInicialPT = 386
+                    Dim codInicialPT = 388
 
                     'Dim codPar = dbEntities.Database.SqlQuery(Of Integer)("SELECT NEXT VALUE FOR SequencePar")
                     Dim id_par = Convert.ToInt32(Me.idPar.Value)
@@ -1147,20 +1159,22 @@ Public Class frm_parEdit
                         Dim id_categoriaAPP = 2044
                         Dim cls_par As APPROVAL.clss_par = New APPROVAL.clss_par(Convert.ToInt32(Me.Session("E_IDprograma")))
 
-                        Dim tblUserApprovalTimeSheet As DataTable = New DataTable
+                        Dim tblUserApprovalPar As DataTable = New DataTable
 
                         If par.valor_total / par.tasa_ser_cotizacion > 50000 Then
-                            tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_mayor_50000(par.id_usuario, id_categoriaAPP)
+                            tblUserApprovalPar = cls_par.get_parApprovalUser_mayor_50000(par.id_usuario, id_categoriaAPP)
+                        ElseIf par.valor_total / par.tasa_ser_cotizacion > 3500 And par.id_tipo_par = 2 Then
+                            tblUserApprovalPar = cls_par.get_parApprovalUser_mayor_3500(par.id_usuario)
                         ElseIf par.asociado_comunicaciones = True Then
-                            tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_comunicaciones(par.id_usuario, id_categoriaAPP)
+                            tblUserApprovalPar = cls_par.get_parApprovalUser_comunicaciones(par.id_usuario, id_categoriaAPP)
                         ElseIf par.id_tipo_par = 1 Then
-                            tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_administrativo(par.id_usuario, id_categoriaAPP)
+                            tblUserApprovalPar = cls_par.get_parApprovalUser_administrativo(par.id_usuario, id_categoriaAPP)
                         Else
-                            tblUserApprovalTimeSheet = cls_par.get_parApprovalUserEventos(par.id_usuario, id_categoriaAPP)
+                            tblUserApprovalPar = cls_par.get_parApprovalUserEventos(par.id_usuario, id_categoriaAPP)
                         End If
 
 
-                        If tblUserApprovalTimeSheet.Rows.Count() = 0 Then
+                        If tblUserApprovalPar.Rows.Count() = 0 Then
                             Me.lblerr_user.Text = "El PAR " & par.codigo_par & "  fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de PAR, contáctese con el administrador."
                             Me.lblerr_user.Visible = True
                             guardarPar = False
@@ -1198,21 +1212,23 @@ Public Class frm_parEdit
     Public Function guardarDocumento(ByVal par As vw_tme_par, ByVal usuario As t_usuarios) As Integer
         Dim id_categoriaAPP = 2044
         Dim cls_par As APPROVAL.clss_par = New APPROVAL.clss_par(Convert.ToInt32(Me.Session("E_IDprograma")))
-        Dim tblUserApprovalTimeSheet As DataTable = New DataTable
+        Dim tblUserApprovalPar As DataTable = New DataTable
 
         If par.valor_total / par.tasa_ser_cotizacion > 50000 Then
-            tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_mayor_50000(par.id_usuario, id_categoriaAPP)
+            tblUserApprovalPar = cls_par.get_parApprovalUser_mayor_50000(par.id_usuario, id_categoriaAPP)
+        ElseIf par.valor_total / par.tasa_ser_cotizacion > 3500 And par.id_tipo_par = 2 Then
+            tblUserApprovalPar = cls_par.get_parApprovalUser_mayor_3500(par.id_usuario)
         ElseIf par.asociado_comunicaciones = True Then
-            tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_comunicaciones(par.id_usuario, id_categoriaAPP)
+            tblUserApprovalPar = cls_par.get_parApprovalUser_comunicaciones(par.id_usuario, id_categoriaAPP)
         ElseIf par.id_tipo_par = 1 Then
-            tblUserApprovalTimeSheet = cls_par.get_parApprovalUser_administrativo(par.id_usuario, id_categoriaAPP)
+            tblUserApprovalPar = cls_par.get_parApprovalUser_administrativo(par.id_usuario, id_categoriaAPP)
         Else
-            tblUserApprovalTimeSheet = cls_par.get_parApprovalUserEventos(par.id_usuario, id_categoriaAPP)
+            tblUserApprovalPar = cls_par.get_parApprovalUserEventos(par.id_usuario, id_categoriaAPP)
         End If
 
 
         clss_approval = New APPROVAL.clss_approval(Me.Session("E_IDPrograma"))
-        Dim id_tipo_doc = tblUserApprovalTimeSheet.Rows(0).Item("id_tipoDocumento")
+        Dim id_tipo_doc = tblUserApprovalPar.Rows(0).Item("id_tipoDocumento")
 
 
 
@@ -1259,7 +1275,7 @@ Public Class frm_parEdit
         clss_approval.set_ta_AppDocumentoFIELDS("id_estadoDoc", cOPEN, "id_app_documento", 0)
         clss_approval.set_ta_AppDocumentoFIELDS("observacion", descripcion, "id_app_documento", 0) '.Replace("'", "''")
         clss_approval.set_ta_AppDocumentoFIELDS("id_usuario_app", Me.Session("E_IdUser"), "id_app_documento", 0)
-        clss_approval.set_ta_AppDocumentoFIELDS("id_role_app", tblUserApprovalTimeSheet.Rows(0).Item("id_rol"), "id_app_documento", 0)
+        clss_approval.set_ta_AppDocumentoFIELDS("id_role_app", tblUserApprovalPar.Rows(0).Item("id_rol"), "id_app_documento", 0)
         clss_approval.set_ta_AppDocumentoFIELDS("datecreated", Date.UtcNow, "id_app_documento", 0)
 
         Dim id_appdocumento = clss_approval.save_ta_AppDocumento()

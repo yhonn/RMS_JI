@@ -221,6 +221,33 @@ Partial Public Class frm_viajeEdit
     Protected WithEvents RequiredFieldValidator20 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''blt_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents blt_estrategia As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''cmb_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cmb_estrategia As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''RequiredFieldValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator2 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Label3 control.
     '''</summary>
     '''<remarks>

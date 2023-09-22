@@ -373,9 +373,16 @@
                                             UniqueName="porcentaje_perdiem">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
-                                         <telerik:GridBoundColumn DataField="valor_perdiem"
+                                        <%-- <telerik:GridBoundColumn DataField="valor_perdiem"
                                             FilterControlAltText="Filter valor_perdiem column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="M&IE Rate" SortExpression="valor_perdiem"
+                                            DataFormatString="{0:n0}"
+                                            UniqueName="valor_perdiem">
+                                            <HeaderStyle CssClass="wrapWord"  />
+                                        </telerik:GridBoundColumn>--%>
+                                         <telerik:GridBoundColumn DataField="valor_perdiem"
+                                            FilterControlAltText="Filter valor_perdiem column"  HeaderStyle-Font-Bold="true"
+                                            HeaderText="Tarifa base" SortExpression="valor_perdiem"
                                             DataFormatString="{0:n0}"
                                             UniqueName="valor_perdiem">
                                             <HeaderStyle CssClass="wrapWord"  />
@@ -465,6 +472,48 @@
                     </tr>
                     <tr>
                         <td colspan="4" class="subtituloPAR"><hr /></td>
+                    </tr>
+
+                       <tr>
+                        <td colspan="4">
+                            <br />
+                            <hr />
+                            <br />
+                        </td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <td colspan="4" class="subtituloPAR">COMENTARIOS DE LA APROBACIÓN</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <telerik:RadGrid ID="grd_comentarios" runat="server" CellSpacing="0"
+                                Culture="Spanish (Spain)" GridLines="None"
+                                Skin="Simple" AllowSorting="True">
+                                <MasterTableView AutoGenerateColumns="False" ShowFooter="false">
+                                    <Columns>
+                                        <telerik:GridBoundColumn DataField="fecha_comentario" FilterControlAltText="Filter fecha_comentario column" HeaderStyle-Font-Bold="true"
+                                            HeaderText="Fecha" SortExpression="fecha_comentario" UniqueName="fecha_comentario">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="empleado" FilterControlAltText="Filter empleado column" HeaderStyle-Font-Bold="true"
+                                            HeaderText="Usuario" SortExpression="empleado" UniqueName="empleado">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="comentario" FilterControlAltText="Filter comentario column" HeaderStyle-Font-Bold="true"
+                                            HeaderText="Comentario" SortExpression="comentario" UniqueName="comentario">
+                                        </telerik:GridBoundColumn>
+                                    </Columns>
+                                </MasterTableView>
+                            </telerik:RadGrid>
+                        </td>
+                    </tr>
+                    
+                       <tr>
+                        <td colspan="4">
+                            <br />
+                            <hr />
+                            <br />
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="subtituloPAR">RUTA DE APROBACIÓN</td>

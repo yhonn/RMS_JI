@@ -203,6 +203,15 @@ Partial Public Class frm_viaje_legalizacionPrint
     Protected WithEvents grd_soportes As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
+    '''grd_comentarios control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents grd_comentarios As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
     '''grd_cate control.
     '''</summary>
     '''<remarks>

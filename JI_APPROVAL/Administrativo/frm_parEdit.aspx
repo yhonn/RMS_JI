@@ -146,7 +146,7 @@
                                <div class="col-sm-6 col-md-6 col-lg-3">
                                     <asp:Label runat="server" ID="Label5" CssClass="control-label text-bold">Región a la que pertenece:</asp:Label>
                                     <br />
-                                    <telerik:RadComboBox ID="cmb_sub_Region" AutoPostBack="false" emptymessage="Seleccione..." Filter="Contains" runat="server" Width="90%">
+                                    <telerik:RadComboBox ID="cmb_sub_Region" enabled="false" AutoPostBack="false" emptymessage="Seleccione..." Filter="Contains" runat="server" Width="90%">
                                     </telerik:RadComboBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator30" runat="server"
                                                 ControlToValidate="cmb_sub_Region" CssClass="Error" Display="Dynamic"
@@ -199,7 +199,7 @@
                                  <div class="col-sm-6 col-md-6 col-lg-3">
                                     <asp:Label runat="server" ID="Label4" CssClass="control-label text-bold">Tipo de par:</asp:Label>
                                     <br />
-                                     <telerik:RadComboBox ID="cmb_tipo_par" emptymessage="Seleccione..." AutoPostBack="true" Filter="Contains" runat="server" Width="90%">
+                                     <telerik:RadComboBox ID="cmb_tipo_par" enabled="false" emptymessage="Seleccione..." AutoPostBack="true" Filter="Contains" runat="server" Width="90%">
                                     </telerik:RadComboBox>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
                                                 ControlToValidate="cmb_tipo_par" CssClass="Error" Display="Dynamic"
@@ -230,6 +230,15 @@
                                     </asp:RadioButtonList>
                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator28" runat="server"
                                                 ControlToValidate="rbn_comunicaciones" CssClass="Error" Display="Dynamic"
+                                                ErrorMessage="Campo obligatorio" ValidationGroup="1">*</asp:RequiredFieldValidator>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-3">
+                                    <asp:Label runat="server" ID="blt_estrategia" CssClass="control-label text-bold">Estrategia:</asp:Label>
+                                    <br />
+                                   <telerik:RadComboBox ID="cmb_estrategia" emptymessage="Seleccione..."  Height="200px" Filter="Contains" runat="server" Width="90%">
+                                    </telerik:RadComboBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator22" runat="server"
+                                                ControlToValidate="cmb_estrategia" CssClass="Error" Display="Dynamic"
                                                 ErrorMessage="Campo obligatorio" ValidationGroup="1">*</asp:RequiredFieldValidator>
                                 </div>
                             </div>

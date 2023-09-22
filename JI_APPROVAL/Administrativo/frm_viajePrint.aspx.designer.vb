@@ -95,6 +95,15 @@ Partial Public Class frm_viajePrint
     Protected WithEvents lbl_codigo_viaje As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''lbl_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_estrategia As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''lbl_motivo control.
     '''</summary>
     '''<remarks>

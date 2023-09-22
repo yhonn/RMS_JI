@@ -5,9 +5,10 @@
 
 <asp:Content runat="server" ID="MainContent" ContentPlaceHolderID="MainContent">
     <uc:Confirm runat="server" ID="MsgGuardar" />
+    <asp:Label ID="identity" runat="server" Text="" CssClass="deleteIdentity" data-id="" Visible="false" />
     <section class="content-header">
          <h1>
-            <asp:Label runat="server" ID="lblt_titulo_pantalla">Financiero</asp:Label>
+            <asp:Label runat="server" ID="lblt_titulo_pantalla">Administrativo</asp:Label>
         </h1>
     </section>
     <section class="content">
@@ -21,15 +22,32 @@
             </div>
             <div class="box-body">
                 <div class="form-group row">
-                    <div class="col-sm-10">
+                    <div class="col-sm-8">
                         <telerik:RadButton ID="btn_nuevo" runat="server" AutoPostBack="true" Enabled="false" Text="Registrar anticipo">
                         </telerik:RadButton>
                     </div>
-                    <div class="col-sm-2">
-                        <%--<a id="A1" runat="server" href="~/reportes/xls?id=5" class="btn btn-primary btn-sm pull-right margin-r-5"><i class="fa fa-download"></i> Descargar datos</a>--%>
-                    </div>
+                    <%--<div class="col-sm-2">
+                        <a id="A1" runat="server" href="~/reportes/xls?id=1" class="btn btn-primary btn-sm pull-right margin-r-5"><i class="fa fa-download"></i> Descargar datos</a>
+                    </div>--%>
+                     <%--<div class="col-sm-2 text-right">   
+                        <asp:LinkButton ID="lnk_help" Text="Try" Width="12%" class="btn btn-default btn-sm margin-r-5" data-toggle="Try" OnClick="showhelp('viajes.mp4');" ><i class="fa fa-question-circle fa-2x"></i>&nbsp;&nbsp;</asp:LinkButton>   
+                    </div>--%>
                 </div>
                 <hr />
+                <div class="form-group row">
+                    <div class="col-sm-2 text-left">
+                        <!--Tittle -->
+                            <asp:Label ID="lblt_groupBy" runat="server" CssClass="control-label text-bold"  Text="Filtrar por"></asp:Label> 
+                        <asp:HiddenField runat="server" ID="h_Filter" Value="" />  
+                    </div>
+                    <div class="col-sm-8">
+                        <asp:HiddenField runat="server" ID="idviaje" Value="0" />
+                        <asp:RadioButton ID="RadioButton1" runat="server" AutoPostBack="True" GroupName="GrdPending"  Text="   Pending action by "  CssClass="labelRadiobutton"  /> <br />
+                        <asp:RadioButton ID="RadioButton3" runat="server" AutoPostBack="True" GroupName="GrdPending" Text= "   Pending approvals that {0} participates" CssClass="labelRadiobutton" /><br />
+                        <asp:RadioButton ID="RadioButton4" runat="server" AutoPostBack="True" GroupName="GrdPending" Text="   View all pending approvals"  CssClass="labelRadiobutton"   />
+                    </div>
+                        <asp:RadioButton ID="RadioButton2" runat="server" AutoPostBack="True" GroupName="GrdPending" Text="   Pending approvals initiated by " CssClass="labelRadiobutton" visible="false" /><br />
+                </div>
                 <asp:Label ID="lbltotal" runat="server" Font-Bold="True" Font-Size="12px"></asp:Label>
 
                 <style type="text/css">
@@ -47,11 +65,7 @@
                             { 
                                 overflow-y: hidden !important; 
                             } 
-                   
-                   .RadGrid .rgDataDiv
-                    {
-                        height : auto !important;
-                    }
+
                 </style>
               
                 <script type="text/javascript">
@@ -77,218 +91,240 @@
                          }
                   }--%>
 
-                    function ColumnResizing(sender, args)
-                    {
+                    function ColumnResizing(sender, args) {
 
                         //alert('Column Resizing');
                         //alert(args.get_gridColumn().get_element().cellIndex + ", width: ");
                         //alert(args.get_gridColumn().get_uniqueName() + ' ColumnIndex : ' + args.get_gridColumn().get_element().cellIndex + ", width: " + args.get_gridColumn().get_element().offsetWidth);
-                        
+
                         var newWidth = args.get_gridColumn().get_element().offsetWidth;
 
                         //alert(newWidth);                        
-                            if (newWidth > 200)
-                            {
-                                //alert('Cancel ' + args.get_gridColumn().get_element().cellIndex + ", width: " + args.get_gridColumn().get_element().offsetWidth); 
-                                args.set_cancel(true);
-                            }
+                        if (newWidth > 200) {
+                            //alert('Cancel ' + args.get_gridColumn().get_element().cellIndex + ", width: " + args.get_gridColumn().get_element().offsetWidth); 
+                            args.set_cancel(true);
+                        }
 
                     }
 
-                    
-     
+
+
                  </script>
 
-                   <div class="col-lg-12">
+                   <div class="col-lg-12" style="width:100%; margin: 0 auto; margin-top:10px;">
                        <div style="max-width:100%; overflow-x:auto">
-                           <asp:HiddenField runat="server" ID="h_Filter" Value="" />  
+                           
 
-                <%--          <telerik:RadGrid RenderMode="Lightweight" AutoGenerateColumns="false" ID="grd_cate"  PageSize="15"
-                                AllowFilteringByColumn="True" AllowSorting="True" Culture = "French (France)" width="100%" 
+                          <telerik:RadGrid RenderMode="Lightweight" AutoGenerateColumns="false" ID="grd_cate"
+                                AllowFilteringByColumn="True" AllowSorting="True" Width="100%"  PageSize="15" 
                                 ShowFooter="True" AllowPaging="True" runat="server">
-                              <MasterTableView TableLayout="Fixed"></MasterTableView>
-                                <HeaderStyle Width="200px" />
-                                <PagerStyle Mode="NextPrevAndNumeric" />
                                 <GroupingSettings CaseSensitive="false"></GroupingSettings>
-                                <MasterTableView AutoGenerateColumns="false" AllowFilteringByColumn="True" ShowFooter="True"  DataKeyNames="id_radicado">
+                                <MasterTableView AutoGenerateColumns="false" AllowFilteringByColumn="True" ShowFooter="True"  DataKeyNames="id_anticipo">
                                     <Columns>
-                                        <telerik:GridBoundColumn DataField="id_radicado"
-                                            FilterControlAltText="Filter id_facturacion column"
-                                            SortExpression="id_radicado" UniqueName="id_radicado"
-                                            Visible="False" DataType="System.Int32" HeaderText="id_radicado"
+                                        <telerik:GridBoundColumn DataField="id_anticipo"
+                                            FilterControlAltText="Filter id_anticipo column"
+                                            SortExpression="id_anticipo" UniqueName="id_anticipo"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_anticipo"
                                             ReadOnly="True">
                                         </telerik:GridBoundColumn>
-
-                                         <telerik:GridTemplateColumn  UniqueName="colm_cambiar_estado" Visible="false" HeaderText="F1" AllowFiltering="false">
+                                        <telerik:GridBoundColumn DataField="id_estadoDoc"
+                                            FilterControlAltText="Filter id_estadoDoc column"
+                                            SortExpression="id_estadoDoc" UniqueName="id_estadoDoc"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_estadoDoc"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                       <%-- <telerik:GridBoundColumn DataField="id_estadoDoc_legalizacion"
+                                            FilterControlAltText="Filter id_estadoDoc_legalizacion column"
+                                            SortExpression="id_estadoDoc_legalizacion" UniqueName="id_estadoDoc_legalizacion"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_estadoDoc_legalizacion"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>--%>
+                                        <telerik:GridBoundColumn DataField="nro_participantes"
+                                            FilterControlAltText="Filter nro_participantes column"
+                                            SortExpression="nro_participantes" UniqueName="nro_participantes"
+                                            Visible="False" DataType="System.Int32" HeaderText="nro_participantes"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="id_tipo_par"
+                                            FilterControlAltText="Filter id_tipo_par column"
+                                            SortExpression="id_tipo_par" UniqueName="id_tipo_par"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_tipo_par"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="id_documento"
+                                            FilterControlAltText="Filter id_documento column"
+                                            SortExpression="id_documento" UniqueName="id_documento"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_documento"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="id_usuario"
+                                            FilterControlAltText="Filter id_usuario column"
+                                            SortExpression="id_usuario" UniqueName="id_usuario"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_usuario"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                       <%-- <telerik:GridBoundColumn DataField="id_estadoDoc_legalizacion"
+                                            FilterControlAltText="Filter id_estadoDoc_legalizacion column"
+                                            SortExpression="id_estadoDoc_legalizacion" UniqueName="id_estadoDoc_legalizacion"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_estadoDoc_legalizacion"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="id_documento_legalizacion"
+                                            FilterControlAltText="Filter id_documento_legalizacion column"
+                                            SortExpression="id_documento" UniqueName="id_documento_legalizacion"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_documento_legalizacion"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn DataField="id_estadoDoc_informe"
+                                            FilterControlAltText="Filter id_estadoDoc_informe column"
+                                            SortExpression="id_estadoDoc_informe" UniqueName="id_estadoDoc_informe"
+                                            Visible="False" DataType="System.Int32" HeaderText="id_estadoDoc_informe"
+                                            ReadOnly="True">
+                                        </telerik:GridBoundColumn>--%>
+                                        <telerik:GridTemplateColumn  UniqueName="colm_Edit" Visible="false" AllowFiltering="false">
                                             <ItemTemplate>
-                                                <asp:HyperLink ID="col_hlk_estado" runat="server" ImageUrl="../Imagenes/iconos/Informacion2.png" ToolTip="Pendiente"/>
+                                                <asp:HyperLink ID="col_hlk_edit" runat="server" ImageUrl="../Imagenes/iconos/b_edit.png" ToolTip="Editar viaje" Target="_self" />
                                             </ItemTemplate>
-                                           <HeaderStyle Width="30px" />
-                                           <ItemStyle Width="30px" />                                           
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
                                         </telerik:GridTemplateColumn>
-
-                                        <telerik:GridTemplateColumn  UniqueName="colm_estado_accion" Visible="false" HeaderText="F1" AllowFiltering="false">
-                                            <ItemTemplate>
-                                                <asp:Image ID="col_img_estado" runat="server" ToolTip="Pendiente" ImageUrl="../Imagenes/iconos/Informacion2.png" Style="border-width: 0px;" />
-                                            </ItemTemplate>
-                                           <HeaderStyle Width="30px" />
-                                           <ItemStyle Width="30px" />                                           
-                                        </telerik:GridTemplateColumn>
-
-
-                                         <telerik:GridTemplateColumn UniqueName="colm_fecha_fact" Visible="false" HeaderText="F2"  AllowFiltering="false">
-                                            <HeaderStyle Width="30" />
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="col_hlk_edit" runat="server" Width="10"
-                                                    ImageUrl="../Imagenes/iconos/dollar.png" ToolTip="Fecha pago / contabilización"
-                                                    OnClick="Editar_fp_Click">
-                                                    <asp:Image ID="img_editar" runat="server" ImageUrl="../Imagenes/iconos/dollar.png" Style="border-width: 0px;" />
-                                                </asp:LinkButton>
-                                            </ItemTemplate>
-                                             <HeaderStyle Width="30px" />
-                                           <ItemStyle Width="30px" />      
-                                        </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn  UniqueName="colm_rechazar" Visible="false" HeaderText="Rechazar" AllowFiltering="false">
-                                            <ItemTemplate>
-                                                <asp:HyperLink ID="col_hlk_reversar" runat="server" ImageUrl="../Imagenes/iconos/s_warn.png" ToolTip="Rechazar radicado"/>
-                                            </ItemTemplate>
-                                           <HeaderStyle Width="30px" />
-                                           <ItemStyle Width="30px" />                                           
-                                        </telerik:GridTemplateColumn>
-                                         <telerik:GridTemplateColumn  UniqueName="colm_anular" Visible="false" HeaderText="Anular" AllowFiltering="false">
-                                            <ItemTemplate>
-                                                <asp:HyperLink ID="col_hlk_anular" runat="server" ImageUrl="../Imagenes/iconos/arrow_left.png" ToolTip="Anular radicado"/>
-                                            </ItemTemplate>
-                                           <HeaderStyle Width="30px" />
-                                           <ItemStyle Width="30px" />                                           
-                                        </telerik:GridTemplateColumn>
-                                        <telerik:GridTemplateColumn  UniqueName="colm_actualizar" Visible="false" HeaderText="" AllowFiltering="false">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="col_hlk_actualizar" runat="server" Width="10"
-                                                    ImageUrl="../Imagenes/iconos/refresh.png" ToolTip="Actualizar GJ"
-                                                    OnClick="Editar_gj_click">
-                                                    <asp:Image ID="Image1" runat="server" ImageUrl="../Imagenes/iconos/refresh.png" Style="border-width: 0px;" />
-                                                </asp:LinkButton>
-                                            </ItemTemplate>
-                                           <HeaderStyle Width="30px" />
-                                           <ItemStyle Width="30px" />                                           
-                                        </telerik:GridTemplateColumn>
-                                        <telerik:GridBoundColumn DataField="codigo"
-                                            FilterControlAltText="Filter codigo column"
-                                            HeaderText="# radicado" SortExpression="codigo"
-                                            UniqueName="colm_codigo" >
-                                            <HeaderStyle Width="120px" />                                            
-                                            <ItemStyle Width="120px" />
+                                        <%--<telerik:GridBoundColumn DataField="codigo_anticipo"
+                                            FilterControlAltText="Filter codigo_anticipo column"
+                                            HeaderText="Código anticipo" SortExpression="codigo_anticipo"
+                                            UniqueName="colm_codigo_anticipo" >
+                                            <HeaderStyle Width="50px" />                                            
+                                            <ItemStyle Width="50px" />
+                                        </telerik:GridBoundColumn>--%>
+                                        <telerik:GridBoundColumn DataField="codigo_par"
+                                            FilterControlAltText="Filter codigo_par column"
+                                            HeaderText="Código PAR" SortExpression="codigo_par"
+                                            UniqueName="colm_codigo_par" >
+                                            <HeaderStyle Width="50px" />                                            
+                                            <ItemStyle Width="50px" />
                                         </telerik:GridBoundColumn>
-                                         <telerik:GridBoundColumn DataField="codigo_GJ"
-                                            FilterControlAltText="Filter codigo_GJ column"
-                                            HeaderText="Código GJ" SortExpression="codigo_GJ"
-                                            UniqueName="colm_codigo_gj" >
-                                            <HeaderStyle Width="120px" />                                            
-                                            <ItemStyle Width="120px" />
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridDateTimeColumn DataField="fecha_radicado" HeaderText="Fecha" FilterControlWidth="120px"
-                                            SortExpression="fecha_radicado" PickerType="DatePicker" EnableTimeIndependentFiltering="true"
-                                            DataFormatString="{0:MM/dd/yyyy hh:mm}">
-                                            <HeaderStyle Width="125px" />                                            
-                                            <ItemStyle Width="125px" />
-                                        </telerik:GridDateTimeColumn>
-                                        <telerik:GridDateTimeColumn DataField="fecha_pago_contabilizacion" HeaderText="Fecha de pago" FilterControlWidth="120px"
-                                            SortExpression="fecha_pago_contabilizacion" PickerType="DatePicker" EnableTimeIndependentFiltering="true"
-                                            DataFormatString="{0:MM/dd/yyyy}">
-                                            <HeaderStyle Width="125px" />                                            
-                                            <ItemStyle Width="125px" />
-                                        </telerik:GridDateTimeColumn>
-                                        <telerik:GridBoundColumn DataField="nombre_subregion"
-                                            FilterControlAltText="Filter nombre_subregion column"
-                                            HeaderText="Regional" SortExpression="nombre_subregion"
-                                            UniqueName="colm_nombre_subregion" >
-                                            <HeaderStyle Width="250px" />                                            
-                                            <ItemStyle Width="250px" />
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="nombre_responsable"
-                                            FilterControlAltText="Filter nombre_responsable column"
-                                            HeaderText="Responsable" SortExpression="nombre_responsable"
-                                            UniqueName="colm_responsable" >
-                                            <HeaderStyle Width="250px" />                                            
-                                            <ItemStyle Width="250px" />
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="identificacion_tercero_a_pagar"
-                                            FilterControlAltText="Filter identificacion_tercero_a_pagar column" visible="false"
-                                            HeaderText="# identificación" SortExpression="identificacion_tercero_a_pagar"
-                                            UniqueName="colm_identificacion_tercero_a_pagar" >
-                                            <HeaderStyle Width="140px" />                                            
-                                            <ItemStyle Width="140px" />
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="tercero_a_pagar"
-                                            FilterControlAltText="Filter tercero_a_pagar column"
-                                            HeaderText="Nombre tercero" SortExpression="tercero_a_pagar"
-                                            UniqueName="colm_tercero_a_pagar" >
-                                            <HeaderStyle Width="170px" />                                            
-                                            <ItemStyle Width="170px" />
-                                        </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="detalle"
-                                            FilterControlAltText="Filter detalle column"
-                                            HeaderText="DOCUMENTO <small>(Factura, Cta Cobro, PTR, etc.)</small>" SortExpression="detalle"
-                                            UniqueName="colm_detalle" >
-                                            <HeaderStyle Width="250px" />                                            
-                                            <ItemStyle Width="250px" />
-                                        </telerik:GridBoundColumn>
-                                        
-                                        
-                                        <telerik:GridNumericColumn HeaderStyle-Width="110px" FilterControlWidth="110px" DataField="valor_factura"
-                                             ItemStyle-HorizontalAlign="Right" FooterStyle-HorizontalAlign="Right" HeaderStyle-HorizontalAlign="Right"
-                                            DataType="System.Decimal" HeaderText="Valor" Aggregate="Sum" DataFormatString="{0:n}">
-                                            <FooterStyle Font-Bold="true"></FooterStyle>
-                                            <HeaderStyle Width="170px" />                                            
-                                            <ItemStyle Width="170px" />
-                                        </telerik:GridNumericColumn>
-                                        <telerik:GridBoundColumn DataField="caracter"
-                                            FilterControlAltText="Filter caracter column"
-                                            HeaderText="Caracter" SortExpression="caracter"
-                                            UniqueName="colm_caracter" >
-                                            <HeaderStyle Width="120px" />                                            
-                                            <ItemStyle Width="120px" />
-                                        </telerik:GridBoundColumn>
-                                         <telerik:GridBoundColumn DataField="tipo_documento"
-                                            FilterControlAltText="Filter tipo_documento column"
-                                            HeaderText="Tipo de documento" SortExpression="tipo_documento"
-                                            UniqueName="colm_tipo_documento" >
+                                        <telerik:GridBoundColumn DataField="usuario_solicita"
+                                            FilterControlAltText="Filter usuario_solicita column"
+                                            HeaderText="Usuario" SortExpression="usuario_solicita"
+                                            UniqueName="colm_usuario_solicita" >
                                             <HeaderStyle Width="200px" />                                            
                                             <ItemStyle Width="200px" />
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="estado_radicado"
-                                            FilterControlAltText="Filter estado_radicado column"
-                                            HeaderText="Estado" SortExpression="estado_radicado"
-                                            UniqueName="colm_estado" >
-                                            <HeaderStyle Width="120px" />                                            
-                                            <ItemStyle Width="120px" />
+                                        <telerik:GridBoundColumn DataField="motivo"
+                                            FilterControlAltText="Filter motivo column"
+                                            HeaderText="Motivo" SortExpression="motivo"
+                                            UniqueName="colm_motivo" >
+                                            <HeaderStyle Width="200px" />                                            
+                                            <ItemStyle Width="200px" />
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn DataField="fuera_tiempo_text" visible="false"
-                                            FilterControlAltText="Filter fuera_tiempo_text column"
-                                            HeaderText="Fuera de tiempo" SortExpression="fuera_tiempo_text"
-                                            UniqueName="colm_fuera_tiempo" >
-                                            <HeaderStyle Width="120px" />                                            
-                                            <ItemStyle Width="120px" />
+                                        <telerik:GridNumericColumn HeaderStyle-Width="110px" FilterControlWidth="110px" DataField="valor_total"
+                                             ItemStyle-HorizontalAlign="Right" 
+                                            DataType="System.Decimal" HeaderText="Valor" DataFormatString="{0:n0}">
+                                        </telerik:GridNumericColumn>
+                                        <telerik:GridBoundColumn DataField="tipo_par"
+                                            FilterControlAltText="Filter tipo_par column"
+                                            HeaderText="Tipo" SortExpression="tipo_par"
+                                            UniqueName="colm_tipo_par" >
+                                            <HeaderStyle Width="250px" />                                            
+                                            <ItemStyle Width="250px" />
                                         </telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn  DataField="id_estado"  FilterControlAltText="Filter id_estado column"  SortExpression="id_estado" UniqueName="id_estado" Visible="true" Display="false"></telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn  DataField="id_usuario_crea"  FilterControlAltText="Filter id_usuario_crea column"  SortExpression="id_estado" UniqueName="id_usuario_crea" Visible="true" Display="false"></telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn  DataField="id_usuario_aprobo"  FilterControlAltText="Filter id_usuario_aprobo column"  SortExpression="id_usuario_aprobo" UniqueName="id_usuario_aprobo" Visible="true" Display="false"></telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn  DataField="radicado_pago_contabilizacion"  FilterControlAltText="Filter radicado_pago_contabilizacion column"  SortExpression="radicado_pago_contabilizacion" UniqueName="radicado_pago_contabilizacion" Visible="true" Display="false"></telerik:GridBoundColumn>
-                                        <telerik:GridBoundColumn  DataField="anulado"  FilterControlAltText="Filter anulado column"  SortExpression="anulado" UniqueName="anulado" Visible="true" Display="false"></telerik:GridBoundColumn>
-                             
+                                        <telerik:GridBoundColumn DataField="sub_region"
+                                            FilterControlAltText="Filter sub_region column"
+                                            HeaderText="Regional" SortExpression="sub_region"
+                                            UniqueName="colm_sub_region" >
+                                            <HeaderStyle Width="200px" />                                            
+                                            <ItemStyle Width="200px" />
+                                        </telerik:GridBoundColumn>
+                                         <telerik:GridDateTimeColumn DataField="fecha_anticipo" HeaderText="Fecha requiere anticipo" FilterControlWidth="110px"
+                                            SortExpression="fecha_anticipo" PickerType="DatePicker" EnableTimeIndependentFiltering="true" FilterDateFormat="dd/MM/yyyy"
+                                            DataFormatString="{0:dd/MM/yyyy}">
+                                        </telerik:GridDateTimeColumn>
+                                       
+                                     <telerik:GridTemplateColumn  UniqueName="colm_seguimiento" Visible="false" HeaderText="F1" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_seguimiento" runat="server" ImageUrl="../Imagenes/iconos/Informacion2.png" ToolTip="Pendiente de envío por aprobación" Target="_self" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn  UniqueName="colm_verificacion_fondos" Visible="false" HeaderText="F2" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_verificacion_fondos" runat="server" ToolTip="" Target="_self" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn  UniqueName="colm_legalizacion" Visible="false" HeaderText="F3" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_legalizacion" runat="server" ImageUrl="../Imagenes/iconos/Informacion2.png" ToolTip="Legalización del anticipo" Target="_self" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
+                                         <%--   <telerik:GridTemplateColumn  UniqueName="colm_facturacion" Visible="false" HeaderText="F4" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_facturacion" runat="server" ImageUrl="../Imagenes/iconos/note_edit.png" ToolTip="Facturación" Target="_self" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridBoundColumn  DataField="editar_solicitud"  FilterControlAltText="Filter editar_solicitud column"  SortExpression="editar_solicitud" UniqueName="editar_solicitud" Visible="true" Display="false">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn  DataField="editar_legalizacion"  FilterControlAltText="Filter editar_legalizacion column"  SortExpression="editar_legalizacion" UniqueName="editar_legalizacion" Visible="true" Display="false">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn  DataField="editar_informe"  FilterControlAltText="Filter editar_informe column"  SortExpression="editar_informe" UniqueName="editar_informe" Visible="true" Display="false">
+                                        </telerik:GridBoundColumn>
+
+                                        <telerik:GridBoundColumn  DataField="habilitar_facturacion"  FilterControlAltText="Filter habilitar_facturacion column"  SortExpression="habilitar_facturacion" UniqueName="habilitar_facturacion" Visible="true" Display="false">
+                                        </telerik:GridBoundColumn> --%>
+
+                                        <telerik:GridBoundColumn  DataField="id_usuario_app"  FilterControlAltText="Filter id_usuario_app column"  SortExpression="id_usuario_app" UniqueName="id_usuario_app" Visible="true" Display="false">
+                                        </telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn  DataField="id_usuario_app_legalizacion"  FilterControlAltText="Filter id_usuario_app_legalizacion column"  SortExpression="id_usuario_app" UniqueName="id_usuario_app_legalizacion" Visible="true" Display="false">
+                                        </telerik:GridBoundColumn>
+                                        <%-- <telerik:GridBoundColumn  DataField="id_usuario_app_legalizacion"  FilterControlAltText="Filter id_usuario_app_legalizacion column"  SortExpression="id_usuario_app_legalizacion" UniqueName="id_usuario_app_legalizacion" Visible="true" Display="false"></telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn  DataField="requiere_servicio_aereo"  FilterControlAltText="Filter requiere_servicio_aereo column"  SortExpression="requiere_servicio_aereo" UniqueName="requiere_servicio_aereo" Visible="true" Display="false"></telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn  DataField="id_usuario_app_informe"  FilterControlAltText="Filter id_usuario_app_informe column"  SortExpression="id_usuario_app_informe" UniqueName="id_usuario_app_informe" Visible="true" Display="false"></telerik:GridBoundColumn> --%>
+                                        <telerik:GridBoundColumn  DataField="id_usuario_radica"  FilterControlAltText="Filter id_usuario_radica column"  SortExpression="id_usuario_radica" UniqueName="id_usuario_radica" Visible="true" Display="false"></telerik:GridBoundColumn>
+                                        <%--<telerik:GridBoundColumn  DataField="numero_reserva"  FilterControlAltText="Filter numero_reserva column"  SortExpression="numero_reserva" UniqueName="numero_reserva" Visible="true" Display="false"></telerik:GridBoundColumn>
+                                        <telerik:GridBoundColumn  DataField="id_usuario_radico"  FilterControlAltText="Filter id_usuario_radico column"  SortExpression="id_usuario_radico" UniqueName="id_usuario_radico" Visible="true" Display="false"></telerik:GridBoundColumn>--%>
+                                        <telerik:GridTemplateColumn  UniqueName="colm_anular" Visible="false" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_revertir" runat="server" ImageUrl="../Imagenes/iconos/arrow_left.png" ToolTip="Anular viaje" Target="_self" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn FilterControlAltText="filtro Permisos column" UniqueName="colm_permisos" visible="false" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_mod" runat="server" ImageUrl="~/Imagenes/iconos/refresh.png" ToolTip="Permisos" />
+                                            </ItemTemplate>
+                                            <ItemStyle Width="30px" />
+                                            <HeaderStyle Width="30px" />                                                                                         
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridTemplateColumn  UniqueName="colm_detalle" AllowFiltering="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_detalle" runat="server" ImageUrl="../Imagenes/iconos/printer_off.png" ToolTip="Ver detalle" Target="_blank" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
+                                        <telerik:GridBoundColumn DataField="anulado" Visible="false"></telerik:GridBoundColumn>
+                                        <telerik:GridTemplateColumn  UniqueName="colm_xls" AllowFiltering="false" visible="false">
+                                            <ItemTemplate>
+                                                <asp:HyperLink ID="col_hlk_download" runat="server" ImageUrl="../Imagenes/iconos/xlsx.png" ToolTip="Descargar participantes" Target="_blank" />
+                                            </ItemTemplate>
+                                           <HeaderStyle Width="25px" />
+                                           <ItemStyle Width="25px" />                                           
+                                        </telerik:GridTemplateColumn>
                                     </Columns>
                                 </MasterTableView>
-                            </telerik:RadGrid>--%>
+                            </telerik:RadGrid>
                         </div>
 
                     </div>
 
                       
             </div>
-            <asp:HiddenField runat="server" ID="identity" Value="0" />
-            
-
             <div class="modal fade bs-example-modal-sm" id="modalConfirm" data-backdrop="static" data-keyboard="false">
                 <div class="vertical-alignment-helper">
                     <div class="modal-dialog modal-sm vertical-align-center">
@@ -311,16 +347,5 @@
                
 
     </section>
-
-    <script type="text/javascript">
-        function loadEditModal() {
-            $('#EditTC').modal('show');
-        }
-        function hideDeleteModal() {
-            $('#EditTC').modal('hide');
-        }
-        function loadGJModal() {
-            $('#EditGJ').modal('show');
-        }
-            </script>
+   
 </asp:Content>

@@ -310,7 +310,7 @@
                                            <ItemStyle Width="25px" />                                           
                                         </telerik:GridTemplateColumn>
                                         <telerik:GridBoundColumn DataField="anulado" Visible="false"></telerik:GridBoundColumn>
-                                         <telerik:GridTemplateColumn UniqueName="colm_generar_documento" Visible="true" AllowFiltering="false">
+                                        <telerik:GridTemplateColumn UniqueName="colm_generar_documento" Visible="false" AllowFiltering="false">
                                             <HeaderStyle Width="25px" />
                                            <ItemStyle Width="25px" />   
                                                 <ItemTemplate>

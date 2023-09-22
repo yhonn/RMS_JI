@@ -115,6 +115,9 @@ Public Class frm_viaje_legalizacionPrint
             Me.grd_soportes.DataSource = archivos
             Me.grd_soportes.DataBind()
 
+            Me.grd_comentarios.DataSource = clss_approval.get_Document_Comments_special(viajeDetail.id_documento_legalizacion.ToString())
+            Me.grd_comentarios.DataBind()
+
         End Using
     End Sub
     Protected Sub grd_soportes_ItemDataBound(ByVal sender As Object, ByVal e As Telerik.Web.UI.GridItemEventArgs) Handles grd_soportes.ItemDataBound

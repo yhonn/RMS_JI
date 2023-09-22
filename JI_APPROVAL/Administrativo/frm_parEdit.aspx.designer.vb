@@ -464,6 +464,33 @@ Partial Public Class frm_parEdit
     Protected WithEvents RequiredFieldValidator28 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''blt_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents blt_estrategia As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''cmb_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cmb_estrategia As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''RequiredFieldValidator22 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator22 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Label19 control.
     '''</summary>
     '''<remarks>

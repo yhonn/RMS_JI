@@ -117,6 +117,14 @@
                         <td style="width: 210px; border-bottom: 1px solid black;" class="center">
                             <asp:Label runat="server" ID="lbl_codigo_viaje"></asp:Label></td>
                     </tr>
+
+                    <tr>
+                        <td class="subtituloPAR">Estrategía</td>
+                        <td style="width: 210px; border-bottom: 1px solid black;" class="center">
+                            <asp:Label runat="server" ID="lbl_estrategia"></asp:Label></td>
+                        <td style="width: 150px; padding-left: 20px" colspan="2" class="subtituloPAR"></td>
+
+                    </tr>
                    
                     <%--<tr>
                         <td class="subtituloPAR" >Ver en el sistema</td>
@@ -614,13 +622,20 @@
                                             UniqueName="porcentaje_perdiem">
                                             <HeaderStyle CssClass="wrapWord"  />
                                         </telerik:GridBoundColumn>
-                                         <telerik:GridBoundColumn DataField="valor_perdiem"
+                                          <telerik:GridBoundColumn DataField="valor_perdiem"
+                                            FilterControlAltText="Filter valor_perdiem column"  HeaderStyle-Font-Bold="true"
+                                            HeaderText="Tarifa base" SortExpression="valor_perdiem"
+                                            DataFormatString="{0:n0}"
+                                            UniqueName="valor_perdiem">
+                                            <HeaderStyle CssClass="wrapWord"  />
+                                        </telerik:GridBoundColumn>
+                                         <%--<telerik:GridBoundColumn DataField="valor_perdiem"
                                             FilterControlAltText="Filter valor_perdiem column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="M&IE Rate" SortExpression="valor_perdiem"
                                             DataFormatString="{0:n0}"
                                             UniqueName="valor_perdiem">
                                             <HeaderStyle CssClass="wrapWord"  />
-                                        </telerik:GridBoundColumn>
+                                        </telerik:GridBoundColumn>--%>
                                          <telerik:GridBoundColumn DataField="numero_dias"
                                             FilterControlAltText="Filter numero_dias column"  HeaderStyle-Font-Bold="true"
                                             HeaderText="# días" SortExpression="numero_dias"

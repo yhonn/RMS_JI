@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class frm_viajeDetalle2
+Partial Public Class frm_anticipoDetalle
 
     '''<summary>
     '''imgChemo control.
@@ -77,6 +77,24 @@ Partial Public Class frm_viajeDetalle2
     Protected WithEvents lbl_fecha_solicitud As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''lbl_par control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_par As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_codigo_anticipo control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_codigo_anticipo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''lbl_regional control.
     '''</summary>
     '''<remarks>
@@ -86,22 +104,40 @@ Partial Public Class frm_viajeDetalle2
     Protected WithEvents lbl_regional As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lbl_codigo_viaje control.
+    '''lbl_tipo_Anticipo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_codigo_viaje As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_tipo_Anticipo As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lbl_estrategia control.
+    '''lbl_medio_pago control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lbl_estrategia As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_medio_pago As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_observaciones_mp control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_observaciones_mp As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''lbl_comision_mp control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_comision_mp As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''lbl_motivo control.
@@ -113,31 +149,85 @@ Partial Public Class frm_viajeDetalle2
     Protected WithEvents lbl_motivo As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''grd_itinerario control.
+    '''eventos control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents grd_itinerario As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents eventos As Global.System.Web.UI.HtmlControls.HtmlTableRow
 
     '''<summary>
-    '''grd_hotel control.
+    '''grd_rutas control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents grd_hotel As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents grd_rutas As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
-    '''RadGrid1 control.
+    '''grd_participantes control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RadGrid1 As Global.Telerik.Web.UI.RadGrid
+    Protected WithEvents grd_participantes As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''lbl_observaciones control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lbl_observaciones As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''doc_df control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents doc_df As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''doc_legalizacion control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents doc_legalizacion As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
+    '''grd_ruta_solicitud control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents grd_ruta_solicitud As Global.Telerik.Web.UI.RadGrid
+
+    '''<summary>
+    '''compras control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents compras As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
+    '''grd_compras control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents grd_compras As Global.Telerik.Web.UI.RadGrid
 
     '''<summary>
     '''grd_cate control.
@@ -147,148 +237,4 @@ Partial Public Class frm_viajeDetalle2
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents grd_cate As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''lbl_fecha_hora_inicio control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_fecha_hora_inicio As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lbl_fecha_hora_fin control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_fecha_hora_fin As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lbl_fecha_radicacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_fecha_radicacion As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lbl_Tasa_ser control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_Tasa_ser As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lbl_total_legalizacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_total_legalizacion As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Label3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''grd_pasajes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_pasajes As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''grd_reuniones control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_reuniones As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''grd_miscelaneos control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_miscelaneos As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''grd_alimentacion_alojamiento control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_alimentacion_alojamiento As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''grd_soportes control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_soportes As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''grd_cate_legalizacion control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_cate_legalizacion As Global.Telerik.Web.UI.RadGrid
-
-    '''<summary>
-    '''lbl_resultados control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_resultados As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lbl_actividades control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_actividades As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''lbl_lugares_visitados control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lbl_lugares_visitados As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''grd_cate_informe control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents grd_cate_informe As Global.Telerik.Web.UI.RadGrid
 End Class

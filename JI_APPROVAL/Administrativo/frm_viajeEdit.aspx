@@ -157,7 +157,15 @@
                                             ControlToValidate="rbn_tipo_viaje" CssClass="Error" Display="Dynamic"
                                             ErrorMessage="Campo obligatorio" ValidationGroup="1">*</asp:RequiredFieldValidator>
                             </div>
-                            
+                            <div class="col-sm-6 col-md-6 col-lg-3">
+                                <asp:Label runat="server" ID="blt_estrategia" CssClass="control-label text-bold">Estrategia:</asp:Label>
+                                <br />
+                               <telerik:RadComboBox ID="cmb_estrategia" emptymessage="Seleccione..."  Height="200px" Filter="Contains" runat="server" Width="90%">
+                                </telerik:RadComboBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                            ControlToValidate="cmb_estrategia" CssClass="Error" Display="Dynamic"
+                                            ErrorMessage="Campo obligatorio" ValidationGroup="1">*</asp:RequiredFieldValidator>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-12 col-md-12 col-lg-12">

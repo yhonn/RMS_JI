@@ -70,16 +70,16 @@ Public Class frm_viajeDetalle
     Sub fillGridLegalizacion(ByVal id_viaje As Integer)
         Using dbEntities As New dbRMS_JIEntities
             Dim legalizadionDetalle = dbEntities.vw_tme_solicitud_viaje_legalizacion.Where(Function(p) p.id_viaje = id_viaje).ToList()
-            Me.grd_general.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 1).ToList()
+            Me.grd_general.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 1).OrderBy(Function(p) p.fecha).ToList()
             Me.grd_general.DataBind()
 
-            Me.grd_reuniones.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 2).ToList()
+            Me.grd_reuniones.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 2).OrderBy(Function(p) p.fecha).ToList()
             Me.grd_reuniones.DataBind()
 
-            Me.grd_miscelaneos.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 3).ToList()
+            Me.grd_miscelaneos.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 3).OrderBy(Function(p) p.fecha).ToList()
             Me.grd_miscelaneos.DataBind()
 
-            Me.grd_alimentacion_alojamiento.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 4).ToList()
+            Me.grd_alimentacion_alojamiento.DataSource = legalizadionDetalle.Where(Function(p) p.id_tipo_legalizacion = 4).OrderBy(Function(p) p.fecha).ThenBy(Function(p) p.porcentaje_perdiem).ToList()
             Me.grd_alimentacion_alojamiento.DataBind()
         End Using
 

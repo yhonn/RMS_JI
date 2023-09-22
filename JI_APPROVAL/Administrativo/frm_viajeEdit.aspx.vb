@@ -213,6 +213,9 @@ Public Class frm_viajeEdit
                 Me.btn_guardar.Visible = False
             End If
 
+            If viaje.id_estrategia IsNot Nothing Then
+                Me.cmb_estrategia.SelectedValue = viaje.id_estrategia
+            End If
 
 
             Session("dtItinerario") = dtItinerario
@@ -355,6 +358,12 @@ Public Class frm_viajeEdit
             Me.cmb_departamento_hotel.SelectedValue = departamentos.FirstOrDefault().id_departamento
             Me.cmb_departamento_hotel.DataBind()
 
+            Me.cmb_estrategia.DataSourceID = ""
+            Me.cmb_estrategia.DataSource = dbEntities.tme_estrategia.Where(Function(p) p.id_programa = id).ToList()
+            Me.cmb_estrategia.DataTextField = "estrategia"
+            Me.cmb_estrategia.DataValueField = "id_estrategia"
+            Me.cmb_estrategia.DataBind()
+
             'Me.rbn_tipo_viaje.DataSource = dbEntities.tme_tipo_viaje.ToList()
             'Me.rbn_tipo_viaje.DataValueField = "id_tipo_viaje"
             'Me.rbn_tipo_viaje.DataTextField = "tipo_viaje"
@@ -368,18 +377,21 @@ Public Class frm_viajeEdit
             If regionesUsuario.Count() = 1 Then
                 Dim subRegion = regionesUsuario.Select(Function(p) _
                                             New With {Key .nombre_subregion = p.t_subregiones.t_regiones.nombre_region & " - " & p.t_subregiones.nombre_subregion,
-                                                      Key .id_subregion = p.id_subregion}).ToList()
+                                                      Key .id_subregion = p.id_subregion,
+                                                      Key .visible = p.t_subregiones.visible}).Where(Function(p) p.visible.Value = True).ToList()
                 Me.cmb_sub_Region.DataSource = subRegion
             ElseIf regionesUsuario.Count() > 0 Then
                 Dim subRegion = regionesUsuario.Select(Function(p) _
                                              New With {Key .nombre_subregion = p.t_subregiones.t_regiones.nombre_region & " - " & p.t_subregiones.nombre_subregion,
-                                                       Key .id_subregion = p.id_subregion}).ToList()
+                                                       Key .id_subregion = p.id_subregion,
+                                                       Key .visible = p.t_subregiones.visible}).Where(Function(p) p.visible.Value = True).ToList()
                 Me.cmb_sub_Region.DataSource = subRegion
                 Me.subRegionVisible.Visible = True
             Else
                 Dim subRegion = dbEntities.t_subregiones.Where(Function(p) p.t_regiones.id_programa = id).Select(Function(p) _
                                              New With {Key .nombre_subregion = p.t_regiones.nombre_region & " - " & p.nombre_subregion,
-                                                       Key .id_subregion = p.id_subregion}).ToList()
+                                                       Key .id_subregion = p.id_subregion,
+                                                       Key .visible = p.visible}).Where(Function(p) p.visible.Value = True).ToList()
                 Me.cmb_sub_Region.DataSource = subRegion
                 Me.subRegionVisible.Visible = True
             End If
@@ -757,11 +769,21 @@ Public Class frm_viajeEdit
 
 
     End Function
-    Public Function guardarDocumento(ByVal viaje As tme_solicitud_viaje, ByVal usuario As t_usuarios) As Integer
+    Public Function guardarDocumento(ByVal viaje As tme_solicitud_viaje, ByVal usuario As t_usuarios, ByVal diasViaje As Integer) As Integer
+
+
+
+
         Dim id_categoriaAPP = 2042
         Dim cls_viaje As APPROVAL.clss_viaje = New APPROVAL.clss_viaje(Convert.ToInt32(Me.Session("E_IDprograma")))
-        Dim tblUserApprovalTimeSheet As DataTable = cls_viaje.get_ViajeApprovalUser(viaje.id_usuario, id_categoriaAPP)
-        Dim id_tipoDoc = tblUserApprovalTimeSheet.Rows(0).Item("id_tipoDocumento")
+        Dim tblUserApprovalTravel As DataTable = New DataTable
+
+        If diasViaje > 2 Then
+            tblUserApprovalTravel = cls_viaje.get_ViajeApprovalUserMayor3(viaje.id_usuario)
+        Else
+            tblUserApprovalTravel = cls_viaje.get_ViajeApprovalUser(viaje.id_usuario, id_categoriaAPP)
+        End If
+        Dim id_tipoDoc = tblUserApprovalTravel.Rows(0).Item("id_tipoDocumento")
 
         Dim descripcion = String.Format("Solicitud de viaje {0} {1} - fecha {2}", usuario.nombre_usuario, usuario.apellidos_usuario, viaje.fecha_inicio_viaje)
         Dim err As Boolean = False
@@ -807,7 +829,7 @@ Public Class frm_viajeEdit
         clss_approval.set_ta_AppDocumentoFIELDS("id_estadoDoc", cOPEN, "id_app_documento", 0)
         clss_approval.set_ta_AppDocumentoFIELDS("observacion", descripcion, "id_app_documento", 0) '.Replace("'", "''")
         clss_approval.set_ta_AppDocumentoFIELDS("id_usuario_app", Me.Session("E_IdUser"), "id_app_documento", 0)
-        clss_approval.set_ta_AppDocumentoFIELDS("id_role_app", tblUserApprovalTimeSheet.Rows(0).Item("id_rol"), "id_app_documento", 0)
+        clss_approval.set_ta_AppDocumentoFIELDS("id_role_app", tblUserApprovalTravel.Rows(0).Item("id_rol"), "id_app_documento", 0)
         clss_approval.set_ta_AppDocumentoFIELDS("datecreated", Date.UtcNow, "id_app_documento", 0)
 
         Dim id_appdocumento = clss_approval.save_ta_AppDocumento()
@@ -1003,6 +1025,7 @@ Public Class frm_viajeEdit
                     viaje.motivo_viaje = Me.txt_motivo_viaje.Text
                     viaje.id_tipo_viaje = Me.rbn_tipo_viaje.SelectedValue
                     viaje.id_sub_region = Convert.ToInt32(Me.cmb_sub_Region.SelectedValue)
+                    viaje.id_estrategia = Me.cmb_estrategia.SelectedValue
                     'viaje.codigo_solicitud_viaje = "V-JI-" & codigoSolicitud.Single()
                     'viaje.id_cargo = usuario.id_job_title
                     dbEntities.Entry(viaje).State = Entity.EntityState.Modified
@@ -1140,16 +1163,27 @@ Public Class frm_viajeEdit
                     If enviarAprobacion Then
                         If viaje.ta_documento_viaje.Where(Function(p) p.reversado Is Nothing).Count() = 0 Then
 
+                            Dim diasViaje = 0
+                            If viaje.fecha_inicio_viaje IsNot Nothing And viaje.fecha_fin_viaje IsNot Nothing Then
+                                diasViaje = DateDiff(DateInterval.Day, viaje.fecha_inicio_viaje.Value, viaje.fecha_fin_viaje.Value)
+                            End If
+
                             Dim id_categoriaAPP = 2042
                             Dim cls_viaje As APPROVAL.clss_viaje = New APPROVAL.clss_viaje(Convert.ToInt32(Me.Session("E_IDprograma")))
-                            Dim tblUserApprovalTimeSheet As DataTable = cls_viaje.get_ViajeApprovalUser(viaje.id_usuario, id_categoriaAPP)
+                            Dim tblUserApprovalTravel As DataTable = New DataTable
 
-                            If tblUserApprovalTimeSheet.Rows.Count() = 0 Then
+                            If diasViaje > 2 Then
+                                tblUserApprovalTravel = cls_viaje.get_ViajeApprovalUserMayor3(viaje.id_usuario)
+                            Else
+                                tblUserApprovalTravel = cls_viaje.get_ViajeApprovalUser(viaje.id_usuario, id_categoriaAPP)
+                            End If
+
+                            If tblUserApprovalTravel.Rows.Count() = 0 Then
                                 Me.lblerr_user.Text = "El viaje fue guardado correctamente, sin embargo no se puede iniciar la aprobación debido a que no está vinculado a ninguna ruta de aprobación de solicitud de viajes, contáctese con el administrador."
                                 Me.lblerr_user.Visible = True
                                 guardar = False
                             Else
-                                Dim id_documento = guardarDocumento(viaje, viaje.t_usuarios)
+                                Dim id_documento = guardarDocumento(viaje, viaje.t_usuarios, diasViaje)
                                 guardar = True
                             End If
 

@@ -104,7 +104,7 @@ Public Class frm_parDetalle
             Me.lbl_aprobado.Text = par.nombre_departamento & " - " & par.nombre_municipio
             Me.lbl_cargo.Text = par.cargo_usuario
             Me.lbl_codigo_rfa.Text = If(par.asociado_actividad = True, par.subactividad, "")
-            Me.lbl_departamento.Text = par.nombre_region
+            Me.lbl_departamento.Text = par.nombre_region & " - " & par.nombre_subregion
 
             Me.rbn_tipo_solicitud.DataSource = dbEntities.tme_tipo_solicitud_par.ToList()
             Me.rbn_tipo_solicitud.DataValueField = "id_tipo_solicitud"
@@ -145,6 +145,10 @@ Public Class frm_parDetalle
             Me.lbl_codigo_par.Text = par.codigo_par
             Me.lbl_date_received.Text = String.Format("{0:MM/dd/yyyy}", par.fecha_solicitud)
             Me.lbl_asociado_comunicaciones.Text = par.asociado_comunicaciones_text
+
+            If par.id_estrategia IsNot Nothing Then
+                Me.lbl_estrategia.Text = par.estrategia
+            End If
             'Dim legalizacion = dbEntities.vw_tme_solicitud_viaje.Where(Function(p) p.id_viaje = id_viaje).FirstOrDefault()
 
             'Me.lbl_usuario.Text = viaje.nombre_usuario

@@ -538,7 +538,7 @@ Public Class frm_viaje_legalizacion
         Me.viaje_8.Visible = False
         Me.viaje_9_2.Visible = True
         Me.viaje_9.Visible = True
-
+        Dim id_viaje = Convert.ToInt32(Me.idViaje.Value)
         Using dbEntities As New dbRMS_JIEntities
             Dim id = Convert.ToInt32(Me.Session("E_IDPrograma").ToString())
             If Me.dt_fecha_inicio.SelectedDate IsNot Nothing And Me.dt_fecha_fin.SelectedDate IsNot Nothing And Me.rt_hora_inicio.SelectedTime IsNot Nothing And Me.rt_hora_fin.SelectedTime IsNot Nothing Then
@@ -577,7 +577,14 @@ Public Class frm_viaje_legalizacion
                     Me.cmb_tipo_legalizacion.DataValueField = "id_tipo_legalizacion"
                     Me.cmb_tipo_legalizacion.DataBind()
                 End If
+                Me.dt_fecha_adquirio_servicio.MinDate = Me.dt_fecha_inicio.SelectedDate
+                Me.dt_fecha_adquirio_servicio.MaxDate = Me.dt_fecha_fin.SelectedDate
+            Else
+                Dim viaje = dbEntities.tme_solicitud_viaje.Find(id_viaje)
+                Me.dt_fecha_adquirio_servicio.MinDate = viaje.fecha_inicio_viaje
+                Me.dt_fecha_adquirio_servicio.MaxDate = viaje.fecha_fin_viaje
             End If
+
         End Using
 
     End Sub
@@ -874,8 +881,8 @@ Public Class frm_viaje_legalizacion
             Me.rv_dia_rbn.Visible = False
             Me.rv_dia_rbn.ControlToValidate = ""
             If Me.cmb_municipio.SelectedValue <> "" Then
-                Me.rv_dia_rbn.Visible = True
-                Me.rv_dia_rbn.ControlToValidate = "rbn_dia"
+                'Me.rv_dia_rbn.Visible = True
+                'Me.rv_dia_rbn.ControlToValidate = "rbn_dia"
             End If
 
             Me.rbn_zona_legalizacion.Items.Clear()
@@ -889,17 +896,21 @@ Public Class frm_viaje_legalizacion
                 'If municipio.mye_rate_usd > 0 Then
                 '    Me.rbn_zona_legalizacion.Items.Add(New ListItem("No aplica", "NA"))
                 'End If
-                Me.zr_data.Visible = True
+                'Me.zr_data.Visible = True
                 Me.rbn_zona_legalizacion.Enabled = True
                 If municipio.zona_rural IsNot Nothing Then
                     If municipio.zona_rural = True Then
                         Me.rbn_zona_legalizacion.SelectedValue = "Rural"
                         Me.rbn_zona_legalizacion.Enabled = False
                         Me.zr_data.Visible = False
+                    Else
+                        Me.rbn_zona_legalizacion.SelectedValue = "No"
+                        'Me.zr_data.Visible = False
                     End If
+                Else
+                    'Me.zr_data.Visible = False
+                    Me.rbn_zona_legalizacion.SelectedValue = "No"
                 End If
-
-
                 Me.rbn_zona_legalizacion.DataBind()
             End If
 

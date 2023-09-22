@@ -410,6 +410,33 @@ Partial Public Class frm_parAD
     Protected WithEvents RequiredFieldValidator28 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''blt_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents blt_estrategia As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''cmb_estrategia control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents cmb_estrategia As Global.Telerik.Web.UI.RadComboBox
+
+    '''<summary>
+    '''RequiredFieldValidator22 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RequiredFieldValidator22 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''Label19 control.
     '''</summary>
     '''<remarks>
@@ -572,13 +599,13 @@ Partial Public Class frm_parAD
     Protected WithEvents RequiredFieldValidator7 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Label11 control.
+    '''lbl_mecanismo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label11 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_mecanismo As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''cmb_tipo_evento control.
@@ -653,13 +680,13 @@ Partial Public Class frm_parAD
     Protected WithEvents RequiredFieldValidator11 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
-    '''Label15 control.
+    '''lbl_entidad_acargo control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Label15 As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lbl_entidad_acargo As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''cmb_entidad control.
